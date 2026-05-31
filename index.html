@@ -1048,29 +1048,10 @@
     const db = firebase.database();
     const playersRef = db.ref('players');
 
-    // Data mặc định
-    const defaultPlayers = [
-        { name: "ItzRealMe", region: "NA", stats: { sword: 1, axe: 2, mace: 3, vanilla: 1, uhc: 2, pot: 1, nethop: 1, smp: 1 } },
-        { name: "coldified", region: "EU", stats: { sword: 2, axe: 1, mace: 2, vanilla: 3, uhc: 1, pot: 1, nethop: 2, smp: 1 } },
-        { name: "Swight", region: "NA", stats: { sword: 3, axe: 2, mace: 2, vanilla: 1, uhc: 1, pot: 3, nethop: 1, smp: 2 } },
-        { name: "Limdex", region: "AS", stats: { sword: 5, axe: 5, mace: 5, vanilla: 5, uhc: 5, pot: 5, nethop: 5, smp: 5 } }
-    ];
-
     // Load cache ngay lập tức để hiển thị nhanh
     const cached = localStorage.getItem('accension_players');
-    let players = cached ? JSON.parse(cached) : JSON.parse(JSON.stringify(defaultPlayers));
+    let players = cached ? JSON.parse(cached) : [];
     let firebaseReady = false;
-
-    function savePlayers() {
-        // Lưu cache local ngay
-        localStorage.setItem('accension_players', JSON.stringify(players));
-        // Đồng bộ lên Firebase
-        if (firebaseReady) {
-            playersRef.set(players).catch(err => {
-                console.error('Firebase save error:', err);
-            });
-        }
-    }
 
     function sortPlayers() {
         players.sort((a, b) => calcPoints(b.stats) - calcPoints(a.stats));
@@ -1094,13 +1075,10 @@
             playersRef.on('value', (snapshot) => {
                 firebaseReady = true;
                 const data = snapshot.val();
-                let newData;
+                let newData = [];
                 if (data) {
                     const arr = Array.isArray(data) ? data : Object.values(data);
                     newData = arr.filter(p => p && p.name && p.stats);
-                } else {
-                    newData = JSON.parse(JSON.stringify(defaultPlayers));
-                    savePlayers();
                 }
                 
                 // Only re-render if data actually changed to prevent double-loading flicker

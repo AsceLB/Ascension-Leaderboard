@@ -1206,10 +1206,11 @@
 
     // Xác định title dựa trên điểm
     function getTitle(points) {
+        if (points >= 80) return 'Combat Grandmaster';
         if (points >= 50) return 'Combat Master';
         if (points >= 30) return 'Combat Ace';
         if (points >= 15) return 'Combat Specialist';
-        return 'Normal';
+        return 'Fighter';
     }
 
     // --- Firebase Setup ---

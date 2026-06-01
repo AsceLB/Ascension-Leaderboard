@@ -1526,10 +1526,10 @@
                     let displayVal = val;
                     let isRetired = false;
 
-                    if (typeof val === 'string' && val.startsWith('r')) {
+                    if (typeof val === 'string' && val.toLowerCase().startsWith('r')) {
                         isRetired = true;
                         val = parseInt(val.substring(1));
-                        displayVal = `#r${val}`;
+                        displayVal = `#R${val}`;
                     } else {
                         displayVal = `#${val}`;
                     }
@@ -1726,14 +1726,23 @@
         // Tiers / Positions
         let tiersHTML = '';
         categories.forEach(cat => {
-            const val = player.stats[cat.id];
+            let val = player.stats[cat.id];
             if(val) {
-                let color = val === 1 ? '#facc15' : val === 2 ? '#94a3b8' : val === 3 ? '#d97706' : '#888';
-                let label = val === 1 ? 'HT1' : val === 2 ? 'LT2' : val === 3 ? 'HT3' : `T${val}`; // Mock logic
+                let isRetired = false;
+                let numVal = val;
+                
+                if (typeof val === 'string' && val.toLowerCase().startsWith('r')) {
+                    isRetired = true;
+                    numVal = parseInt(val.substring(1));
+                }
+
+                let color = numVal === 1 ? '#facc15' : numVal === 2 ? '#e2e8f0' : numVal === 3 ? '#fba94c' : '#cbd5e1';
+                let label = isRetired ? `#R${numVal}` : `#${numVal}`;
+                
                 tiersHTML += `
                 <div class="modal-tier-icon" onclick="goToBoard('${cat.id}', '${playerName}')">
                     <img src="${cat.icon}" alt="${cat.name}">
-                    <span style="color: ${color}; font-size: 12px; font-weight: bold;">${label}</span>
+                    <span style="color: ${color}; font-size: 14px; font-weight: 900; text-shadow: 0 0 10px ${color}80; letter-spacing: 0.5px;">${label}</span>
                 </div>`;
             }
         });

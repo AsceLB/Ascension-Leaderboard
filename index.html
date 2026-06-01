@@ -664,11 +664,14 @@
             align-items: center;
             gap: 10px;
             padding: 8px;
+            padding-left: 8px;
             background: #1a1a1a;
             border-radius: 6px;
             border: 1px solid #333;
             position: relative;
-            transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+            overflow: hidden;
+            transition: padding-left 0.3s ease,
+                        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
                         background-color 0.3s ease,
                         border-color 0.4s ease,
                         box-shadow 0.4s ease;
@@ -678,8 +681,38 @@
             transform: translateY(-3px) scale(1.015);
             background: #252525;
             border-color: rgba(255,255,255,0.6);
+            padding-left: 45px;
             animation: neonPulseLight 2s ease-in-out infinite;
         }
+
+        .card-region-tag {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            opacity: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: bold;
+            transition: width 0.3s ease, opacity 0.3s ease;
+            overflow: hidden;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .board-player-card:hover .card-region-tag {
+            width: 35px;
+            opacity: 1;
+        }
+
+        .card-region-tag.AS { background-color: rgba(255,100,100,0.3); color: #ff6b6b; border-left: 3px solid #ff6b6b; }
+        .card-region-tag.EU { background-color: rgba(100,255,100,0.3); color: #6bff6b; border-left: 3px solid #6bff6b; }
+        .card-region-tag.NA { background-color: rgba(100,100,255,0.3); color: #6b6bff; border-left: 3px solid #6b6bff; }
+        .card-region-tag.AF { background-color: rgba(255,200,100,0.3); color: #ffc26b; border-left: 3px solid #ffc26b; }
+        .card-region-tag.OC { background-color: rgba(200,100,255,0.3); color: #d06bff; border-left: 3px solid #d06bff; }
 
         .board-player-card.bobbing {
             animation: neonBobLight 2s ease-in-out infinite,
@@ -1461,6 +1494,7 @@
 
                 htmlContent += `
                     <div class="${cardClass}" onclick="openPlayerProfile('${p.name}')" style="cursor: pointer;">
+                        <div class="card-region-tag ${p.region}">${p.region}</div>
                         <img src="${avatarUrl}" class="avatar" alt="${p.name}" onerror="this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=50'">
                         <span class="name">${namePrefix}${p.name}</span>
                     </div>

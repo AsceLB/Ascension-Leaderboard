@@ -1054,6 +1054,8 @@
             border: 2px solid #eab308;
             box-shadow: 0 0 20px rgba(234,179,8,0.2);
             background: #1e293b;
+            object-fit: cover;
+            object-position: top;
         }
         .modal-header-profile h2 {
             margin: 0 0 10px 0;
@@ -1256,7 +1258,7 @@
         </div>
 
         <div class="modal-section">
-            <div class="modal-section-title">TIERS</div>
+            <div class="modal-section-title">POSITIONS</div>
             <div id="modalTiers" class="modal-tiers-grid">
                 <!-- tier icons will be injected here -->
             </div>
@@ -1692,8 +1694,8 @@
         const rank = players.findIndex(p => p.name === playerName) + 1;
         const pts = calcPoints(player.stats);
         
-        document.getElementById('modalAvatar').src = `https://mc-heads.net/avatar/${player.name}/200`;
-        document.getElementById('modalAvatar').onerror = function() { this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=200'; };
+        document.getElementById('modalAvatar').src = `https://mc-heads.net/body/${player.name}/200`;
+        document.getElementById('modalAvatar').onerror = function() { this.src='https://crafatar.com/renders/body/606e2ff0ed7748429d6ce0927ce6486?size=200'; };
         document.getElementById('modalName').textContent = player.name;
         
         // Update modal title icon SVG based on title

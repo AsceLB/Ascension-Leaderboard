@@ -335,7 +335,7 @@
 
         .leaderboard-header {
             display: grid;
-            grid-template-columns: 150px 1fr 80px 520px;
+            grid-template-columns: 150px 1.5fr 80px minmax(520px, 2fr);
             gap: 20px;
             padding: 10px 15px 10px 0;
             color: var(--text-muted);
@@ -355,7 +355,7 @@
 
         .player-row {
             display: grid;
-            grid-template-columns: 150px 1fr 80px 520px;
+            grid-template-columns: 150px 1.5fr 80px minmax(520px, 2fr);
             gap: 20px;
             align-items: center;
             background-color: var(--card-bg);
@@ -571,6 +571,11 @@
         .region.AU { background-color: rgba(181,52,219,0.2); color: #b534db; border-color: rgba(181,52,219,0.3); }
         .region.NA { background-color: rgba(231,76,60,0.2); color: #e74c3c; border-color: rgba(231,76,60,0.3); }
 
+        .player-row > div:nth-child(3) {
+            display: flex;
+            justify-content: center;
+        }
+
         /* --- Overall Tiers Display --- */
         .tiers {
             display: flex;
@@ -578,6 +583,7 @@
             flex-wrap: nowrap;
             overflow: visible;
             padding: 2px 0;
+            justify-content: flex-end;
         }
         .tiers::-webkit-scrollbar { display: none; }
 
@@ -1357,8 +1363,8 @@
         <div class="leaderboard-header">
             <div style="padding-left: 20px;">#</div>
             <div>PLAYER</div>
-            <div>REGION</div>
-            <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="text-align: center;">REGION</div>
+            <div style="display: flex; align-items: center; justify-content: flex-end; gap: 15px;">
                 <span>POSITIONS</span>
                 <div class="info-btn" onclick="openRankInfo()" title="View Rank Info">! Information</div>
             </div>

@@ -1264,6 +1264,70 @@
         .modal-tier-icon .badge.top-1 { background: #2a2410; color: #d1b054; border-color: #635223; box-shadow: 0 0 5px rgba(209,176,84,0.1); }
         .modal-tier-icon .badge.top-2 { background: #192025; color: #c4d4e6; border-color: #435b73; box-shadow: 0 0 5px rgba(196,212,230,0.1); }
         .modal-tier-icon .badge.top-3 { background: #2a1b12; color: #b8825c; border-color: #6b452b; box-shadow: 0 0 5px rgba(184,130,92,0.1); }
+        /* --- Point Tooltips --- */
+        .point-box {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .point-box .point-tooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(10px) scale(0.9);
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10;
+            white-space: nowrap;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .point-box:hover .point-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0) scale(1);
+        }
+
+        .point-tooltip.high-tier {
+            color: #fff;
+            text-shadow: -1px 0px 0px #38bdf8, 1px 0px 0px #fb923c;
+        }
+
+        .point-tooltip.low-tier {
+            color: #fff;
+            text-shadow: -1px 0px 0px #38bdf8, 1px 0px 0px #fb923c;
+        }
+
+        .point-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #0f172a transparent transparent transparent;
+        }
+        
+        .point-tooltip::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 7px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.1) transparent transparent transparent;
+            z-index: -1;
+        }
     </style>
 </head>
 <body>
@@ -1330,13 +1394,15 @@
                     </div>
                     <div style="border-left: 2px solid #facc15; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div style="background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
                                 <span style="color: #facc15; font-size: 12px; font-weight: bold;">60 Points</span>
+                                <div class="point-tooltip high-tier">High Tier</div>
                             </div>
-                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                                 <span style="color: #facc15; font-size: 12px; font-weight: bold;">45 Points</span>
+                                <div class="point-tooltip low-tier">Low Tier</div>
                             </div>
                         </div>
                     </div>
@@ -1350,13 +1416,15 @@
                     </div>
                     <div style="border-left: 2px solid #94a3b8; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
                                 <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">30 Points</span>
+                                <div class="point-tooltip high-tier">High Tier</div>
                             </div>
-                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                                 <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">20 Points</span>
+                                <div class="point-tooltip low-tier">Low Tier</div>
                             </div>
                         </div>
                     </div>
@@ -1370,13 +1438,15 @@
                     </div>
                     <div style="border-left: 2px solid #d97706; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
                                 <span style="color: #d97706; font-size: 12px; font-weight: bold;">10 Points</span>
+                                <div class="point-tooltip high-tier">High Tier</div>
                             </div>
-                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                                 <span style="color: #d97706; font-size: 12px; font-weight: bold;">6 Points</span>
+                                <div class="point-tooltip low-tier">Low Tier</div>
                             </div>
                         </div>
                     </div>
@@ -1390,13 +1460,15 @@
                     </div>
                     <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
                                 <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">4 Points</span>
+                                <div class="point-tooltip high-tier">High Tier</div>
                             </div>
-                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                                 <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">3 Points</span>
+                                <div class="point-tooltip low-tier">Low Tier</div>
                             </div>
                         </div>
                     </div>
@@ -1410,13 +1482,15 @@
                     </div>
                     <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
                                 <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">2 Points</span>
+                                <div class="point-tooltip high-tier">High Tier</div>
                             </div>
-                            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                            <div class="point-box" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
                                 <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">1 Point</span>
+                                <div class="point-tooltip low-tier">Low Tier</div>
                             </div>
                         </div>
                     </div>

@@ -292,7 +292,7 @@
         /* --- Kích thước to hơn cho Top 1, 2, 3 --- */
         .player-row.rank-row-1 { padding: 14px 10px; margin: 6px 0; border-color: rgba(223,166,50,0.3); }
         .player-row.rank-row-2 { padding: 12px 10px; margin: 4px 0; border-color: rgba(138,149,153,0.3); }
-        .player-row.rank-row-3 { padding: 12px 10px; margin: 4px 0; border-color: rgba(194,104,40,0.3); }
+        .player-row.rank-row-3 { padding: 10px 10px; margin: 2px 0; border-color: rgba(194,104,40,0.2); }
 
         .player-row.entered:hover,
         .player-row.rank-row-1:hover,
@@ -1260,7 +1260,7 @@
             else if (rank === 2) rowClassExtra = 'rank-row-2';
             else if (rank === 3) rowClassExtra = 'rank-row-3';
 
-            const bustUrl = `https://crafatar.com/renders/body/${player.name}?overlay&scale=4`;
+            const bustUrl = `https://mc-heads.net/combo/${player.name}/100`;
 
             const row = document.createElement('div');
             row.className = `player-row ${rowClassExtra}`;

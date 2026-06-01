@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accension Leaderboard</title>
+    <title>Ascension Leaderboard</title>
     <link rel="icon" type="image/png" href="https://i.postimg.cc/j5B1nLhX/Silver-Arrow-Emblem-with-Wings-removebg-preview.png">
     <style>
         /* Black and White Theme */
@@ -218,9 +218,9 @@
             50% { box-shadow: 0 0 18px rgba(194,104,40,0.7), 0 0 45px rgba(194,104,40,0.25), 0 8px 25px rgba(0,0,0,0.5); }
         }
 
-        @keyframes neonBob {
-            0%, 100% { transform: translateY(-5px) scale(1.04); }
-            50%      { transform: translateY(-2px) scale(1.03); }
+        @keyframes gentleBob {
+            0%, 100% { transform: translateY(-4px) scale(1.02); }
+            50%      { transform: translateY(-6px) scale(1.02); }
         }
 
         @keyframes sweepLight {
@@ -321,6 +321,7 @@
                         0 0 30px rgba(255,255,255,0.12),
                         0 8px 20px rgba(0,0,0,0.4);
             z-index: 10;
+            animation: gentleBob 3s ease-in-out 0.5s infinite;
         }
 
         /* #1 Gold glow */
@@ -1079,7 +1080,7 @@
     <div class="header">
         <div onclick="location.reload()" style="cursor: pointer; display: flex; align-items: center; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
             <img src="https://i.postimg.cc/j5B1nLhX/Silver-Arrow-Emblem-with-Wings-removebg-preview.png" alt="Logo" class="site-logo">
-            <div class="site-title">ACCENSION LEADERBOARD</div>
+            <div class="site-title">ASCENSION LEADERBOARD</div>
         </div>
     </div>
 

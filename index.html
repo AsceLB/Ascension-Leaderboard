@@ -1751,13 +1751,13 @@
                     numVal = parseInt(val.substring(1));
                 }
 
-                let color = numVal === 1 ? '#facc15' : numVal === 2 ? '#e2e8f0' : numVal === 3 ? '#fba94c' : '#cbd5e1';
+                let color = numVal === 1 ? '#eab308' : numVal === 2 ? '#94a3b8' : numVal === 3 ? '#d97706' : '#64748b';
                 let label = isRetired ? `#R${numVal}` : `#${numVal}`;
                 
                 tiersHTML += `
                 <div class="modal-tier-icon" onclick="goToBoard('${cat.id}', '${playerName}')">
                     <img src="${cat.icon}" alt="${cat.name}">
-                    <span style="color: ${color}; font-size: 15px; font-weight: 900; letter-spacing: 0.5px;">${label}</span>
+                    <span style="color: ${color}; font-size: 13px; font-weight: 800;">${label}</span>
                 </div>`;
             }
         });

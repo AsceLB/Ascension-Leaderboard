@@ -344,6 +344,7 @@
             text-transform: uppercase;
             border-bottom: 1px solid var(--border-color);
             margin-bottom: 10px;
+            align-items: center;
         }
 
         .player-list {
@@ -587,7 +588,6 @@
             align-items: center;
             gap: 0;
             cursor: pointer;
-            padding-bottom: 8px;
         }
 
         .tier-item img, .tier-icon-value {
@@ -599,7 +599,7 @@
         }
         
         .tier-item:hover .tier-icon-value {
-            transform: translateX(-50%) scale(1.15);
+            transform: scale(1.15);
         }
 
         .tier-item img {
@@ -617,10 +617,8 @@
             font-weight: 800;
             padding: 2px 8px;
             border-radius: 12px;
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            margin-top: -6px;
             z-index: 2;
         }
         
@@ -1611,7 +1609,7 @@
                     }
                     
                     let color = numVal === 1 ? '#dfa539' : numVal === 2 ? '#aabac6' : numVal === 3 ? '#be733f' : '#64748b';
-                    let bgAlpha = numVal === 1 ? 'rgba(223, 165, 57, 0.1)' : numVal === 2 ? 'rgba(170, 186, 198, 0.1)' : numVal === 3 ? 'rgba(190, 115, 63, 0.1)' : 'rgba(100, 116, 139, 0.1)';
+                    let bgAlpha = numVal === 1 ? 'linear-gradient(rgba(223, 165, 57, 0.15), rgba(223, 165, 57, 0.15)), var(--card-bg)' : numVal === 2 ? 'linear-gradient(rgba(170, 186, 198, 0.15), rgba(170, 186, 198, 0.15)), var(--card-bg)' : numVal === 3 ? 'linear-gradient(rgba(190, 115, 63, 0.15), rgba(190, 115, 63, 0.15)), var(--card-bg)' : 'linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg)';
                     let borderAlpha = numVal === 1 ? 'rgba(223, 165, 57, 0.3)' : numVal === 2 ? 'rgba(170, 186, 198, 0.3)' : numVal === 3 ? 'rgba(190, 115, 63, 0.3)' : 'rgba(100, 116, 139, 0.3)';
                     let label = isRetired ? `#R${numVal}` : `#${numVal}`;
                     let fontStyle = isRetired ? 'font-style: italic;' : '';
@@ -1629,7 +1627,7 @@
                     emptyTiersHTML += `
                     <div class="tier-item empty-tier" style="cursor: default;">
                         <div class="empty-icon-ring" style="width: 38px; height: 38px; padding: 6px; border-radius: 50%; border: 1.5px dashed rgba(255,255,255,0.15);"></div>
-                        <span class="tier-icon-value empty-badge" style="color: #64748b; background: rgba(100, 116, 139, 0.1); border: 1px solid rgba(100, 116, 139, 0.3);">-</span>
+                        <span class="tier-icon-value empty-badge" style="color: #64748b; background: linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg); border: 1px solid rgba(100, 116, 139, 0.3);">-</span>
                     </div>`;
                 }
             });
@@ -1807,7 +1805,7 @@
                 }
 
                 let color = numVal === 1 ? '#dfa539' : numVal === 2 ? '#aabac6' : numVal === 3 ? '#be733f' : '#64748b';
-                let bgAlpha = numVal === 1 ? 'rgba(223, 165, 57, 0.1)' : numVal === 2 ? 'rgba(170, 186, 198, 0.1)' : numVal === 3 ? 'rgba(190, 115, 63, 0.1)' : 'rgba(100, 116, 139, 0.1)';
+                let bgAlpha = numVal === 1 ? 'linear-gradient(rgba(223, 165, 57, 0.15), rgba(223, 165, 57, 0.15)), var(--card-bg)' : numVal === 2 ? 'linear-gradient(rgba(170, 186, 198, 0.15), rgba(170, 186, 198, 0.15)), var(--card-bg)' : numVal === 3 ? 'linear-gradient(rgba(190, 115, 63, 0.15), rgba(190, 115, 63, 0.15)), var(--card-bg)' : 'linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg)';
                 let borderAlpha = numVal === 1 ? 'rgba(223, 165, 57, 0.3)' : numVal === 2 ? 'rgba(170, 186, 198, 0.3)' : numVal === 3 ? 'rgba(190, 115, 63, 0.3)' : 'rgba(100, 116, 139, 0.3)';
                 let label = isRetired ? `#R${numVal}` : `#${numVal}`;
                 let fontStyle = isRetired ? 'font-style: italic;' : '';

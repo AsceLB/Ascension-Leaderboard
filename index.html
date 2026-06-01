@@ -1162,6 +1162,8 @@
             width: 20px;
             height: 20px;
             object-fit: contain;
+            mix-blend-mode: screen;
+            background: transparent;
         }
         .modal-tier-icon-value {
             font-size: 13px;
@@ -1213,31 +1215,31 @@
             <button class="modal-close" onclick="closeRankInfo()" style="background: none; border: none; color: #888; font-size: 24px; cursor: pointer; padding: 0;">&times;</button>
         </div>
             <div style="display: flex; gap: 15px; align-items: center;">
-                <img src="https://i.postimg.cc/Y2RdcHbH/combat-grandmaster.webp" style="width: 24px; height: 24px; object-fit: contain;">
+                <img src="https://i.postimg.cc/Y2RdcHbH/combat-grandmaster.webp" style="width: 24px; height: 24px; object-fit: contain; mix-blend-mode: screen;">
                 <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Grandmaster</div><div style="color: #888; font-size: 13px;">Obtained 80+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
-                <img src="https://i.postimg.cc/TPbtB5HD/combat-master.webp" style="width: 24px; height: 24px; object-fit: contain;">
+                <img src="https://i.postimg.cc/TPbtB5HD/combat-master.webp" style="width: 24px; height: 24px; object-fit: contain; mix-blend-mode: screen;">
                 <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Master</div><div style="color: #888; font-size: 13px;">Obtained 50+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
-                <img src="https://i.postimg.cc/qBx5knBz/combat-ace.jpg" style="width: 24px; height: 24px; object-fit: contain;">
+                <img src="https://i.postimg.cc/qBx5knBz/combat-ace.jpg" style="width: 24px; height: 24px; object-fit: contain; mix-blend-mode: screen;">
                 <div><div style="color: #f43f5e; font-weight: bold; font-size: 15px;">Combat Ace</div><div style="color: #888; font-size: 13px;">Obtained 30+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
-                <img src="https://i.postimg.cc/pL6SwHWk/combat-specialist.jpg" style="width: 24px; height: 24px; object-fit: contain;">
+                <img src="https://i.postimg.cc/pL6SwHWk/combat-specialist.jpg" style="width: 24px; height: 24px; object-fit: contain; mix-blend-mode: screen;">
                 <div><div style="color: #d946ef; font-weight: bold; font-size: 15px;">Combat Specialist</div><div style="color: #888; font-size: 13px;">Obtained 15+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
-                <img src="https://i.postimg.cc/59BZ6TgY/combat-cadet.jpg" style="width: 24px; height: 24px; object-fit: contain;">
+                <img src="https://i.postimg.cc/59BZ6TgY/combat-cadet.jpg" style="width: 24px; height: 24px; object-fit: contain; mix-blend-mode: screen;">
                 <div><div style="color: #3b82f6; font-weight: bold; font-size: 15px;">Combat Cadet</div><div style="color: #888; font-size: 13px;">Obtained 10+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
-                <img src="https://i.postimg.cc/FHCthSpm/combat-novice.jpg" style="width: 24px; height: 24px; object-fit: contain;">
+                <img src="https://i.postimg.cc/FHCthSpm/combat-novice.jpg" style="width: 24px; height: 24px; object-fit: contain; mix-blend-mode: screen;">
                 <div><div style="color: #10b981; font-weight: bold; font-size: 15px;">Combat Novice</div><div style="color: #888; font-size: 13px;">Obtained 5+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
-                <img src="https://i.postimg.cc/X78SDmyS/rookie.jpg" style="width: 24px; height: 24px; object-fit: contain;">
+                <img src="https://i.postimg.cc/X78SDmyS/rookie.jpg" style="width: 24px; height: 24px; object-fit: contain; mix-blend-mode: screen;">
                 <div><div style="color: #9ca3af; font-weight: bold; font-size: 15px;">Rookie</div><div style="color: #888; font-size: 13px;">Starting rank for players with less than 5 points.</div></div>
             </div>
     </div>
@@ -1272,7 +1274,7 @@
                     <span id="modalOverallRank" class="modal-rank" style="font-size: 24px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
                 </div>
                 <div style="display: flex; align-items: center; padding-left: 15px; z-index: 1;">
-                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 20px; height: 20px; margin-right: 8px; object-fit: contain;">
+                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 20px; height: 20px; margin-right: 8px; object-fit: contain; mix-blend-mode: screen;">
                     <span style="font-weight: 800; font-size: 16px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
                     <span id="modalOverallPoints" style="color: #94a3b8; font-size: 14px; margin-left: 6px; font-weight: normal;">(0 points)</span>
                 </div>
@@ -1603,7 +1605,7 @@
                 <div class="player-info" onclick="openPlayerProfile('${player.name}')" style="cursor: pointer;">
                     <div class="name-wrapper">
                         <h3>${player.name}</h3>
-                        <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats))}" style="width: 14px; height: 14px; object-fit: contain; margin-right: 5px;"> ${getTitle(calcPoints(player.stats))} <span style="margin-left:4px;">(${calcPoints(player.stats)} pts)</span></div>
+                        <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats))}" style="width: 14px; height: 14px; object-fit: contain; margin-right: 5px; mix-blend-mode: screen;"> ${getTitle(calcPoints(player.stats))} <span style="margin-left:4px;">(${calcPoints(player.stats)} pts)</span></div>
                     </div>
                 </div>
 
@@ -1732,7 +1734,7 @@
         
         const titleEl = document.getElementById('modalTitle');
         const iconUrl = getRankIcon(pts);
-        titleEl.innerHTML = `<img src="${iconUrl}" style="width: 16px; height: 16px; object-fit: contain; margin-right: 6px;"> ${getTitle(pts)}`;
+        titleEl.innerHTML = `<img src="${iconUrl}" style="width: 16px; height: 16px; object-fit: contain; margin-right: 6px; mix-blend-mode: screen;"> ${getTitle(pts)}`;
         
         document.getElementById('modalRegion').textContent = player.region;
         document.getElementById('modalNamemc').href = `https://namemc.com/profile/${player.name}`;

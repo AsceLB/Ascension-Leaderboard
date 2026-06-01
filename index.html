@@ -270,7 +270,7 @@
 
         .player-row {
             display: grid;
-            grid-template-columns: 140px 2.5fr 1fr 4fr;
+            grid-template-columns: auto 2.5fr 1fr 4fr;
             align-items: center;
             background-color: var(--card-bg);
             border-radius: 12px;
@@ -289,16 +289,16 @@
             animation: none;
         }
 
-        /* --- Cỡ chữ và Kích thước to hơn cho Top 1, 2, 3 --- */
-        .player-row.rank-row-1 { transform: scale(1.04); margin: 8px 0; border-color: rgba(223,166,50,0.3); }
-        .player-row.rank-row-2 { transform: scale(1.025); margin: 6px 0; border-color: rgba(138,149,153,0.3); }
-        .player-row.rank-row-3 { transform: scale(1.015); margin: 4px 0; border-color: rgba(194,104,40,0.3); }
+        /* --- Kích thước to hơn cho Top 1, 2, 3 --- */
+        .player-row.rank-row-1 { padding: 14px 10px; margin: 6px 0; border-color: rgba(223,166,50,0.3); }
+        .player-row.rank-row-2 { padding: 12px 10px; margin: 4px 0; border-color: rgba(138,149,153,0.3); }
+        .player-row.rank-row-3 { padding: 12px 10px; margin: 4px 0; border-color: rgba(194,104,40,0.3); }
 
         .player-row.entered:hover,
         .player-row.rank-row-1:hover,
         .player-row.rank-row-2:hover,
         .player-row.rank-row-3:hover {
-            transform: translateY(-5px) scale(1.05);
+            transform: translateY(-5px) scale(1.03);
             background-color: var(--hover-bg);
             border-color: #ffffff;
             animation: neonPulse 2s ease-in-out infinite;
@@ -313,41 +313,47 @@
         /* --- Premium Rank Banner --- */
         .rank-banner {
             position: relative;
-            width: 140px;
-            height: 60px;
+            width: 120px;
+            height: 58px;
             display: flex;
             align-items: center;
-            clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 82% 100%, 0% 100%);
             border-radius: 8px 0 0 8px;
             overflow: hidden;
-            margin-right: 15px;
+            flex-shrink: 0;
         }
+
+        /* Top 1-3 banners wider */
+        .rank-banner.rank-1 { width: 150px; height: 65px; }
+        .rank-banner.rank-2 { width: 140px; height: 62px; }
+        .rank-banner.rank-3 { width: 135px; height: 60px; }
         
+        /* Glass reflection panel for top 3 */
         .rank-1::after, .rank-2::after, .rank-3::after {
             content: '';
             position: absolute;
             top: 0;
-            right: -10px;
-            width: 45px;
+            right: 5px;
+            width: 40px;
             height: 100%;
-            background: rgba(255,255,255,0.25);
-            transform: skewX(-25deg);
+            background: rgba(255,255,255,0.2);
+            transform: skewX(-20deg);
             z-index: 3;
             pointer-events: none;
         }
 
-        /* --- Hiệu ứng ánh sáng lướt qua kính (Sweep) --- */
+        /* Sweep light animation for top 3 */
         .rank-1::before, .rank-2::before, .rank-3::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -50px;
-            width: 25px;
+            left: -60px;
+            width: 20px;
             height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
             animation: sweepLight 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 4;
+            z-index: 5;
             pointer-events: none;
         }
 
@@ -358,14 +364,16 @@
             color: #ffffff;
             text-shadow: 2px 2px 0 #000, -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
             z-index: 2;
-            margin-left: 15px;
+            margin-left: 12px;
+            min-width: 35px;
         }
 
         .player-bust {
-            height: 65px;
+            height: 55px;
             position: absolute;
-            right: 25px;
-            top: -2px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-30%, -50%);
             z-index: 1;
         }
 
@@ -1252,7 +1260,7 @@
             else if (rank === 2) rowClassExtra = 'rank-row-2';
             else if (rank === 3) rowClassExtra = 'rank-row-3';
 
-            const bustUrl = `https://minotar.net/armor/body/${player.name}/100.png`;
+            const bustUrl = `https://crafatar.com/renders/body/${player.name}?overlay&scale=4`;
 
             const row = document.createElement('div');
             row.className = `player-row ${rowClassExtra}`;

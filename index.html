@@ -1003,15 +1003,15 @@
             pointer-events: auto;
         }
         .modal-content {
-            background: #0f0f0f;
+            background: #0f172a;
             border-radius: 20px;
             width: 90%;
-            max-width: 450px;
+            max-width: 400px;
             padding: 30px;
             position: relative;
-            box-shadow: 0 0 25px rgba(255,255,255,0.1), inset 0 0 10px rgba(255,255,255,0.02);
-            border: 1px solid #333;
-            color: #fff;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid #1e293b;
+            color: #f8fafc;
             transform: scale(0.9);
             opacity: 0;
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
@@ -1022,25 +1022,23 @@
         }
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #222;
-            color: #ccc;
-            border: 1px solid #333;
-            width: 32px;
-            height: 32px;
+            top: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: #94a3b8;
+            border: none;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
             transition: 0.2s;
         }
         .modal-close:hover {
-            background: #fff;
-            color: #000;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            background: #334155;
+            color: #fff;
         }
         .modal-header-profile {
             display: flex;
@@ -1049,43 +1047,44 @@
             margin-bottom: 25px;
         }
         .modal-header-profile img.avatar-large {
-            width: 90px;
-            height: 90px;
+            width: 96px;
+            height: 96px;
             border-radius: 50%;
-            margin-bottom: 15px;
-            border: 2px solid #444;
-            box-shadow: 0 0 15px rgba(255,255,255,0.2);
+            margin-bottom: 12px;
+            border: 2px solid #eab308;
+            box-shadow: 0 0 20px rgba(234,179,8,0.2);
+            background: #1e293b;
         }
         .modal-header-profile h2 {
             margin: 0 0 10px 0;
             font-size: 24px;
-            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+            font-weight: 800;
+            letter-spacing: 0.5px;
         }
         .modal-title-badge {
-            background: #1a1a1a;
-            color: #fff;
-            border: 1px solid #444;
-            box-shadow: 0 0 8px rgba(255,255,255,0.1);
+            background: rgba(234, 179, 8, 0.15);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.3);
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 14px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
         .modal-region {
-            color: #888;
-            font-weight: bold;
-            font-size: 14px;
+            color: #475569;
+            font-weight: 800;
+            font-size: 16px;
             margin-bottom: 15px;
-            text-transform: capitalize;
+            text-transform: uppercase;
         }
         .modal-namemc-btn {
-            background: #222;
-            color: #ccc;
-            border: 1px solid #333;
+            background: #1e293b;
+            color: #94a3b8;
+            border: 1px solid #334155;
             padding: 6px 14px;
             border-radius: 8px;
             font-size: 12px;
@@ -1096,83 +1095,70 @@
             transition: 0.2s;
         }
         .modal-namemc-btn:hover {
-            background: #fff;
-            color: #000;
-            box-shadow: 0 0 10px rgba(255,255,255,0.4);
+            background: #334155;
+            color: #fff;
         }
         .modal-section {
             margin-bottom: 20px;
         }
         .modal-section-title {
-            color: #aaa;
-            font-size: 16px;
+            color: #94a3b8;
+            font-size: 14px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             letter-spacing: 1px;
         }
         .modal-overall-box {
-            background: #151515;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 15px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            height: 50px;
+            overflow: hidden;
+            position: relative;
         }
         .modal-rank {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: 900;
             font-style: italic;
-            border-right: 1px solid #333;
-            padding-right: 15px;
             color: #fff;
             text-shadow: 0 0 5px rgba(255,255,255,0.5);
-        }
-        .modal-overall-text {
-            font-size: 18px;
-            font-weight: bold;
-        }
-        .modal-overall-text span {
-            color: #888;
-            font-weight: normal;
-            font-size: 16px;
+            z-index: 2;
         }
         .modal-tiers-grid {
-            background: #151515;
-            border: 1px solid #333;
-            border-radius: 12px;
-            padding: 15px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 12px;
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: flex-start;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
         .modal-tier-icon {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
+            gap: 4px;
             cursor: pointer;
+        }
+        .modal-tier-icon img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #1e293b;
+            padding: 4px;
+            transition: transform 0.2s;
+        }
+        .modal-tier-icon:hover img {
+            transform: scale(1.1);
         }
         @keyframes iconWiggle {
             0%, 100% { transform: scale(1.15) translateY(-3px) rotate(0deg); }
             25% { transform: scale(1.15) translateY(-3px) rotate(8deg); }
             75% { transform: scale(1.15) translateY(-3px) rotate(-8deg); }
         }
-        .modal-tier-icon img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            mix-blend-mode: screen;
-            filter: contrast(1.4) brightness(0.8);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s;
-        }
-        .modal-tier-icon:hover img {
-            transform: scale(1.15) translateY(-3px);
-            animation: iconWiggle 0.6s ease-in-out infinite;
-            filter: contrast(1.4) brightness(1.2);
         }
         @keyframes neonBlinkTwice {
             0%, 100% { border-color: #333; box-shadow: none; background: transparent; }
@@ -1211,31 +1197,23 @@
         <div class="modal-body" style="display: flex; flex-direction: column; gap: 15px;">
             <div style="display: flex; gap: 15px; align-items: center;">
                 <div style="width: 24px; text-align: center; color: #facc15;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L22 12L12 22L2 12L12 2Z"/></svg></div>
-                <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Grandmaster</div><div style="color: #888; font-size: 13px;">Obtained 400+ total points.</div></div>
+                <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Grandmaster</div><div style="color: #888; font-size: 13px;">Obtained 80+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
                 <div style="width: 24px; text-align: center; color: #facc15;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4L20 12L12 20L4 12L12 4Z"/></svg></div>
-                <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Master</div><div style="color: #888; font-size: 13px;">Obtained 250+ total points.</div></div>
+                <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Master</div><div style="color: #888; font-size: 13px;">Obtained 50+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
                 <div style="width: 24px; text-align: center; color: #f43f5e;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 6L18 12L12 18L6 12L12 6Z"/></svg></div>
-                <div><div style="color: #f43f5e; font-weight: bold; font-size: 15px;">Combat Ace</div><div style="color: #888; font-size: 13px;">Obtained 100+ total points.</div></div>
+                <div><div style="color: #f43f5e; font-weight: bold; font-size: 15px;">Combat Ace</div><div style="color: #888; font-size: 13px;">Obtained 30+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
                 <div style="width: 24px; text-align: center; color: #d946ef;"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 6L18 12L12 18L6 12L12 6Z"/></svg></div>
-                <div><div style="color: #d946ef; font-weight: bold; font-size: 15px;">Combat Specialist</div><div style="color: #888; font-size: 13px;">Obtained 50+ total points.</div></div>
-            </div>
-            <div style="display: flex; gap: 15px; align-items: center;">
-                <div style="width: 24px; text-align: center; color: #a78bfa;"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg></div>
-                <div><div style="color: #a78bfa; font-weight: bold; font-size: 15px;">Combat Cadet</div><div style="color: #888; font-size: 13px;">Obtained 20+ total points.</div></div>
-            </div>
-            <div style="display: flex; gap: 15px; align-items: center;">
-                <div style="width: 24px; text-align: center; color: #a78bfa;"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg></div>
-                <div><div style="color: #a78bfa; font-weight: bold; font-size: 15px;">Combat Novice</div><div style="color: #888; font-size: 13px;">Obtained 10+ total points.</div></div>
+                <div><div style="color: #d946ef; font-weight: bold; font-size: 15px;">Combat Specialist</div><div style="color: #888; font-size: 13px;">Obtained 15+ total points.</div></div>
             </div>
             <div style="display: flex; gap: 15px; align-items: center;">
                 <div style="width: 24px; text-align: center; color: #9ca3af;"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="4"/></svg></div>
-                <div><div style="color: #9ca3af; font-weight: bold; font-size: 15px;">Rookie</div><div style="color: #888; font-size: 13px;">Starting rank for players with less than 10 points.</div></div>
+                <div><div style="color: #9ca3af; font-weight: bold; font-size: 15px;">Fighter</div><div style="color: #888; font-size: 13px;">Starting rank for players with less than 15 points.</div></div>
             </div>
         </div>
     </div>
@@ -1245,31 +1223,40 @@
 <!-- Player Profile Modal -->
 <div id="playerModal" class="modal-overlay" onclick="if(event.target===this) closePlayerProfile()">
     <div class="modal-content">
-        <button class="modal-close" onclick="closePlayerProfile()">×</button>
+        <button class="modal-close" onclick="closePlayerProfile()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
         
         <div class="modal-header-profile">
-            <img id="modalAvatar" class="avatar-large" src="" alt="avatar">
+            <div style="position: relative; display: inline-block;">
+                <img id="modalAvatar" class="avatar-large" src="" alt="avatar">
+            </div>
             <h2 id="modalName">Name</h2>
-            <div id="modalTitle" class="modal-title-badge">❖ Title</div>
-            <div id="modalRegion" class="modal-region">Region</div>
+            <div id="modalTitle" class="modal-title-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M12 2L22 12L12 22L2 12L12 2Z"/></svg> Combat Master
+            </div>
+            <div id="modalRegion" class="modal-region">North America</div>
             <a id="modalNamemc" href="#" target="_blank" class="modal-namemc-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="9" y2="15"></line><line x1="15" y1="9" x2="15" y2="15"></line></svg> NameMC
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M8 12l4-4 4 4"></path><path d="M12 16V8"></path></svg> NameMC
             </a>
         </div>
 
         <div class="modal-section">
             <div class="modal-section-title">POSITION</div>
             <div class="modal-overall-box">
-                <span id="modalOverallRank" class="modal-rank">1.</span>
-                <span class="modal-overall-text">
-                    <img src="https://i.postimg.cc/Qxw2KYfG/overall.jpg" alt="overall" style="width:24px;height:24px;border-radius:50%;vertical-align:middle;mix-blend-mode:screen;margin-right:6px;box-shadow: 0 0 10px rgba(255,255,255,0.2);"> 
-                    OVERALL <span id="modalOverallPoints">(0 points)</span>
-                </span>
+                <div class="rank-banner" id="modalOverallBanner" style="height: 100%; width: 100px; display: flex; align-items: center; justify-content: center; clip-path: polygon(0 0, 100% 0, 80% 100%, 0% 100%);">
+                    <span id="modalOverallRank" class="modal-rank">1.</span>
+                </div>
+                <div style="display: flex; align-items: center; padding-left: 10px; z-index: 1;">
+                    <svg style="color: #facc15; width: 20px; height: 20px; margin-right: 8px;" viewBox="0 0 24 24" fill="currentColor"><path d="M20,2H4v2h16V2z M21,5H3v10c0,2.21,1.79,4,4,4h3v2h4v-2h3c2.21,0,4-1.79,4-4V5z M7,17c-1.1,0-2-0.9-2-2V7h2V17z M19,15c0,1.1-0.9,2-2,2h-2V7h4V15z M13,11V7h-2v4H13z"/></svg>
+                    <span style="font-weight: 800; font-size: 16px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
+                    <span id="modalOverallPoints" style="color: #94a3b8; font-size: 14px; margin-left: 6px; font-weight: normal;">(330 points)</span>
+                </div>
             </div>
         </div>
 
         <div class="modal-section">
-            <div class="modal-section-title">POSITIONS</div>
+            <div class="modal-section-title">TIERS</div>
             <div id="modalTiers" class="modal-tiers-grid">
                 <!-- tier icons will be injected here -->
             </div>
@@ -1400,13 +1387,11 @@
 
     // Xác định title dựa trên điểm
     function getTitle(points) {
-        if (points >= 400) return 'Combat Grandmaster';
-        if (points >= 250) return 'Combat Master';
-        if (points >= 100) return 'Combat Ace';
-        if (points >= 50) return 'Combat Specialist';
-        if (points >= 20) return 'Combat Cadet';
-        if (points >= 10) return 'Combat Novice';
-        return 'Rookie';
+        if (points >= 80) return 'Combat Grandmaster';
+        if (points >= 50) return 'Combat Master';
+        if (points >= 30) return 'Combat Ace';
+        if (points >= 15) return 'Combat Specialist';
+        return 'Fighter';
     }
 
     // --- Firebase Setup ---
@@ -1710,27 +1695,43 @@
         document.getElementById('modalAvatar').src = `https://mc-heads.net/avatar/${player.name}/200`;
         document.getElementById('modalAvatar').onerror = function() { this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=200'; };
         document.getElementById('modalName').textContent = player.name;
-        document.getElementById('modalTitle').innerHTML = `❖ ${getTitle(pts)}`;
+        
+        // Update modal title icon SVG based on title
+        let svgIcon = '';
+        if (pts >= 80) svgIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M12 2L22 12L12 22L2 12L12 2Z"/></svg>';
+        else if (pts >= 50) svgIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M12 4L20 12L12 20L4 12L12 4Z"/></svg>';
+        else if (pts >= 30) svgIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M12 6L18 12L12 18L6 12L12 6Z"/></svg>';
+        else if (pts >= 15) svgIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M12 6L18 12L12 18L6 12L12 6Z"/></svg>';
+        else svgIcon = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><circle cx="12" cy="12" r="6"/></svg>';
+        
+        let titleColor = pts >= 50 ? '#facc15' : pts >= 30 ? '#f43f5e' : pts >= 15 ? '#d946ef' : '#9ca3af';
+        const titleEl = document.getElementById('modalTitle');
+        titleEl.style.color = titleColor;
+        titleEl.style.borderColor = titleColor + '40';
+        titleEl.style.background = titleColor + '20';
+        titleEl.innerHTML = `${svgIcon} ${getTitle(pts)}`;
+        
         document.getElementById('modalRegion').textContent = player.region;
         document.getElementById('modalNamemc').href = `https://namemc.com/profile/${player.name}`;
         
         document.getElementById('modalOverallRank').textContent = rank + '.';
         document.getElementById('modalOverallPoints').textContent = `(${pts} points)`;
+        
+        const overallBanner = document.getElementById('modalOverallBanner');
+        overallBanner.className = 'rank-banner rank-' + rank;
+        if (rank > 3) overallBanner.className = 'rank-banner rank-other';
 
         // Tiers / Positions
         let tiersHTML = '';
         categories.forEach(cat => {
             const val = player.stats[cat.id];
             if(val) {
-                let badgeClass = 'badge';
-                if(val === 1) badgeClass += ' top-1';
-                else if(val === 2) badgeClass += ' top-2';
-                else if(val === 3) badgeClass += ' top-3';
-                
+                let color = val === 1 ? '#facc15' : val === 2 ? '#94a3b8' : val === 3 ? '#d97706' : '#888';
+                let label = val === 1 ? 'HT1' : val === 2 ? 'LT2' : val === 3 ? 'HT3' : `T${val}`; // Mock logic
                 tiersHTML += `
                 <div class="modal-tier-icon" onclick="goToBoard('${cat.id}', '${playerName}')">
                     <img src="${cat.icon}" alt="${cat.name}">
-                    <div class="${badgeClass}">#${val}</div>
+                    <span style="color: ${color}; font-size: 12px; font-weight: bold;">${label}</span>
                 </div>`;
             }
         });

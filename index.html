@@ -537,13 +537,13 @@
         }
 
         .name-wrapper h3 {
-            font-size: 18px;
+            font-size: 20px;
             margin-bottom: 2px;
             color: var(--text-main);
         }
 
         .title {
-            font-size: 14px;
+            font-size: 15px;
             color: var(--text-muted);
         }
         
@@ -1076,7 +1076,7 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 6px 16px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 16px;
             font-weight: bold;
             margin-bottom: 15px;
             display: inline-flex;
@@ -1326,12 +1326,12 @@
             <div class="modal-section-title">POSITION</div>
             <div class="modal-overall-box">
                 <div id="modalOverallBanner" style="display: flex; align-items: center; justify-content: center; padding: 0 20px; border-right: 1px solid rgba(255,255,255,0.05);">
-                    <span id="modalOverallRank" class="modal-rank" style="font-size: 24px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
+                    <span id="modalOverallRank" class="modal-rank" style="font-size: 28px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
                 </div>
-                <div style="display: flex; align-items: center; padding-left: 15px; z-index: 1;">
-                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 20px; height: 20px; margin-right: 8px; object-fit: contain; mix-blend-mode: screen;">
-                    <span style="font-weight: 800; font-size: 16px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
-                    <span id="modalOverallPoints" style="color: #94a3b8; font-size: 14px; margin-left: 6px; font-weight: normal;">(0 points)</span>
+                <div style="display: flex; align-items: center; padding-left: 15px;">
+                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 28px; height: 28px; margin-right: 10px; object-fit: contain; mix-blend-mode: screen;">
+                    <span style="font-weight: 800; font-size: 18px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
+                    <span id="modalOverallPoints" style="color: #94a3b8; font-size: 15px; margin-left: 6px; font-weight: normal;">(0 points)</span>
                 </div>
             </div>
         </div>
@@ -1664,7 +1664,7 @@
                 <div class="player-info" onclick="openPlayerProfile('${player.name}')" style="cursor: pointer;">
                     <div class="name-wrapper">
                         <h3>${player.name}</h3>
-                        <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats))}" style="width: 14px; height: 14px; object-fit: contain; margin-right: 5px; mix-blend-mode: screen;"> ${getTitle(calcPoints(player.stats))} <span style="margin-left:4px;">(${calcPoints(player.stats)} pts)</span></div>
+                        <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats))}" style="width: 22px; height: 22px; object-fit: contain; margin-right: 6px; mix-blend-mode: screen;"> ${getTitle(calcPoints(player.stats))} <span style="margin-left:4px;">(${calcPoints(player.stats)} pts)</span></div>
                     </div>
                 </div>
 
@@ -1793,7 +1793,7 @@
         
         const titleEl = document.getElementById('modalTitle');
         const iconUrl = getRankIcon(pts);
-        titleEl.innerHTML = `<img src="${iconUrl}" style="width: 16px; height: 16px; object-fit: contain; margin-right: 6px; mix-blend-mode: screen;"> ${getTitle(pts)}`;
+        titleEl.innerHTML = `<img src="${iconUrl}" style="width: 28px; height: 28px; object-fit: contain; margin-right: 8px; mix-blend-mode: screen;"> ${getTitle(pts)}`;
         
         document.getElementById('modalRegion').textContent = player.region;
         document.getElementById('modalNamemc').href = `https://namemc.com/profile/${player.name}`;

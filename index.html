@@ -1009,7 +1009,7 @@
             pointer-events: auto;
         }
         .modal-content {
-            background: #050505;
+            background: #0d1117;
             border-radius: 20px;
             width: 90%;
             max-width: 400px;
@@ -1057,8 +1057,8 @@
             height: 96px;
             border-radius: 50%;
             margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
             background: #1e293b;
             object-fit: cover;
             object-position: top;
@@ -1119,8 +1119,8 @@
             letter-spacing: 1px;
         }
         .modal-overall-box, .modal-positions-box {
-            background: #0e0e11;
-            border: 1px solid #1a1a24;
+            background: #161b22;
+            border: 1px solid #30363d;
             border-radius: 8px;
         }
         .modal-overall-box {
@@ -1606,7 +1606,7 @@
                 <div class="player-info" onclick="openPlayerProfile('${player.name}')" style="cursor: pointer;">
                     <div class="name-wrapper">
                         <h3>${player.name}</h3>
-                        <div class="title">❖ ${getTitle(calcPoints(player.stats))} (<span>${calcPoints(player.stats)} pts</span>)</div>
+                        <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats))}" style="width: 14px; height: 14px; object-fit: contain; margin-right: 5px;"> ${getTitle(calcPoints(player.stats))} <span style="margin-left:4px;">(${calcPoints(player.stats)} pts)</span></div>
                     </div>
                 </div>
 

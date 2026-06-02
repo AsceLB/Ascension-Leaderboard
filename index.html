@@ -1365,6 +1365,43 @@
             border-color: rgba(255, 255, 255, 0.1) transparent transparent transparent;
             z-index: -1;
         }
+        /* Snow Effect */
+        #snow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .snowflake {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+            opacity: 0;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(0) translateX(10px) scale(1);
+            }
+            90% {
+                opacity: 1;
+                transform: translateY(90vh) translateX(-10px) scale(1);
+            }
+            100% {
+                transform: translateY(105vh) translateX(0) scale(0);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2147,6 +2184,38 @@
         }
     }
 
+    // --- Snow Effect ---
+    function createSnowflakes() {
+        const container = document.createElement('div');
+        container.id = 'snow-container';
+        document.body.prepend(container);
+
+        const snowflakeCount = 70; // Gentle amount of snow
+        
+        for (let i = 0; i < snowflakeCount; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            
+            // Randomize properties
+            const size = Math.random() * 4 + 2; // 2px to 6px
+            const left = Math.random() * 100; // 0% to 100%
+            const duration = Math.random() * 8 + 7; // 7s to 15s (slow, gentle)
+            const delay = Math.random() * 15; // 0s to 15s
+            const opacity = Math.random() * 0.4 + 0.2; // 0.2 to 0.6 (subtle)
+
+            snowflake.style.width = `${size}px`;
+            snowflake.style.height = `${size}px`;
+            snowflake.style.left = `${left}vw`;
+            snowflake.style.animationDuration = `${duration}s`;
+            snowflake.style.animationDelay = `-${delay}s`;
+            snowflake.style.opacity = opacity;
+
+            container.appendChild(snowflake);
+        }
+    }
+    
+    // Initialize snow when document loads
+    document.addEventListener('DOMContentLoaded', createSnowflakes);
 </script>
 </body>
 </html>

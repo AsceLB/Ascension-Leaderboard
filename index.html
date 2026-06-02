@@ -1380,7 +1380,7 @@
             position: absolute;
             background: white;
             border-radius: 50%;
-            filter: blur(1.5px) drop-shadow(0 0 3px rgba(255, 255, 255, 0.5));
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
             opacity: 0;
             animation: fall linear infinite;
         }
@@ -2197,11 +2197,11 @@
             snowflake.classList.add('snowflake');
             
             // Randomize properties
-            const size = Math.random() * 3 + 2; // 2px to 5px
+            const size = Math.random() * 4 + 2; // 2px to 6px
             const left = Math.random() * 100; // 0% to 100%
-            const duration = Math.random() * 10 + 10; // 10s to 20s (slower)
+            const duration = Math.random() * 8 + 7; // 7s to 15s (slow, gentle)
             const delay = Math.random() * 15; // 0s to 15s
-            const opacity = Math.random() * 0.25 + 0.1; // 0.1 to 0.35 (much more subtle/faded)
+            const opacity = Math.random() * 0.4 + 0.2; // 0.2 to 0.6 (subtle)
 
             snowflake.style.width = `${size}px`;
             snowflake.style.height = `${size}px`;

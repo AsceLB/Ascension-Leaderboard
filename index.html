@@ -1085,6 +1085,134 @@
             font-weight: 700;
         }
 
+        /* --- Match History Panel --- */
+        .history-panel {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 400px;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+        }
+        .history-panel.active {
+            right: 0;
+        }
+        .history-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        .history-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .history-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .history-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .match-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .match-player {
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .winner { color: #4ade80; }
+        .loser { color: #f87171; }
+        .match-vs {
+            color: #64748b;
+            font-size: 12px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .match-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 8px;
+        }
+        .match-status-promoted { color: #a78bfa; font-weight: bold; }
+        .match-status-demoted { color: #f87171; font-weight: bold; }
+        .match-status-stayed { color: #94a3b8; font-weight: bold; }
+
+        /* --- White Neon Fire Aura --- */
+        .white-fire-aura {
+            position: relative;
+            border-color: rgba(255,255,255,0.8) !important;
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.5) !important;
+            z-index: 1;
+        }
+        .white-fire-aura::before {
+            content: '';
+            position: absolute;
+            top: -3px; left: -3px; right: -3px; bottom: -3px;
+            border-radius: inherit;
+            background: linear-gradient(0deg, transparent, rgba(255, 255, 255, 0.6), rgba(220, 240, 255, 0.9));
+            z-index: -1;
+            animation: neonFire 2s infinite alternate ease-in-out;
+            opacity: 0.9;
+            pointer-events: none;
+        }
+        @keyframes neonFire {
+            0% {
+                transform: scale(1) translateY(0) rotate(-1deg);
+                opacity: 0.7;
+                background: linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.7) 50%, rgba(220,240,255,1) 100%);
+                filter: blur(6px) drop-shadow(0 0 10px rgba(255,255,255,0.8));
+            }
+            33% {
+                transform: scale(1.02) translateY(-2px) rotate(1.5deg);
+                opacity: 1;
+                background: linear-gradient(0deg, rgba(255,255,255,0.15) 10%, rgba(255,255,255,0.9) 60%, rgba(255,255,255,1) 100%);
+                filter: blur(8px) drop-shadow(0 0 15px #fff);
+            }
+            66% {
+                transform: scale(0.98) translateY(1px) rotate(-1.5deg);
+                opacity: 0.8;
+                background: linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(200,230,255,0.8) 40%, rgba(255,255,255,0.9) 100%);
+                filter: blur(6px) drop-shadow(0 0 12px rgba(255,255,255,0.9));
+            }
+            100% {
+                transform: scale(1.01) translateY(-1px) rotate(1deg);
+                opacity: 0.9;
+                background: linear-gradient(0deg, rgba(255,255,255,0.15) 5%, rgba(255,255,255,1) 55%, rgba(230,245,255,1) 100%);
+                filter: blur(9px) drop-shadow(0 0 20px #fff);
+            }
+        }
+
         /* --- Modal Profile --- */
         .modal-overlay {
             position: fixed;
@@ -1595,6 +1723,24 @@
             </a>
         </div>
 
+        <div class="modal-section" style="margin-bottom: 25px;">
+            <div class="modal-section-title">COMBAT STATS</div>
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN RATE</div>
+                    <div id="modalWinRate" style="font-size: 20px; color: #4ade80; font-weight: 800;">100%</div>
+                </div>
+                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">MATCHES</div>
+                    <div id="modalMatches" style="font-size: 20px; color: #fff; font-weight: 800;">0</div>
+                </div>
+                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
+                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN STREAK</div>
+                    <div id="modalStreak" style="font-size: 20px; color: #dfa539; font-weight: 800; text-shadow: 0 0 10px rgba(223,165,57,0.5);">🔥 0</div>
+                </div>
+            </div>
+        </div>
+
         <div class="modal-section">
             <div class="modal-section-title">POSITION</div>
             <div class="modal-overall-box">
@@ -1652,6 +1798,19 @@
     </div>
 </div>
 
+<!-- Match History Panel -->
+<div id="historyPanel" class="history-panel">
+    <div class="history-header">
+        <h2 style="margin: 0; font-size: 20px; color: #fff; display: flex; align-items: center; gap: 8px;">⚔️ Match History</h2>
+        <button class="modal-close" style="position: static; padding: 5px; width: 30px; height: 30px;" onclick="closeHistoryPanel()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+    </div>
+    <div class="history-list" id="historyList">
+        <div style="text-align: center; color: #888; padding: 20px;">Loading matches...</div>
+    </div>
+</div>
+
 <div class="container">
     <div class="header">
         <div onclick="location.reload()" style="cursor: pointer; display: flex; align-items: center; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
@@ -1659,6 +1818,10 @@
             <div class="site-title">ASCENSION LEADERBOARD</div>
         </div>
         <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="rules-btn" onclick="openHistoryPanel()" title="View Match History" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1)); border-color: rgba(124, 58, 237, 0.2);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> 
+                <span style="color: #a78bfa;">History</span>
+            </div>
             <div class="rules-btn" onclick="openRulesModal()" title="View Leaderboard Rules">
                 <img src="https://i.postimg.cc/2SrLBgdb/Book-JE2-BE2.png" style="width: 22px; height: 22px; image-rendering: pixelated; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5)); transform: translateY(-1px);" alt="Rules"> Rules
             </div>
@@ -1809,6 +1972,7 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     const playersRef = db.ref('players');
+    const historyRef = db.ref('match_history');
 
     // Load cache ngay lập tức để hiển thị nhanh
     const cached = localStorage.getItem('accension_players');
@@ -1853,6 +2017,15 @@
                 }
             }, (error) => {
                 console.error('Firebase read error:', error);
+            });
+
+            historyRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                let history = [];
+                if (data) {
+                    history = Array.isArray(data) ? data : Object.values(data);
+                }
+                renderHistoryPanel(history);
             });
         })
         .catch((error) => {
@@ -1971,6 +2144,14 @@
             else if (rank === 2) rowClassExtra = 'rank-row-2';
             else if (rank === 3) rowClassExtra = 'rank-row-3';
 
+            let wins = player.wins || 0;
+            let losses = player.losses || 0;
+            let streak = player.streak || 0;
+            let totalMatches = wins + losses;
+            let winRate = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 100;
+            
+            if (streak >= 10) rowClassExtra += ' white-fire-aura';
+
             const bustUrl = `https://mc-heads.net/body/${player.name}/100`;
 
             const row = document.createElement('div');
@@ -1985,7 +2166,7 @@
                 
                 <div class="player-info" onclick="openPlayerProfile('${player.name}')" style="cursor: pointer;">
                     <div class="name-wrapper">
-                        <h3>${player.name}</h3>
+                        <h3 title="Win Rate: ${winRate}% | Streak: 🔥 ${streak}">${player.name}</h3>
                         <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats, player.peaks))}" style="width: 22px; height: 22px; object-fit: contain; margin-right: 6px; mix-blend-mode: screen;"> ${getTitle(calcPoints(player.stats, player.peaks))} <span style="margin-left:4px;">(${calcPoints(player.stats, player.peaks)} pts)</span></div>
                     </div>
                 </div>
@@ -2057,8 +2238,16 @@
                 let cardClass = isRetired ? 'board-player-card retired-card' : 'board-player-card';
                 let namePrefix = isRetired ? '[R] ' : '';
 
+                let wins = p.wins || 0;
+                let losses = p.losses || 0;
+                let streak = p.streak || 0;
+                let totalMatches = wins + losses;
+                let winRate = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 100;
+                
+                if (streak >= 10) cardClass += ' white-fire-aura';
+
                 htmlContent += `
-                    <div class="${cardClass}" onclick="openPlayerProfile('${p.name}')" style="cursor: pointer;">
+                    <div class="${cardClass}" onclick="openPlayerProfile('${p.name}')" style="cursor: pointer;" title="Win Rate: ${winRate}% | Streak: 🔥 ${streak}">
                         <div class="card-region-tag ${p.region}">${p.region}</div>
                         <img src="${avatarUrl}" class="avatar" alt="${p.name}" onerror="this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=50'">
                         <span class="name">${namePrefix}${p.name}</span>
@@ -2123,6 +2312,24 @@
         document.getElementById('modalOverallRank').textContent = '#' + rank;
         document.getElementById('modalOverallPoints').textContent = `(${pts} points)`;
         document.getElementById('modalOverallIcon').src = IMG.overall;
+
+        // Render Combat Stats
+        let wins = player.wins || 0;
+        let losses = player.losses || 0;
+        let streak = player.streak || 0;
+        let totalMatches = wins + losses;
+        let winRate = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 100;
+        
+        document.getElementById('modalWinRate').textContent = `${winRate}%`;
+        document.getElementById('modalMatches').textContent = totalMatches;
+        document.getElementById('modalStreak').textContent = `🔥 ${streak}`;
+        
+        const avatarContainer = document.getElementById('modalAvatar').parentElement;
+        if (streak >= 10) {
+            avatarContainer.classList.add('white-fire-aura');
+        } else {
+            avatarContainer.classList.remove('white-fire-aura');
+        }
 
         // Tiers / Positions
         let tiersHTML = '';
@@ -2233,11 +2440,68 @@
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('active'), 10);
     }
-
+    
     function closeRankInfo() {
         const modal = document.getElementById('rankInfoModal');
         modal.classList.remove('active');
         setTimeout(() => modal.style.display = 'none', 300);
+    }
+
+    // --- History Panel ---
+    function openHistoryPanel() {
+        document.getElementById('historyPanel').classList.add('active');
+    }
+    
+    function closeHistoryPanel() {
+        document.getElementById('historyPanel').classList.remove('active');
+    }
+
+    function formatTimeAgo(timestamp) {
+        const seconds = Math.floor((new Date() - timestamp) / 1000);
+        let interval = seconds / 31536000;
+        if (interval > 1) return Math.floor(interval) + " years ago";
+        interval = seconds / 2592000;
+        if (interval > 1) return Math.floor(interval) + " months ago";
+        interval = seconds / 86400;
+        if (interval > 1) return Math.floor(interval) + " days ago";
+        interval = seconds / 3600;
+        if (interval > 1) return Math.floor(interval) + " hours ago";
+        interval = seconds / 60;
+        if (interval > 1) return Math.floor(interval) + " mins ago";
+        return Math.floor(seconds) + " secs ago";
+    }
+
+    function renderHistoryPanel(historyData) {
+        const list = document.getElementById('historyList');
+        if (!historyData || historyData.length === 0) {
+            list.innerHTML = '<div style="text-align: center; color: #888; padding: 20px;">No matches yet...</div>';
+            return;
+        }
+
+        let html = '';
+        historyData.forEach(match => {
+            const timeAgo = formatTimeAgo(match.timestamp);
+            let actionColorClass = 'match-status-stayed';
+            if (match.action === 'Promoted') actionColorClass = 'match-status-promoted';
+            else if (match.action === 'Demoted') actionColorClass = 'match-status-demoted';
+
+            const catName = categories.find(c => c.id === match.leaderboard)?.name || match.leaderboard;
+
+            html += `
+            <div class="history-card">
+                <div class="match-row">
+                    <span class="match-player winner">👑 ${match.winner}</span>
+                    <span class="match-vs">VS</span>
+                    <span class="match-player loser">☠️ ${match.loser}</span>
+                </div>
+                <div class="match-meta">
+                    <span>In <b>${catName}</b> (${timeAgo})</span>
+                    <span class="${actionColorClass}">${match.action}</span>
+                </div>
+            </div>`;
+        });
+        
+        list.innerHTML = html;
     }
 
     function switchInfoTab(tabId) {

@@ -1188,7 +1188,7 @@
             z-index: 1;
             /* Keep original transparent/glass background */
             border: 1px solid transparent !important;
-            box-shadow: 0 0 15px rgba(255, 69, 0, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
             animation: cardFloat 3s infinite alternate ease-in-out;
         }
         
@@ -1202,13 +1202,13 @@
             background: conic-gradient(
                 from var(--angle),
                 transparent 0%,
-                #ff4500 15%,
-                #ff9900 22%,
+                rgba(255, 255, 255, 0.1) 15%,
+                rgba(255, 255, 255, 0.5) 22%,
                 #ffffff 25%,
                 transparent 25%,
                 transparent 50%,
-                #ff4500 65%,
-                #ff9900 72%,
+                rgba(255, 255, 255, 0.1) 65%,
+                rgba(255, 255, 255, 0.5) 72%,
                 #ffffff 75%,
                 transparent 75%,
                 transparent 100%
@@ -1228,7 +1228,7 @@
             top: 0; left: 0; right: 0; bottom: 0;
             z-index: -2;
             border-radius: inherit;
-            box-shadow: 0 0 20px rgba(255, 100, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.25);
             animation: pulseGlow 1.5s infinite alternate;
             pointer-events: none;
         }
@@ -1240,7 +1240,7 @@
 
         @keyframes pulseGlow {
             0% { opacity: 0.6; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.01); box-shadow: 0 0 25px rgba(255, 150, 0, 0.6); }
+            100% { opacity: 1; transform: scale(1.01); box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); }
         }
 
         @keyframes cardFloat {
@@ -1251,33 +1251,41 @@
         .streak-badge {
             display: inline-flex;
             align-items: center;
-            background: linear-gradient(90deg, rgba(255,69,0,0.2), rgba(255,140,0,0.2));
-            border: 1px solid rgba(255, 140, 0, 0.4);
-            color: #ffb700;
+            background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0.25));
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: #ffffff;
             font-size: 14px;
             font-weight: bold;
             padding: 2px 6px;
             border-radius: 4px;
             margin-left: 10px;
             vertical-align: middle;
-            text-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
-            box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
             font-family: var(--font-number);
+        }
+        .white-fire-emoji {
+            filter: grayscale(100%) brightness(500%);
+            margin-right: 4px;
         }
 
         .card-streak-badge {
             position: absolute;
             top: -4px;
             right: -4px;
-            background: linear-gradient(90deg, #ff4500, #ff9900);
-            color: white;
+            background: linear-gradient(90deg, #ffffff, #e2e8f0);
+            color: #000000;
             font-size: 11px;
             font-weight: bold;
             padding: 2px 6px;
             border-radius: 4px;
             z-index: 10;
-            box-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
             font-family: var(--font-number);
+        }
+        .card-streak-badge .white-fire-emoji {
+            filter: grayscale(100%) brightness(0%); /* Black fire for light badge */
+            margin-right: 2px;
         }
 
         /* --- Modal Profile --- */
@@ -2226,7 +2234,7 @@
 
             const bustUrl = `https://mc-heads.net/body/${player.name}/100`;
 
-            const streakBadge = streak >= 3 ? `<span class="streak-badge" title="${streak} Win Streak!">🔥 ${streak}</span>` : '';
+            const streakBadge = streak >= 3 ? `<span class="streak-badge" title="${streak} Win Streak!"><span class="white-fire-emoji">🔥</span> ${streak}</span>` : '';
 
             const row = document.createElement('div');
             row.className = `player-row ${rowClassExtra}`;
@@ -2318,7 +2326,7 @@
                 let totalMatches = wins + losses;
                 let winRate = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 100;
                 
-                let streakBadgeCard = streak >= 3 ? `<div class="card-streak-badge">🔥 ${streak}</div>` : '';
+                let streakBadgeCard = streak >= 3 ? `<div class="card-streak-badge"><span class="white-fire-emoji">🔥</span> ${streak}</div>` : '';
 
                 if (streak >= 10) cardClass += ' white-fire-aura';
 

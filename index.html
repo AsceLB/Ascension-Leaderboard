@@ -1248,6 +1248,38 @@
             100% { transform: translateY(-3px); }
         }
 
+        .streak-badge {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(255,69,0,0.2), rgba(255,140,0,0.2));
+            border: 1px solid rgba(255, 140, 0, 0.4);
+            color: #ffb700;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 10px;
+            vertical-align: middle;
+            text-shadow: 0 0 5px rgba(255, 165, 0, 0.5);
+            box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
+            font-family: var(--font-number);
+        }
+
+        .card-streak-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: linear-gradient(90deg, #ff4500, #ff9900);
+            color: white;
+            font-size: 11px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 4px;
+            z-index: 10;
+            box-shadow: 0 0 8px rgba(255, 69, 0, 0.5);
+            font-family: var(--font-number);
+        }
+
         /* --- Modal Profile --- */
         .modal-overlay {
             position: fixed;
@@ -2194,6 +2226,8 @@
 
             const bustUrl = `https://mc-heads.net/body/${player.name}/100`;
 
+            const streakBadge = streak >= 3 ? `<span class="streak-badge" title="${streak} Win Streak!">🔥 ${streak}</span>` : '';
+
             const row = document.createElement('div');
             row.className = `player-row ${rowClassExtra}`;
             row.style.animationDelay = `${index * 0.08}s`;
@@ -2206,7 +2240,7 @@
                 
                 <div class="player-info" onclick="openPlayerProfile('${player.name}')" style="cursor: pointer;">
                     <div class="name-wrapper">
-                        <h3 title="Win Rate: ${winRate}% | Streak: 🔥 ${streak}">${player.name}</h3>
+                        <h3 title="Win Rate: ${winRate}%">${player.name} ${streakBadge}</h3>
                         <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats, player.peaks))}" style="width: 22px; height: 22px; object-fit: contain; margin-right: 6px; mix-blend-mode: screen;"> ${getTitle(calcPoints(player.stats, player.peaks))} <span style="margin-left:4px;">(${calcPoints(player.stats, player.peaks)} pts)</span></div>
                     </div>
                 </div>
@@ -2284,10 +2318,13 @@
                 let totalMatches = wins + losses;
                 let winRate = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 100;
                 
+                let streakBadgeCard = streak >= 3 ? `<div class="card-streak-badge">🔥 ${streak}</div>` : '';
+
                 if (streak >= 10) cardClass += ' white-fire-aura';
 
                 htmlContent += `
-                    <div class="${cardClass}" onclick="openPlayerProfile('${p.name}')" style="cursor: pointer;" title="Win Rate: ${winRate}% | Streak: 🔥 ${streak}">
+                    <div class="${cardClass}" onclick="openPlayerProfile('${p.name}')" style="cursor: pointer;" title="Win Rate: ${winRate}%">
+                        ${streakBadgeCard}
                         <div class="card-region-tag ${p.region}">${p.region}</div>
                         <img src="${avatarUrl}" class="avatar" alt="${p.name}" onerror="this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=50'">
                         <span class="name">${namePrefix}${p.name}</span>

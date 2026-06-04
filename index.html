@@ -1176,37 +1176,76 @@
             padding-top: 8px;
         }
         .match-status-promoted { color: #a78bfa; font-weight: bold; }
-        .match-status-demoted { color: #f87171; font-weight: bold; }
-        .match-status-stayed { color: #94a3b8; font-weight: bold; }
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
 
-        /* --- Clean Premium Streak Fire Glow --- */
+        /* --- Ultimate Premium Animated Border (Esports Style) --- */
         .white-fire-aura {
             position: relative;
             z-index: 1;
-            /* Keep original transparent/glass background - NO solid background! */
-            border: 1px solid rgba(255, 100, 0, 0.8) !important;
-            box-shadow: 
-                0 0 15px rgba(255, 69, 0, 0.5),
-                inset 0 0 15px rgba(255, 69, 0, 0.3) !important;
-            animation: cleanStreakGlow 1.5s infinite alternate ease-in-out;
+            /* Keep original transparent/glass background */
+            border: 1px solid transparent !important;
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.2);
+            animation: cardFloat 3s infinite alternate ease-in-out;
+        }
+        
+        .white-fire-aura::before {
+            content: '';
+            position: absolute;
+            top: -1.5px; left: -1.5px; right: -1.5px; bottom: -1.5px;
+            z-index: -1;
+            border-radius: inherit;
+            padding: 1.5px; /* This sets the border thickness */
+            background: conic-gradient(
+                from var(--angle),
+                transparent 0%,
+                #ff4500 15%,
+                #ff9900 22%,
+                #ffffff 25%,
+                transparent 25%,
+                transparent 50%,
+                #ff4500 65%,
+                #ff9900 72%,
+                #ffffff 75%,
+                transparent 75%,
+                transparent 100%
+            );
+            /* Mask to cut out the center so the row background remains transparent */
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+                    mask-composite: exclude;
+            animation: spinGlow 2.5s linear infinite;
         }
 
-        @keyframes cleanStreakGlow {
-            0% {
-                box-shadow: 
-                    0 0 10px rgba(255, 69, 0, 0.4),
-                    inset 0 0 10px rgba(255, 69, 0, 0.2);
-                border-color: rgba(255, 100, 0, 0.6) !important;
-                transform: translateY(0);
-            }
-            100% {
-                box-shadow: 
-                    0 0 25px rgba(255, 215, 0, 0.7),
-                    0 0 10px rgba(255, 69, 0, 0.9),
-                    inset 0 0 20px rgba(255, 215, 0, 0.4);
-                border-color: rgba(255, 215, 0, 1) !important;
-                transform: translateY(-2px);
-            }
+        .white-fire-aura::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -2;
+            border-radius: inherit;
+            box-shadow: 0 0 20px rgba(255, 100, 0, 0.4);
+            animation: pulseGlow 1.5s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes spinGlow {
+            0% { --angle: 0deg; }
+            100% { --angle: 360deg; }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.6; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.01); box-shadow: 0 0 25px rgba(255, 150, 0, 0.6); }
+        }
+
+        @keyframes cardFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-3px); }
         }
 
         /* --- Modal Profile --- */

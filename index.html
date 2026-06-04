@@ -1736,7 +1736,7 @@
                 </div>
                 <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
                     <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN STREAK</div>
-                    <div id="modalStreak" style="font-size: 20px; color: #dfa539; font-weight: 800; text-shadow: 0 0 10px rgba(223,165,57,0.5);">🔥 0</div>
+                    <div id="modalStreak" style="font-size: 20px; color: #dfa539; font-weight: 800; text-shadow: 0 0 10px rgba(223,165,57,0.5); display: flex; justify-content: center; align-items: center;"><img src="fire.png" style="width: 24px; height: 24px; margin-right: 4px; filter: drop-shadow(0 2px 5px rgba(223,165,57,0.5));" alt="Fire"> 0</div>
                 </div>
             </div>
         </div>
@@ -2322,7 +2322,7 @@
         
         document.getElementById('modalWinRate').textContent = `${winRate}%`;
         document.getElementById('modalMatches').textContent = totalMatches;
-        document.getElementById('modalStreak').textContent = `🔥 ${streak}`;
+        document.getElementById('modalStreak').innerHTML = `<img src="fire.png" style="width: 24px; height: 24px; margin-right: 4px; filter: drop-shadow(0 2px 5px rgba(223,165,57,0.5));" alt="Fire"> ${streak}`;
         
         const avatarContainer = document.getElementById('modalAvatar').parentElement;
         if (streak >= 10) {

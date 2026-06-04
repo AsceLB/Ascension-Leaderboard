@@ -1704,7 +1704,7 @@
 
 <!-- Player Profile Modal -->
 <div id="playerModal" class="modal-overlay" onclick="if(event.target===this) closePlayerProfile()">
-    <div class="modal-content">
+    <div class="modal-content" style="max-width: 480px; padding: 35px;">
         <button class="modal-close" onclick="closePlayerProfile()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -1736,7 +1736,12 @@
                 </div>
                 <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
                     <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN STREAK</div>
-                    <div id="modalStreak" style="font-size: 20px; color: #dfa539; font-weight: 800; text-shadow: 0 0 10px rgba(223,165,57,0.5); display: flex; justify-content: center; align-items: center;"><img src="fire.png" style="width: 24px; height: 24px; margin-right: 4px; filter: drop-shadow(0 2px 5px rgba(223,165,57,0.5));" alt="Fire"> 0</div>
+                    <div id="modalStreak" style="font-size: 20px; color: #e2e8f0; font-weight: 800; text-shadow: 0 0 10px rgba(255,255,255,0.3); display: flex; justify-content: center; align-items: center;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" stroke="none" style="margin-right: 6px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.6));">
+                            <path d="M11.25,21C7.81,21 5,18.19 5,14.75C5,11.5 7.6,9.1 9.77,7.18C10.74,6.33 11.6,5.57 11.9,4.5C11.94,4.35 12.18,4.35 12.22,4.5C13.22,7.74 16.5,8.9 17.65,12.14C17.95,12.96 17.9,13.9 17.6,14.67C18.66,13.62 19,12 19,12C19,12 21,14.5 21,17C21,19.21 19.21,21 17,21C16.14,21 15.34,20.73 14.67,20.26C13.72,20.73 12.54,21 11.25,21M13,18.5C13,18.5 13,17.5 14,16.5C15,15.5 15,14 15,14C15,14 14.5,15 13.5,15.5C12.5,16 12.5,17 12.5,17C12.5,17 12,16 11,15.5C10,15 10,14 10,14C10,14 10.5,15 11,15.5C11.5,16 11.5,17.5 11.5,17.5C11.5,17.5 12,18 13,18.5Z"></path>
+                        </svg>
+                        <span id="modalStreakValue">0</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -2322,7 +2327,7 @@
         
         document.getElementById('modalWinRate').textContent = `${winRate}%`;
         document.getElementById('modalMatches').textContent = totalMatches;
-        document.getElementById('modalStreak').innerHTML = `<img src="fire.png" style="width: 24px; height: 24px; margin-right: 4px; filter: drop-shadow(0 2px 5px rgba(223,165,57,0.5));" alt="Fire"> ${streak}`;
+        document.getElementById('modalStreakValue').textContent = streak;
         
         const avatarContainer = document.getElementById('modalAvatar').parentElement;
         if (streak >= 10) {
@@ -2486,13 +2491,16 @@
             else if (match.action === 'Demoted') actionColorClass = 'match-status-demoted';
 
             const catName = categories.find(c => c.id === match.leaderboard)?.name || match.leaderboard;
+            
+            let winnerScoreText = match.scoreWinner !== undefined ? ` (${match.scoreWinner})` : '';
+            let loserScoreText = match.scoreLoser !== undefined ? ` (${match.scoreLoser})` : '';
 
             html += `
             <div class="history-card">
                 <div class="match-row">
-                    <span class="match-player winner">👑 ${match.winner}</span>
+                    <span class="match-player winner">👑 ${match.winner}${winnerScoreText}</span>
                     <span class="match-vs">VS</span>
-                    <span class="match-player loser">☠️ ${match.loser}</span>
+                    <span class="match-player loser">☠️ ${match.loser}${loserScoreText}</span>
                 </div>
                 <div class="match-meta">
                     <span>In <b>${catName}</b> (${timeAgo})</span>

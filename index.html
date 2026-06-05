@@ -46,6 +46,13 @@
         }
 
         /* --- Custom Neon Cursor (x10000 Better) --- */
+        :root {
+            --cursor-r: 167;
+            --cursor-g: 139;
+            --cursor-b: 250;
+            --cursor-hex: #a78bfa;
+        }
+
         .cursor-dot {
             position: fixed;
             top: 0; left: 0;
@@ -55,15 +62,15 @@
             pointer-events: none;
             z-index: 999999;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 10px #ffffff, 0 0 20px #a78bfa, 0 0 40px #3b82f6;
+            box-shadow: 0 0 10px #ffffff, 0 0 20px var(--cursor-hex), 0 0 40px rgba(var(--cursor-r), var(--cursor-g), var(--cursor-b), 0.5);
             transition: width 0.15s ease, height 0.15s ease, background 0.15s ease;
             mix-blend-mode: screen;
         }
 
         .cursor-dot.clicking {
             width: 12px; height: 12px;
-            background: #a78bfa;
-            box-shadow: 0 0 20px #a78bfa, 0 0 40px #3b82f6;
+            background: var(--cursor-hex);
+            box-shadow: 0 0 20px var(--cursor-hex), 0 0 40px rgba(var(--cursor-r), var(--cursor-g), var(--cursor-b), 0.8);
         }
 
         .cursor-ring {
@@ -76,22 +83,22 @@
             z-index: 999998;
             transform: translate(-50%, -50%);
             transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, background-color 0.3s ease;
-            box-shadow: inset 0 0 15px rgba(167, 139, 250, 0.2), 0 0 15px rgba(167, 139, 250, 0.2);
+            box-shadow: inset 0 0 15px rgba(var(--cursor-r), var(--cursor-g), var(--cursor-b), 0.2), 0 0 15px rgba(var(--cursor-r), var(--cursor-g), var(--cursor-b), 0.2);
         }
 
         .cursor-ring.clicking {
             width: 30px; height: 30px;
-            border-color: #a78bfa;
-            background-color: rgba(167, 139, 250, 0.1);
+            border-color: var(--cursor-hex);
+            background-color: rgba(var(--cursor-r), var(--cursor-g), var(--cursor-b), 0.1);
         }
 
         .cursor-ring.hovering {
             width: 65px; height: 65px;
             border-color: transparent;
             background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(3px) brightness(1.2);
-            -webkit-backdrop-filter: blur(3px) brightness(1.2);
-            box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
+            backdrop-filter: blur(1px) brightness(1.2); /* Reduced blur for readability */
+            -webkit-backdrop-filter: blur(1px) brightness(1.2);
+            box-shadow: 0 0 20px rgba(var(--cursor-r), var(--cursor-g), var(--cursor-b), 0.3);
         }
 
         .cursor-trail {
@@ -101,11 +108,21 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 999997;
-            background: #a78bfa;
-            box-shadow: 0 0 10px #a78bfa, 0 0 20px #3b82f6;
+            background: var(--cursor-hex);
+            box-shadow: 0 0 10px var(--cursor-hex), 0 0 20px rgba(var(--cursor-r), var(--cursor-g), var(--cursor-b), 0.8);
             mix-blend-mode: screen;
             will-change: transform, opacity;
             transform: translate(-50%, -50%);
+        }
+
+        /* Solid Line Canvas Trail */
+        #cursorCanvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            pointer-events: none;
+            z-index: 999996;
+            mix-blend-mode: screen;
         }
 
         /* --- Toolbar Buttons --- */
@@ -117,6 +134,114 @@
             display: flex;
             gap: 8px;
         }
+
+        /* --- Cursor Settings Panel --- */
+        .cursor-settings-panel {
+            position: fixed;
+            top: 70px;
+            left: 20px;
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            width: 250px;
+            z-index: 100000;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transform-origin: top left;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        
+        .cursor-settings-panel.hidden {
+            transform: scale(0.9);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        body.light-mode .cursor-settings-panel {
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a2e;
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cursor-settings-panel .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+        }
+
+        body.light-mode .cursor-settings-panel .panel-header { border-bottom-color: rgba(0,0,0,0.1); }
+        .cursor-settings-panel h3 { margin: 0; font-size: 16px; font-weight: 600; }
+        
+        .cursor-settings-panel .setting-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .cursor-settings-panel .setting-group .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cursor-settings-panel .setting-group label {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        body.light-mode .cursor-settings-panel .setting-group label { color: #64748b; }
+
+        .cursor-settings-panel select {
+            background: rgba(0,0,0,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px;
+            border-radius: 6px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        body.light-mode .cursor-settings-panel select {
+            background: white;
+            color: #1a1a2e;
+            border-color: rgba(0,0,0,0.2);
+        }
+
+        .color-options {
+            display: flex;
+            gap: 8px;
+        }
+
+        .color-btn {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .color-btn:hover { transform: scale(1.15); }
+        .color-btn.active { border-color: white; box-shadow: 0 0 10px currentColor; transform: scale(1.15); }
+        body.light-mode .color-btn.active { border-color: #1a1a2e; }
+
+        /* Toggle Switch */
+        .switch { position: relative; display: inline-block; width: 40px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #475569; transition: .4s; }
+        .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; transition: .4s; }
+        input:checked + .slider { background-color: #3b82f6; }
+        input:checked + .slider:before { transform: translateX(18px); }
+        .slider.round { border-radius: 22px; }
+        .slider.round:before { border-radius: 50%; }
 
         .toolbar-btn {
             width: 42px;
@@ -2325,7 +2450,9 @@
             " />
         </filter>
     </svg>
-    <!-- Custom Cursor -->
+    <!-- Custom Cursor Canvas -->
+    <canvas id="cursorCanvas"></canvas>
+    <!-- Custom Cursor DOM Elements -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
@@ -2360,6 +2487,53 @@
                 <line x1="1" y1="1" x2="23" y2="23"></line>
             </svg>
         </button>
+        
+        <!-- Cursor Settings Toggle -->
+        <button id="cursorSettingsBtn" class="toolbar-btn" title="Cursor Settings" onclick="toggleCursorSettings()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"></path>
+                <path d="M13 13l6 6"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Cursor Settings Panel -->
+    <div id="cursorSettingsPanel" class="cursor-settings-panel hidden">
+        <div class="panel-header">
+            <h3>Cursor Settings</h3>
+            <button class="modal-close" style="position:static; padding:4px;" onclick="toggleCursorSettings()">×</button>
+        </div>
+        
+        <div class="setting-group">
+            <div class="row">
+                <label>Enable Custom Cursor</label>
+                <label class="switch">
+                    <input type="checkbox" id="cursorToggle" checked onchange="updateCursorSettings()">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="setting-group">
+            <label>Trail Style</label>
+            <select id="cursorStyle" onchange="updateCursorSettings()">
+                <option value="dots">Chấm tròn (Dots)</option>
+                <option value="solid">Nét liền (Solid)</option>
+                <option value="sparkles">Lấp lánh (Sparkles)</option>
+                <option value="smoke">Khói (Smoke)</option>
+            </select>
+        </div>
+
+        <div class="setting-group">
+            <label>Cursor Color</label>
+            <div class="color-options">
+                <button class="color-btn active" style="background: #a78bfa;" onclick="setCursorColor(167, 139, 250, '#a78bfa', this)"></button>
+                <button class="color-btn" style="background: #ef4444;" onclick="setCursorColor(239, 68, 68, '#ef4444', this)"></button>
+                <button class="color-btn" style="background: #22c55e;" onclick="setCursorColor(34, 197, 94, '#22c55e', this)"></button>
+                <button class="color-btn" style="background: #3b82f6;" onclick="setCursorColor(59, 130, 246, '#3b82f6', this)"></button>
+                <button class="color-btn" style="background: #ffffff;" onclick="setCursorColor(255, 255, 255, '#ffffff', this)"></button>
+            </div>
+        </div>
     </div>
 
     <div class="universe-bg">
@@ -3766,18 +3940,77 @@
 
     <!-- Custom Cursor Engine -->
     <script>
+    // --- Global Cursor Settings UI Functions ---
+    window.toggleCursorSettings = function() {
+        const panel = document.getElementById('cursorSettingsPanel');
+        panel.classList.toggle('hidden');
+    };
+
+    window.updateCursorSettings = function() {
+        window.cursorEnabled = document.getElementById('cursorToggle').checked;
+        window.cursorStyle = document.getElementById('cursorStyle').value;
+        
+        if (!window.cursorEnabled) {
+            document.body.style.cursor = 'auto';
+            document.getElementById('cursorDot').style.display = 'none';
+            document.getElementById('cursorRing').style.display = 'none';
+            document.querySelectorAll('.cursor-trail').forEach(el => el.style.display = 'none');
+            const canvas = document.getElementById('cursorCanvas');
+            if(canvas) { const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height); }
+        } else {
+            document.body.style.cursor = 'none';
+            document.getElementById('cursorDot').style.display = 'block';
+            document.getElementById('cursorRing').style.display = 'block';
+            if (window.cursorStyle === 'dots') {
+                document.querySelectorAll('.cursor-trail').forEach(el => el.style.display = 'block');
+            } else {
+                document.querySelectorAll('.cursor-trail').forEach(el => el.style.display = 'none');
+            }
+        }
+    };
+
+    window.setCursorColor = function(r, g, b, hex, btn) {
+        document.documentElement.style.setProperty('--cursor-r', r);
+        document.documentElement.style.setProperty('--cursor-g', g);
+        document.documentElement.style.setProperty('--cursor-b', b);
+        document.documentElement.style.setProperty('--cursor-hex', hex);
+        
+        document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+        if(btn) btn.classList.add('active');
+    };
+
+    // --- Cursor Engine Initialization ---
     (function() {
         const dot = document.getElementById('cursorDot');
         const ring = document.getElementById('cursorRing');
-        if (!dot || !ring) return;
+        const canvas = document.getElementById('cursorCanvas');
+        if (!dot || !ring || !canvas) return;
 
+        const ctx = canvas.getContext('2d');
+        let cWidth = window.innerWidth;
+        let cHeight = window.innerHeight;
+        canvas.width = cWidth;
+        canvas.height = cHeight;
+        window.addEventListener('resize', () => {
+            cWidth = window.innerWidth;
+            cHeight = window.innerHeight;
+            canvas.width = cWidth;
+            canvas.height = cHeight;
+        });
+
+        // Initialize Defaults
+        window.cursorEnabled = true;
+        window.cursorStyle = 'dots';
+        
         let mouseX = -100, mouseY = -100;
         let ringX = -100, ringY = -100;
         const trail = [];
         const TRAIL_LENGTH = 20;
         let isVisible = false;
 
-        // Pre-create trail elements
+        const extraParticles = []; // For sparkles/smoke
+
+        // Pre-create DOM trail elements (used for 'dots' style)
         for (let i = 0; i < TRAIL_LENGTH; i++) {
             const t = document.createElement('div');
             t.className = 'cursor-trail';
@@ -3787,6 +4020,8 @@
         }
 
         document.addEventListener('mousemove', (e) => {
+            if (!window.cursorEnabled) return;
+            
             mouseX = e.clientX;
             mouseY = e.clientY;
 
@@ -3797,36 +4032,57 @@
                 for(let i=0; i<TRAIL_LENGTH; i++) {
                     trail[i].x = mouseX;
                     trail[i].y = mouseY;
-                    trail[i].el.style.opacity = '1';
+                    if(window.cursorStyle === 'dots') trail[i].el.style.opacity = '1';
+                }
+            }
+
+            // Spawn extra particles for sparkles/smoke
+            if (window.cursorStyle === 'sparkles' || window.cursorStyle === 'smoke') {
+                if (Math.random() > 0.3) {
+                    extraParticles.push({
+                        x: mouseX + (Math.random() - 0.5) * 10,
+                        y: mouseY + (Math.random() - 0.5) * 10,
+                        vx: (Math.random() - 0.5) * 2,
+                        vy: (Math.random() - 0.5) * 2 - (window.cursorStyle === 'smoke' ? 1 : 0),
+                        life: 1,
+                        size: window.cursorStyle === 'smoke' ? Math.random() * 10 + 10 : Math.random() * 3 + 1,
+                        rot: Math.random() * Math.PI * 2,
+                        rotSpeed: (Math.random() - 0.5) * 0.2
+                    });
                 }
             }
         });
 
         document.addEventListener('mousedown', () => {
+            if (!window.cursorEnabled) return;
             dot.classList.add('clicking');
             ring.classList.add('clicking');
         });
 
         document.addEventListener('mouseup', () => {
+            if (!window.cursorEnabled) return;
             dot.classList.remove('clicking');
             ring.classList.remove('clicking');
         });
 
         document.addEventListener('mouseover', (e) => {
-            const interactive = e.target.closest('a, button, .player-row, .board-player-card, .tab, .rules-btn, .tier-item, input, .modal-close, .close-history-btn, [onclick]');
+            if (!window.cursorEnabled) return;
+            const interactive = e.target.closest('a, button, .player-row, .board-player-card, .tab, .rules-btn, .tier-item, input, .modal-close, .close-history-btn, .color-btn, .switch, [onclick]');
             if (interactive) {
                 ring.classList.add('hovering');
             }
         });
 
         document.addEventListener('mouseout', (e) => {
-            const interactive = e.target.closest('a, button, .player-row, .board-player-card, .tab, .rules-btn, .tier-item, input, .modal-close, .close-history-btn, [onclick]');
+            if (!window.cursorEnabled) return;
+            const interactive = e.target.closest('a, button, .player-row, .board-player-card, .tab, .rules-btn, .tier-item, input, .modal-close, .close-history-btn, .color-btn, .switch, [onclick]');
             if (interactive) {
                 ring.classList.remove('hovering');
             }
         });
 
         document.addEventListener('mouseleave', () => {
+            if (!window.cursorEnabled) return;
             isVisible = false;
             dot.style.opacity = '0';
             ring.style.opacity = '0';
@@ -3834,6 +4090,13 @@
         });
 
         function animate() {
+            if (!window.cursorEnabled) {
+                requestAnimationFrame(animate);
+                return;
+            }
+
+            ctx.clearRect(0, 0, cWidth, cHeight);
+
             if (isVisible) {
                 // Dot follows instantly
                 dot.style.left = mouseX + 'px';
@@ -3848,6 +4111,10 @@
                 // Fluid Trail Physics
                 let currentX = mouseX;
                 let currentY = mouseY;
+                const r = getComputedStyle(document.documentElement).getPropertyValue('--cursor-r').trim() || '167';
+                const g = getComputedStyle(document.documentElement).getPropertyValue('--cursor-g').trim() || '139';
+                const b = getComputedStyle(document.documentElement).getPropertyValue('--cursor-b').trim() || '250';
+
                 for (let i = 0; i < TRAIL_LENGTH; i++) {
                     const t = trail[i];
                     
@@ -3856,19 +4123,69 @@
                     t.y += (currentY - t.y) * 0.35;
                     
                     const scale = 1 - (i / TRAIL_LENGTH);
-                    t.el.style.left = t.x + 'px';
-                    t.el.style.top = t.y + 'px';
-                    t.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                    t.el.style.opacity = scale * 0.7;
+
+                    if (window.cursorStyle === 'dots') {
+                        t.el.style.left = t.x + 'px';
+                        t.el.style.top = t.y + 'px';
+                        t.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                        t.el.style.opacity = scale * 0.7;
+                    } else if (window.cursorStyle === 'solid') {
+                        ctx.beginPath();
+                        ctx.moveTo(currentX, currentY);
+                        ctx.lineTo(t.x, t.y);
+                        ctx.lineWidth = 2 + (6 * scale);
+                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${scale * 0.8})`;
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+                        ctx.stroke();
+                    }
                     
                     currentX = t.x;
                     currentY = t.y;
+                }
+
+                // Render extra particles for sparkles / smoke
+                if (window.cursorStyle === 'sparkles' || window.cursorStyle === 'smoke') {
+                    for (let i = extraParticles.length - 1; i >= 0; i--) {
+                        const p = extraParticles[i];
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.life -= (window.cursorStyle === 'smoke' ? 0.015 : 0.03);
+                        p.rot += p.rotSpeed;
+
+                        if (p.life <= 0) {
+                            extraParticles.splice(i, 1);
+                            continue;
+                        }
+
+                        if (window.cursorStyle === 'sparkles') {
+                            ctx.save();
+                            ctx.translate(p.x, p.y);
+                            ctx.rotate(p.rot);
+                            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${p.life})`;
+                            ctx.fillRect(-p.size/2, -p.size/2, p.size, p.size);
+                            ctx.restore();
+                        } else if (window.cursorStyle === 'smoke') {
+                            const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                            grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${p.life * 0.2})`);
+                            grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+                            ctx.fillStyle = grad;
+                            ctx.beginPath();
+                            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                } else {
+                    extraParticles.length = 0; // Clear if switched
                 }
             }
 
             requestAnimationFrame(animate);
         }
         animate();
+        
+        // Ensure DOM elements match initial state
+        window.updateCursorSettings();
     })();
     </script>
 </body>

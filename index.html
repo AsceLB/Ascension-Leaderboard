@@ -41,6 +41,64 @@
             min-height: 100vh;
             position: relative;
             overflow-y: scroll;
+            cursor: none;
+        }
+
+        /* --- Custom Neon Cursor --- */
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 8px; height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999999;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 6px #fff, 0 0 15px rgba(167,139,250,0.6), 0 0 30px rgba(59,130,246,0.3);
+            transition: width 0.15s ease, height 0.15s ease, background 0.15s ease;
+        }
+
+        .cursor-dot.clicking {
+            width: 5px; height: 5px;
+            background: #a78bfa;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            top: 0; left: 0;
+            width: 36px; height: 36px;
+            border: 1.5px solid rgba(255,255,255,0.25);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999998;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+        }
+
+        .cursor-ring.clicking {
+            width: 28px; height: 28px;
+            border-color: rgba(167,139,250,0.5);
+        }
+
+        .cursor-ring.hovering {
+            width: 50px; height: 50px;
+            border-color: rgba(167,139,250,0.4);
+            opacity: 0.6;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 999997;
+            background: rgba(167,139,250,0.5);
+            transform: translate(-50%, -50%);
+        }
+
+        @media (max-width: 768px) {
+            .cursor-dot, .cursor-ring, .cursor-trail { display: none !important; }
+            body { cursor: auto; }
         }
 
 
@@ -2014,6 +2072,9 @@
     </script>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
     <div class="universe-bg">
         <div id="mainBgParticles" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1;"></div>
         <div class="noise-overlay"></div>
@@ -3355,6 +3416,116 @@
                 animateLogo();
             }
         });
+    </script>
+
+    <!-- Custom Cursor Engine -->
+    <script>
+    (function() {
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        if (!dot || !ring) return;
+
+        let mouseX = -100, mouseY = -100;
+        let ringX = -100, ringY = -100;
+        const trail = [];
+        const TRAIL_LENGTH = 12;
+        let lastTrailTime = 0;
+        let isVisible = false;
+
+        // Pre-create trail elements
+        for (let i = 0; i < TRAIL_LENGTH; i++) {
+            const t = document.createElement('div');
+            t.className = 'cursor-trail';
+            t.style.opacity = '0';
+            document.body.appendChild(t);
+            trail.push({ el: t, x: -100, y: -100, life: 0 });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            if (!isVisible) {
+                isVisible = true;
+                dot.style.opacity = '1';
+                ring.style.opacity = '1';
+            }
+
+            // Spawn trail particle
+            const now = Date.now();
+            if (now - lastTrailTime > 30) {
+                lastTrailTime = now;
+                const oldest = trail.reduce((a, b) => a.life < b.life ? a : b);
+                oldest.x = mouseX;
+                oldest.y = mouseY;
+                oldest.life = 1;
+            }
+        });
+
+        document.addEventListener('mousedown', () => {
+            dot.classList.add('clicking');
+            ring.classList.add('clicking');
+        });
+
+        document.addEventListener('mouseup', () => {
+            dot.classList.remove('clicking');
+            ring.classList.remove('clicking');
+        });
+
+        document.addEventListener('mouseover', (e) => {
+            const interactive = e.target.closest('a, button, .player-row, .board-player-card, .tab, .rules-btn, .tier-item, input, .modal-close, .close-history-btn, [onclick]');
+            if (interactive) {
+                ring.classList.add('hovering');
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            const interactive = e.target.closest('a, button, .player-row, .board-player-card, .tab, .rules-btn, .tier-item, input, .modal-close, .close-history-btn, [onclick]');
+            if (interactive) {
+                ring.classList.remove('hovering');
+            }
+        });
+
+        document.addEventListener('mouseleave', () => {
+            isVisible = false;
+            dot.style.opacity = '0';
+            ring.style.opacity = '0';
+        });
+
+        function animate() {
+            // Dot follows instantly
+            dot.style.left = mouseX + 'px';
+            dot.style.top = mouseY + 'px';
+
+            // Ring follows with smooth lerp
+            ringX += (mouseX - ringX) * 0.15;
+            ringY += (mouseY - ringY) * 0.15;
+            ring.style.left = ringX + 'px';
+            ring.style.top = ringY + 'px';
+
+            // Trail particles fade
+            for (let i = 0; i < trail.length; i++) {
+                const t = trail[i];
+                if (t.life > 0) {
+                    t.life -= 0.04;
+                    if (t.life <= 0) {
+                        t.life = 0;
+                        t.el.style.opacity = '0';
+                    } else {
+                        const scale = t.life;
+                        t.el.style.left = t.x + 'px';
+                        t.el.style.top = t.y + 'px';
+                        t.el.style.opacity = (t.life * 0.6).toString();
+                        t.el.style.width = (4 * scale) + 'px';
+                        t.el.style.height = (4 * scale) + 'px';
+                    }
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+    })();
     </script>
 </body>
 </html>

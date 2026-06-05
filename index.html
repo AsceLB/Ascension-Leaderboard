@@ -1685,15 +1685,15 @@
             animation: continueEntrance 1s ease-out 1s forwards,
                        continuePulse 1.5s ease-in-out 2s infinite alternate;
             text-transform: uppercase;
-            transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease, text-shadow 0.3s ease, opacity 0.3s ease;
         }
 
         .splash-continue:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
             color: #ffffff !important;
             text-shadow: 0 0 20px rgba(255,255,255,1) !important;
             opacity: 1 !important;
-            animation: none !important;
+            animation-play-state: paused !important;
         }
 
         @keyframes letterEntrance {

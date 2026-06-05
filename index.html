@@ -1642,26 +1642,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transform-origin: center;
             cursor: pointer;
-        }
-        
-        .splash-fade-out {
-            animation: splashFadeOut 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
-            pointer-events: none;
-        }
-
-        .splash-continue {
-            position: absolute;
-            bottom: 50px;
-            font-size: 16px;
-            font-weight: bold;
-            letter-spacing: 6px;
-            color: rgba(255, 255, 255, 0.6);
-            opacity: 0;
-            animation: continueEntrance 1s ease-out 2.5s forwards,
-                       continuePulse 1.5s ease-in-out 3.5s infinite alternate;
-            text-transform: uppercase;
         }
         
         .splash-logo {
@@ -1672,19 +1653,51 @@
         }
 
         .splash-text {
-            margin-top: 30px;
+            margin-top: 15px; /* Brought closer to logo */
+            display: flex;
+            gap: 15px;
             font-size: 50px;
             font-weight: 900;
-            letter-spacing: 25px;
             color: white;
             text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .splash-text span {
+            display: inline-block;
             background: linear-gradient(180deg, #ffffff 0%, #555555 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 0;
             transform: translateY(30px);
-            animation: textEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
-            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+            animation: letterEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation-delay: calc(0.3s + (var(--i) * 0.1s));
+        }
+
+        .splash-continue {
+            position: absolute;
+            bottom: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 6px;
+            color: rgba(255, 255, 255, 0.6);
+            opacity: 0;
+            animation: continueEntrance 1s ease-out 1s forwards,
+                       continuePulse 1.5s ease-in-out 2s infinite alternate;
+            text-transform: uppercase;
+            transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .splash-continue:hover {
+            transform: scale(1.1);
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255,255,255,1);
+            animation-play-state: paused;
+        }
+
+        @keyframes letterEntrance {
+            0% { opacity: 0; transform: translateY(30px) scale(0.8); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
         }
 
         @keyframes logoEntrance {
@@ -1697,17 +1710,6 @@
             100% { filter: drop-shadow(0 0 50px rgba(255,255,255,0.9)); }
         }
 
-        @keyframes textEntrance {
-            0% { opacity: 0; transform: translateY(30px); letter-spacing: 5px; filter: blur(5px); }
-            100% { opacity: 1; transform: translateY(0); letter-spacing: 25px; filter: blur(0px); }
-        }
-
-        @keyframes splashFadeOut {
-            0% { opacity: 1; visibility: visible; transform: scale(1); border-radius: 0; }
-            40% { transform: scale(1.05); opacity: 1; border-radius: 20px; }
-            100% { opacity: 0; visibility: hidden; transform: scale(0); border-radius: 50%; }
-        }
-
         @keyframes continueEntrance {
             0% { opacity: 0; transform: translateY(10px); }
             100% { opacity: 0.6; transform: translateY(0); }
@@ -1717,14 +1719,26 @@
             0% { opacity: 0.3; text-shadow: 0 0 5px rgba(255,255,255,0); }
             100% { opacity: 1; text-shadow: 0 0 15px rgba(255,255,255,0.8); }
         }
+
+        /* The dynamic pop out animation classes added by JS */
+        .pop-out {
+            animation: popOut 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards !important;
+        }
+        
+        @keyframes popOut {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
     </style>
 </head>
 <body>
     <!-- Epic Intro Splash Screen -->
     <div id="intro-splash" onclick="dismissSplash()">
-        <img src="https://i.postimg.cc/j5B1nLhX/Silver-Arrow-Emblem-with-Wings-removebg-preview.png" class="splash-logo">
-        <div class="splash-text">ASCENSION</div>
-        <div class="splash-continue">Click to continue</div>
+        <img src="https://i.postimg.cc/j5B1nLhX/Silver-Arrow-Emblem-with-Wings-removebg-preview.png" id="splashLogo" class="splash-logo">
+        <div class="splash-text">
+            <span style="--i:1">A</span><span style="--i:2">S</span><span style="--i:3">C</span><span style="--i:4">E</span><span style="--i:5">N</span><span style="--i:6">S</span><span style="--i:7">I</span><span style="--i:8">O</span><span style="--i:9">N</span>
+        </div>
+        <div class="splash-continue" id="splashContinue">Click to continue</div>
     </div>
 
   <div class="bg-mesh"></div>
@@ -2053,12 +2067,36 @@
     document.body.style.overflow = 'hidden'; // Hide scrollbar initially
     function dismissSplash() {
         const splash = document.getElementById('intro-splash');
-        if (splash) {
-            splash.classList.add('splash-fade-out');
+        if (splash && !splash.classList.contains('dismissing')) {
+            splash.classList.add('dismissing');
+            
+            const cont = document.getElementById('splashContinue');
+            const logo = document.getElementById('splashLogo');
+            const letters = document.querySelectorAll('.splash-text span');
+
+            if (cont) {
+                cont.style.animation = 'none';
+                cont.classList.add('pop-out');
+            }
+
+            letters.forEach((letter, index) => {
+                letter.style.animation = 'none';
+                setTimeout(() => letter.classList.add('pop-out'), index * 40);
+            });
+
+            if (logo) {
+                logo.style.animation = 'none';
+                setTimeout(() => logo.classList.add('pop-out'), 300);
+            }
+
             setTimeout(() => {
-                document.body.style.overflow = ''; // Restore original scroll behavior
-                splash.style.display = 'none';
-            }, 600); // Wait for the pop animation to almost finish
+                splash.style.transition = 'opacity 0.5s ease';
+                splash.style.opacity = '0';
+                setTimeout(() => {
+                    splash.style.display = 'none';
+                    document.body.style.overflow = ''; 
+                }, 500);
+            }, 500);
         }
     }
 

@@ -158,22 +158,30 @@
 
         /* --- Light Mode --- */
         body.light-mode {
-            background-color: #f0f0f5;
+            background-color: #ffffff;
             color: #1a1a2e;
+        }
+
+        body.light-mode .universe-bg {
+            background: #ffffff;
+        }
+
+        body.light-mode #mainBgParticles {
+            filter: invert(1);
         }
 
         body.light-mode .container { color: #1a1a2e; }
 
         body.light-mode .player-row {
-            background-color: #ffffff;
-            border-color: rgba(0,0,0,0.08);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            background-color: transparent;
+            border-color: rgba(0,0,0,0.05);
+            box-shadow: none;
         }
 
         body.light-mode .player-row:hover {
-            background: linear-gradient(135deg, #f8f8ff 0%, #e8e8f0 100%);
             border-color: rgba(100,100,200,0.4);
-            box-shadow: 0 0 12px rgba(100,100,200,0.2), 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+            /* Important: We don't set background here so we don't override the gold/silver/bronze gradients */
         }
 
         body.light-mode .name-wrapper h3 { color: #1a1a2e; }
@@ -181,34 +189,34 @@
         body.light-mode .title span { color: #333; }
 
         body.light-mode .tabs {
-            background-color: #ffffff;
+            background-color: transparent;
             border-color: rgba(0,0,0,0.1);
         }
 
         body.light-mode .tab { color: #888; }
         body.light-mode .tab.active, body.light-mode .tab:hover { 
-            background-color: #f0f0f5; color: #1a1a2e; 
+            background-color: rgba(0,0,0,0.05); color: #1a1a2e; 
         }
         body.light-mode .tab::after { background: #1a1a2e; }
 
         body.light-mode .leaderboard-header { color: #999; border-bottom-color: rgba(0,0,0,0.1); }
 
         body.light-mode .board-col {
-            background: #ffffff;
+            background: transparent;
             border-color: rgba(0,0,0,0.1);
         }
 
         body.light-mode .board-player-card {
-            background: #f5f5fa;
+            background: rgba(0,0,0,0.02);
             border-color: rgba(0,0,0,0.08);
         }
         body.light-mode .board-player-card:hover {
-            background: #eeeef5;
+            background: rgba(0,0,0,0.05);
             border-color: rgba(100,100,200,0.4);
         }
         body.light-mode .board-player-card .name { color: #1a1a2e; }
 
-        body.light-mode .region { background-color: #e8e8f0; color: #555; border-color: #ccc; }
+        body.light-mode .region { background-color: rgba(0,0,0,0.05); color: #555; border-color: rgba(0,0,0,0.1); }
 
         body.light-mode .search-container input {
             background: rgba(0,0,0,0.04);
@@ -246,8 +254,21 @@
         body.light-mode .glare { mix-blend-mode: soft-light; }
 
         body.light-mode .rank-number { 
-            color: #ffffff; 
+            color: #1a1a2e; 
         }
+
+        body.light-mode .position-circle {
+            background: rgba(0,0,0,0.08);
+            border-color: rgba(0,0,0,0.1);
+        }
+        body.light-mode .position-circle img {
+            filter: drop-shadow(0 0 2px rgba(0,0,0,0.3));
+        }
+
+        /* Fix gold/silver/bronze text visibility on light background */
+        body.light-mode .position-badge.gold { border-color: rgba(218,165,32,0.8); background: rgba(218,165,32,0.15); color: #b8860b; font-weight: bold; }
+        body.light-mode .position-badge.silver { border-color: rgba(128,128,128,0.8); background: rgba(128,128,128,0.15); color: #555555; font-weight: bold; }
+        body.light-mode .position-badge.bronze { border-color: rgba(160,82,45,0.8); background: rgba(160,82,45,0.15); color: #8b4513; font-weight: bold; }
 
         body.light-mode .site-title {
             background: linear-gradient(180deg, #1a1a2e 0%, #444 50%, #666 100%);

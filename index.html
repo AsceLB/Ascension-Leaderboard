@@ -1786,6 +1786,109 @@
 
     </style>
     <script src="https://unpkg.com/skinview3d@3.0.0/bundles/skinview3d.bundle.js"></script>
+    <script>
+        class UIAudioEngine {
+            constructor() {
+                this.ctx = null;
+                this.initialized = false;
+                this.masterVolume = null;
+            }
+            
+            init() {
+                if (this.initialized) return;
+                try {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                    this.masterVolume = this.ctx.createGain();
+                    this.masterVolume.gain.value = 0.15;
+                    this.masterVolume.connect(this.ctx.destination);
+                    this.initialized = true;
+                } catch(e) {}
+            }
+
+            playHover() {
+                if (!this.initialized) return;
+                try {
+                    if(this.ctx.state === 'suspended') this.ctx.resume();
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1200, this.ctx.currentTime);
+                    gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.015, this.ctx.currentTime + 0.01);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
+                    osc.connect(gain);
+                    gain.connect(this.masterVolume);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.15);
+                } catch(e) {}
+            }
+
+            playClick() {
+                if (!this.initialized) return;
+                try {
+                    if(this.ctx.state === 'suspended') this.ctx.resume();
+                    const freqs = [523.25, 659.25, 783.99, 987.77]; 
+                    freqs.forEach((freq, i) => {
+                        setTimeout(() => {
+                            const osc = this.ctx.createOscillator();
+                            const gain = this.ctx.createGain();
+                            osc.type = 'sine';
+                            osc.frequency.value = freq;
+                            gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                            gain.gain.linearRampToValueAtTime(0.03, this.ctx.currentTime + 0.05);
+                            gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 1.5);
+                            osc.connect(gain);
+                            gain.connect(this.masterVolume);
+                            osc.start();
+                            osc.stop(this.ctx.currentTime + 1.6);
+                        }, i * 40);
+                    });
+                } catch(e) {}
+            }
+            
+            playClose() {
+                if (!this.initialized) return;
+                try {
+                    if(this.ctx.state === 'suspended') this.ctx.resume();
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.3);
+                    gain.gain.setValueAtTime(0, this.ctx.currentTime);
+                    gain.gain.linearRampToValueAtTime(0.03, this.ctx.currentTime + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.4);
+                    osc.connect(gain);
+                    gain.connect(this.masterVolume);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.45);
+                } catch(e) {}
+            }
+        }
+        window.uiAudio = new UIAudioEngine();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.addEventListener('mouseover', (e) => {
+                if (e.target.closest('.player-card, .board-player-card, .tab, .rules-btn, .tier-item, .modal-close, .modal-tier-icon, .close-history-btn')) {
+                    window.uiAudio.playHover();
+                }
+            });
+            
+            document.addEventListener('mousedown', (e) => {
+                const target = e.target.closest('.player-card, .board-player-card, .tab, .rules-btn, .tier-item, .modal-close, .modal-tier-icon, #intro-splash, .close-history-btn');
+                if (target) {
+                    window.uiAudio.init();
+                    if (target.classList.contains('modal-close') || target.classList.contains('close-history-btn')) {
+                        window.uiAudio.playClose();
+                    } else {
+                        window.uiAudio.playClick();
+                    }
+                } else {
+                    window.uiAudio.init();
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="universe-bg">

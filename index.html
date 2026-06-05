@@ -1962,7 +1962,7 @@
                     lastHoveredRow3D.style.borderColor = '';
                     const glare = lastHoveredRow3D.querySelector('.glare');
                     if (glare) glare.style.opacity = '0';
-                    const bust = lastHoveredRow3D.querySelector('.player-bust');
+                    const bust = lastHoveredRow3D.querySelector('.player-bust, .avatar');
                     if (bust) bust.style.transform = '';
                 }
 
@@ -1981,11 +1981,19 @@
                     row.style.boxShadow = `0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)`;
                     row.style.borderColor = `rgba(255,255,255,0.4)`;
 
-                    const bust = row.querySelector('.player-bust');
+                    const bust = row.querySelector('.player-bust, .avatar');
                     if (bust) {
-                        const bustX = ((x - centerX) / centerX) * 15; 
-                        const bustY = ((y - centerY) / centerY) * 15;
-                        bust.style.transform = `translateX(calc(-50% + ${bustX}px)) translateY(${bustY}px) scale(1.15)`;
+                        const bustRotateY = ((x - centerX) / centerX) * 25; 
+                        const bustRotateX = ((y - centerY) / centerY) * -15; 
+                        
+                        const bustX = ((x - centerX) / centerX) * 5; 
+                        const bustY = ((y - centerY) / centerY) * 5;
+                        
+                        if (bust.classList.contains('player-bust')) {
+                            bust.style.transform = `translateX(calc(-50% + ${bustX}px)) translateY(${bustY}px) scale(1.15) perspective(400px) rotateY(${bustRotateY}deg) rotateX(${bustRotateX}deg)`;
+                        } else {
+                            bust.style.transform = `translateX(${bustX}px) translateY(${bustY}px) scale(1.15) perspective(400px) rotateY(${bustRotateY}deg) rotateX(${bustRotateX}deg)`;
+                        }
                     }
                     
                     let glare = row.querySelector('.glare');

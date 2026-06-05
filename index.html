@@ -1942,6 +1942,7 @@
 <!-- Player Profile Modal -->
 <div id="playerModal" class="modal-overlay" onclick="if(event.target===this) closePlayerProfile()">
     <div class="modal-content" style="max-width: 480px; padding: 25px;">
+        <video id="modalBgVideo" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.35; border-radius: 20px; display: none; pointer-events: none;"></video>
         <button class="modal-close" onclick="closePlayerProfile()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -2634,17 +2635,29 @@
         modalContent.style.borderColor = borderTheme.main;
         modalContent.style.boxShadow = `0 0 50px ${borderTheme.glow}, inset 0 0 30px ${borderTheme.bgAlpha}`;
         
+        const bgVideo = document.getElementById('modalBgVideo');
+        
         // Custom Profile Background logic
         if (player.background) {
-            if (player.background.startsWith('http')) {
+            if (player.background.match(/\.(mp4|webm|ogg)$/i)) {
+                modalContent.style.background = `linear-gradient(to bottom, rgba(13,17,23,0.7), rgba(13,17,23,0.95))`;
+                bgVideo.src = player.background;
+                bgVideo.style.display = 'block';
+            } else if (player.background.startsWith('http')) {
+                bgVideo.style.display = 'none';
+                bgVideo.src = '';
                 modalContent.style.background = `linear-gradient(to bottom, rgba(13,17,23,0.7), rgba(13,17,23,0.95)), url('${player.background}')`;
                 modalContent.style.backgroundSize = 'cover';
                 modalContent.style.backgroundPosition = 'center';
                 modalContent.style.backgroundRepeat = 'no-repeat';
             } else {
+                bgVideo.style.display = 'none';
+                bgVideo.src = '';
                 modalContent.style.background = `linear-gradient(135deg, ${player.background} 0%, #0d1117 100%)`;
             }
         } else {
+            bgVideo.style.display = 'none';
+            bgVideo.src = '';
             modalContent.style.background = '#0d1117'; // default
         }
         

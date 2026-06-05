@@ -97,6 +97,59 @@
             transform: translate(-50%, -50%);
         }
 
+        /* --- Zen Mode Toggle --- */
+        .zen-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100000;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            color: rgba(255,255,255,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .zen-toggle:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+            border-color: rgba(255,255,255,0.3);
+            box-shadow: 0 0 20px rgba(167,139,250,0.3);
+            transform: scale(1.1);
+        }
+
+        .zen-toggle.active {
+            background: rgba(167,139,250,0.2);
+            border-color: rgba(167,139,250,0.5);
+            color: #a78bfa;
+            box-shadow: 0 0 25px rgba(167,139,250,0.4);
+        }
+
+        body.zen-mode {
+            padding: 0;
+            overflow: hidden;
+        }
+
+        body.zen-mode > *:not(.zen-toggle):not(.cursor-dot):not(.cursor-ring):not(.cursor-trail):not(.universe-bg):not(#intro-splash) {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 0.5s ease !important;
+        }
+
+        body.zen-mode .universe-bg {
+            opacity: 1 !important;
+        }
+
+        body.zen-mode #mainBgParticles {
+            pointer-events: auto !important;
+        }
+
         @media (max-width: 768px) {
             .cursor-dot, .cursor-ring, .cursor-trail { display: none !important; }
             * { cursor: auto !important; }
@@ -2076,6 +2129,22 @@
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Zen Mode Toggle -->
+    <button id="zenToggle" class="zen-toggle" title="Zen Mode - Hide UI">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+    </button>
+
     <div class="universe-bg">
         <div id="mainBgParticles" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1;"></div>
         <div class="noise-overlay"></div>
@@ -3417,6 +3486,24 @@
                 animateLogo();
             }
         });
+    </script>
+
+    <!-- Zen Mode Toggle -->
+    <script>
+    document.getElementById('zenToggle').addEventListener('click', function() {
+        this.classList.toggle('active');
+        document.body.classList.toggle('zen-mode');
+        
+        // Make background particles interactive in zen mode
+        const particles = document.getElementById('mainBgParticles');
+        if (document.body.classList.contains('zen-mode')) {
+            particles.style.pointerEvents = 'auto';
+            particles.style.zIndex = '10';
+        } else {
+            particles.style.pointerEvents = 'none';
+            particles.style.zIndex = '1';
+        }
+    });
     </script>
 
     <!-- Custom Cursor Engine -->

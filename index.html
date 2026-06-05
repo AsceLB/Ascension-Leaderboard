@@ -1642,45 +1642,45 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            animation: splashFadeOut 0.8s ease-in-out 2.5s forwards;
+            animation: splashFadeOut 1s ease-in-out 3s forwards;
         }
         
         .splash-logo {
-            width: 150px;
+            width: 300px;
             opacity: 0;
-            animation: logoEntrance 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
-                       logoGlowPulse 2s ease-in-out infinite alternate;
+            animation: logoEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+                       logoGlowPulse 2.5s ease-in-out infinite alternate;
         }
 
         .splash-text {
-            margin-top: 25px;
-            font-size: 40px;
+            margin-top: 30px;
+            font-size: 50px;
             font-weight: 900;
-            letter-spacing: 20px;
+            letter-spacing: 25px;
             color: white;
             text-transform: uppercase;
             background: linear-gradient(180deg, #ffffff 0%, #555555 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 0;
-            transform: translateY(20px);
-            animation: textEntrance 1s ease-out 0.5s forwards;
+            transform: translateY(30px);
+            animation: textEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
             text-shadow: 0 0 20px rgba(255,255,255,0.1);
         }
 
         @keyframes logoEntrance {
-            0% { opacity: 0; transform: scale(0.5) translateY(50px); filter: drop-shadow(0 0 0 rgba(255,255,255,0)); }
-            100% { opacity: 1; transform: scale(1) translateY(0); filter: drop-shadow(0 0 25px rgba(255,255,255,0.6)); }
+            0% { opacity: 0; transform: scale(0.3) translateY(40px); filter: drop-shadow(0 0 0 rgba(255,255,255,0)) blur(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: drop-shadow(0 0 30px rgba(255,255,255,0.8)) blur(0px); }
         }
 
         @keyframes logoGlowPulse {
-            0% { filter: drop-shadow(0 0 15px rgba(255,255,255,0.4)); }
-            100% { filter: drop-shadow(0 0 40px rgba(255,255,255,0.8)); }
+            0% { filter: drop-shadow(0 0 20px rgba(255,255,255,0.5)); }
+            100% { filter: drop-shadow(0 0 50px rgba(255,255,255,0.9)); }
         }
 
         @keyframes textEntrance {
-            0% { opacity: 0; transform: translateY(20px); letter-spacing: 5px; }
-            100% { opacity: 1; transform: translateY(0); letter-spacing: 20px; }
+            0% { opacity: 0; transform: translateY(30px); letter-spacing: 5px; filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); letter-spacing: 25px; filter: blur(0px); }
         }
 
         @keyframes splashFadeOut {

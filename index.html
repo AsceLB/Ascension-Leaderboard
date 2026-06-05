@@ -45,55 +45,66 @@
             cursor: none;
         }
 
-        /* --- Custom Neon Cursor --- */
+        /* --- Custom Neon Cursor (x10000 Better) --- */
         .cursor-dot {
             position: fixed;
             top: 0; left: 0;
-            width: 8px; height: 8px;
-            background: #fff;
+            width: 6px; height: 6px;
+            background: #ffffff;
             border-radius: 50%;
             pointer-events: none;
             z-index: 999999;
             transform: translate(-50%, -50%);
-            box-shadow: 0 0 6px #fff, 0 0 15px rgba(167,139,250,0.6), 0 0 30px rgba(59,130,246,0.3);
+            box-shadow: 0 0 10px #ffffff, 0 0 20px #a78bfa, 0 0 40px #3b82f6;
             transition: width 0.15s ease, height 0.15s ease, background 0.15s ease;
+            mix-blend-mode: screen;
         }
 
         .cursor-dot.clicking {
-            width: 5px; height: 5px;
+            width: 12px; height: 12px;
             background: #a78bfa;
+            box-shadow: 0 0 20px #a78bfa, 0 0 40px #3b82f6;
         }
 
         .cursor-ring {
             position: fixed;
             top: 0; left: 0;
-            width: 36px; height: 36px;
-            border: 1.5px solid rgba(255,255,255,0.25);
+            width: 40px; height: 40px;
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
             border-radius: 50%;
             pointer-events: none;
             z-index: 999998;
             transform: translate(-50%, -50%);
-            transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+            transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, background-color 0.3s ease;
+            box-shadow: inset 0 0 15px rgba(167, 139, 250, 0.2), 0 0 15px rgba(167, 139, 250, 0.2);
         }
 
         .cursor-ring.clicking {
-            width: 28px; height: 28px;
-            border-color: rgba(167,139,250,0.5);
+            width: 30px; height: 30px;
+            border-color: #a78bfa;
+            background-color: rgba(167, 139, 250, 0.1);
         }
 
         .cursor-ring.hovering {
-            width: 50px; height: 50px;
-            border-color: rgba(167,139,250,0.4);
-            opacity: 0.6;
+            width: 65px; height: 65px;
+            border-color: transparent;
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(3px) brightness(1.2);
+            -webkit-backdrop-filter: blur(3px) brightness(1.2);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.3);
         }
 
         .cursor-trail {
             position: fixed;
-            width: 4px; height: 4px;
+            top: 0; left: 0;
+            width: 10px; height: 10px;
             border-radius: 50%;
             pointer-events: none;
             z-index: 999997;
-            background: rgba(167,139,250,0.5);
+            background: #a78bfa;
+            box-shadow: 0 0 10px #a78bfa, 0 0 20px #3b82f6;
+            mix-blend-mode: screen;
+            will-change: transform, opacity;
             transform: translate(-50%, -50%);
         }
 
@@ -3763,8 +3774,7 @@
         let mouseX = -100, mouseY = -100;
         let ringX = -100, ringY = -100;
         const trail = [];
-        const TRAIL_LENGTH = 12;
-        let lastTrailTime = 0;
+        const TRAIL_LENGTH = 20;
         let isVisible = false;
 
         // Pre-create trail elements
@@ -3773,7 +3783,7 @@
             t.className = 'cursor-trail';
             t.style.opacity = '0';
             document.body.appendChild(t);
-            trail.push({ el: t, x: -100, y: -100, life: 0 });
+            trail.push({ el: t, x: -100, y: -100 });
         }
 
         document.addEventListener('mousemove', (e) => {
@@ -3784,16 +3794,11 @@
                 isVisible = true;
                 dot.style.opacity = '1';
                 ring.style.opacity = '1';
-            }
-
-            // Spawn trail particle
-            const now = Date.now();
-            if (now - lastTrailTime > 30) {
-                lastTrailTime = now;
-                const oldest = trail.reduce((a, b) => a.life < b.life ? a : b);
-                oldest.x = mouseX;
-                oldest.y = mouseY;
-                oldest.life = 1;
+                for(let i=0; i<TRAIL_LENGTH; i++) {
+                    trail[i].x = mouseX;
+                    trail[i].y = mouseY;
+                    trail[i].el.style.opacity = '1';
+                }
             }
         });
 
@@ -3825,35 +3830,39 @@
             isVisible = false;
             dot.style.opacity = '0';
             ring.style.opacity = '0';
+            trail.forEach(t => t.el.style.opacity = '0');
         });
 
         function animate() {
-            // Dot follows instantly
-            dot.style.left = mouseX + 'px';
-            dot.style.top = mouseY + 'px';
+            if (isVisible) {
+                // Dot follows instantly
+                dot.style.left = mouseX + 'px';
+                dot.style.top = mouseY + 'px';
 
-            // Ring follows with smooth lerp
-            ringX += (mouseX - ringX) * 0.15;
-            ringY += (mouseY - ringY) * 0.15;
-            ring.style.left = ringX + 'px';
-            ring.style.top = ringY + 'px';
+                // Ring follows with smooth lerp
+                ringX += (mouseX - ringX) * 0.15;
+                ringY += (mouseY - ringY) * 0.15;
+                ring.style.left = ringX + 'px';
+                ring.style.top = ringY + 'px';
 
-            // Trail particles fade
-            for (let i = 0; i < trail.length; i++) {
-                const t = trail[i];
-                if (t.life > 0) {
-                    t.life -= 0.04;
-                    if (t.life <= 0) {
-                        t.life = 0;
-                        t.el.style.opacity = '0';
-                    } else {
-                        const scale = t.life;
-                        t.el.style.left = t.x + 'px';
-                        t.el.style.top = t.y + 'px';
-                        t.el.style.opacity = (t.life * 0.6).toString();
-                        t.el.style.width = (4 * scale) + 'px';
-                        t.el.style.height = (4 * scale) + 'px';
-                    }
+                // Fluid Trail Physics
+                let currentX = mouseX;
+                let currentY = mouseY;
+                for (let i = 0; i < TRAIL_LENGTH; i++) {
+                    const t = trail[i];
+                    
+                    // Spring physics to pull towards the previous point
+                    t.x += (currentX - t.x) * 0.35;
+                    t.y += (currentY - t.y) * 0.35;
+                    
+                    const scale = 1 - (i / TRAIL_LENGTH);
+                    t.el.style.left = t.x + 'px';
+                    t.el.style.top = t.y + 'px';
+                    t.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                    t.el.style.opacity = scale * 0.7;
+                    
+                    currentX = t.x;
+                    currentY = t.y;
                 }
             }
 

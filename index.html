@@ -2956,12 +2956,17 @@
 
     </script>
     <script>
-        // --- Magnetic 3D Hover & Idle Effect for Logo ---
+        // --- Magnetic 3D Hover & Idle Effect for Logo & Title ---
         document.addEventListener("DOMContentLoaded", () => {
             const siteLogo = document.querySelector('.site-logo');
+            const siteTitle = document.querySelector('.site-title');
             const logoZone = document.getElementById('logoZone');
             
-            if (siteLogo && logoZone) {
+            if (siteLogo && siteTitle && logoZone) {
+                // Ensure title can be transformed
+                siteTitle.style.display = 'inline-block';
+                siteTitle.style.transformOrigin = 'left center';
+                
                 let time = 0;
                 let isHovering = false;
                 let targetRotateX = 0, targetRotateY = 0, targetTranslateX = 0, targetTranslateY = 0;
@@ -2977,23 +2982,23 @@
                 
                 logoZone.addEventListener('mousemove', (e) => {
                     if (!isHovering) return;
-                    const rect = siteLogo.getBoundingClientRect();
-                    const logoX = rect.left + rect.width / 2;
-                    const logoY = rect.top + rect.height / 2;
+                    const rect = logoZone.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
                     
-                    const distX = e.clientX - logoX;
-                    const distY = e.clientY - logoY;
+                    const distX = e.clientX - centerX;
+                    const distY = e.clientY - centerY;
                     
                     targetRotateX = -(distY / 15);
-                    targetRotateY = (distX / 15);
-                    targetTranslateX = distX / 20;
-                    targetTranslateY = distY / 20;
+                    targetRotateY = (distX / 30);
+                    targetTranslateX = distX / 25;
+                    targetTranslateY = distY / 25;
                 });
                 
                 function animateLogo() {
                     if (!isHovering) {
                         time += 0.03;
-                        idleFloatY = Math.sin(time) * -6; // float up 6px
+                        idleFloatY = Math.sin(time) * -4; // float up 4px
                         idleGlow = (Math.sin(time) + 1) / 2; // 0 to 1
                     } else {
                         idleFloatY += (0 - idleFloatY) * 0.1;
@@ -3007,14 +3012,20 @@
                     
                     const finalTranslateY = currentTranslateY + idleFloatY;
                     
-                    siteLogo.style.transform = `perspective(500px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) translate(${currentTranslateX}px, ${finalTranslateY}px) scale(${isHovering ? 1.05 : 1})`;
+                    // Apply to Logo
+                    siteLogo.style.transform = `perspective(800px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) translate(${currentTranslateX}px, ${finalTranslateY}px) scale(${isHovering ? 1.05 : 1})`;
+                    
+                    // Apply to Title with Parallax offset (moves slightly differently for 3D depth)
+                    siteTitle.style.transform = `perspective(800px) rotateX(${currentRotateX * 0.7}deg) rotateY(${currentRotateY * 0.7}deg) translate(${currentTranslateX * 0.5}px, ${finalTranslateY * 0.8}px) scale(${isHovering ? 1.02 : 1})`;
                     
                     if (isHovering) {
                         siteLogo.style.filter = `drop-shadow(${currentTranslateX * -1}px ${currentTranslateY * -1}px 10px rgba(0, 229, 255, 0.5))`;
+                        siteTitle.style.filter = `drop-shadow(${currentTranslateX * -0.5}px ${currentTranslateY * -0.5}px 5px rgba(255, 255, 255, 0.4))`;
                     } else {
                         const glowRadius = 5 + (idleGlow * 10);
                         const glowAlpha = 0.2 + (idleGlow * 0.4);
                         siteLogo.style.filter = `drop-shadow(0px 0px ${glowRadius}px rgba(0, 229, 255, ${glowAlpha}))`;
+                        siteTitle.style.filter = `drop-shadow(0px 0px ${glowRadius * 0.5}px rgba(255, 255, 255, ${glowAlpha * 0.3}))`;
                     }
                     
                     requestAnimationFrame(animateLogo);

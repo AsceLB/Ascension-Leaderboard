@@ -309,7 +309,8 @@
         /* Remove black JPG background globally using SVG Chroma Key filter! ("cắt nền" 100% success for both Dark and Light mode) */
         img[style*="mix-blend-mode: screen"],
         .tier-item img,
-        .title img {
+        .title img,
+        .tab img {
             mix-blend-mode: normal !important;
             filter: url(#unblack) drop-shadow(0 2px 4px rgba(0,0,0,0.4)) !important;
             border-radius: 0 !important;

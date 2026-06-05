@@ -42,7 +42,12 @@
             min-height: 100vh;
             position: relative;
             overflow-y: scroll;
-            cursor: none;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body.custom-cursor-active, body.custom-cursor-active * {
+            cursor: none !important;
         }
 
         /* --- Custom Neon Cursor (x10000 Better) --- */
@@ -289,7 +294,7 @@
             overflow: hidden;
         }
 
-        body.zen-mode > *:not(.toolbar-btns):not(.cursor-dot):not(.cursor-ring):not(.cursor-trail):not(.universe-bg):not(#intro-splash) {
+        body.zen-mode > *:not(.toolbar-btns):not(.cursor-dot):not(.cursor-ring):not(.cursor-trail):not(.universe-bg):not(#intro-splash):not(#cursorCanvas):not(#cursorSettingsPanel) {
             opacity: 0 !important;
             pointer-events: none !important;
             transition: opacity 0.5s ease !important;
@@ -3962,14 +3967,16 @@
         window.cursorStyle = document.getElementById('cursorStyle').value;
         
         if (!window.cursorEnabled) {
-            document.body.style.cursor = 'auto';
+            document.body.classList.remove('custom-cursor-active');
+            document.body.style.cursor = 'auto'; // Fallback
             document.getElementById('cursorDot').style.display = 'none';
             document.getElementById('cursorRing').style.display = 'none';
             document.querySelectorAll('.cursor-trail').forEach(el => el.style.display = 'none');
             const canvas = document.getElementById('cursorCanvas');
             if(canvas) { const ctx = canvas.getContext('2d'); ctx.clearRect(0,0,canvas.width,canvas.height); }
         } else {
-            document.body.style.cursor = 'none';
+            document.body.classList.add('custom-cursor-active');
+            document.body.style.cursor = 'none'; // Fallback
             document.getElementById('cursorDot').style.display = 'block';
             document.getElementById('cursorRing').style.display = 'block';
             if (window.cursorStyle === 'dots') {

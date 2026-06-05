@@ -427,17 +427,16 @@
         }
 
         /* Skin scales up on hover */
-        .player-row:hover .player-bust {
-            transform: translateX(-50%) scale(1.12);
+        .player-row:hover .player-bust-wrapper {
             filter: drop-shadow(0 0 6px rgba(255,255,255,0.25));
         }
-        .player-row.rank-row-1:hover .player-bust {
+        .player-row.rank-row-1:hover .player-bust-wrapper {
             filter: drop-shadow(0 0 8px rgba(223,166,50,0.5));
         }
-        .player-row.rank-row-2:hover .player-bust {
+        .player-row.rank-row-2:hover .player-bust-wrapper {
             filter: drop-shadow(0 0 8px rgba(138,149,153,0.5));
         }
-        .player-row.rank-row-3:hover .player-bust {
+        .player-row.rank-row-3:hover .player-bust-wrapper {
             filter: drop-shadow(0 0 8px rgba(194,104,40,0.5));
         }
 
@@ -472,14 +471,35 @@
             min-width: 35px;
         }
 
-        .player-bust {
+        .player-bust-wrapper {
             height: 100px;
+            width: 60px;
             position: absolute;
             left: 50%;
             top: -8px;
             transform: translateX(-50%);
             z-index: 1;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), filter 0.4s ease;
+        }
+
+        .player-bust {
+            height: 100px;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            z-index: 1;
+            transition: transform 0.15s ease-out, filter 0.4s ease;
+        }
+
+        .player-bust-body {
+            clip-path: inset(40% 0 0 0);
+            z-index: 1;
+        }
+
+        .player-bust-head {
+            clip-path: inset(0 0 58% 0);
+            z-index: 2;
+            transform-origin: 50% 100%;
         }
 
         .rank-1 { 
@@ -853,6 +873,12 @@
                 margin-left: 8px;
             }
             
+            .player-bust-wrapper {
+                height: 60px;
+                width: 40px;
+                top: -5px;
+            }
+
             .player-bust {
                 height: 60px;
                 width: auto;
@@ -1962,8 +1988,12 @@
                     lastHoveredRow3D.style.borderColor = '';
                     const glare = lastHoveredRow3D.querySelector('.glare');
                     if (glare) glare.style.opacity = '0';
-                    const bust = lastHoveredRow3D.querySelector('.player-bust, .avatar');
-                    if (bust) bust.style.transform = '';
+                    const wrapper = lastHoveredRow3D.querySelector('.player-bust-wrapper');
+                    if (wrapper) wrapper.style.transform = '';
+                    const head = lastHoveredRow3D.querySelector('.player-bust-head');
+                    if (head) head.style.transform = '';
+                    const avatarEl = lastHoveredRow3D.querySelector('.avatar');
+                    if (avatarEl) avatarEl.style.transform = '';
                 }
 
                 if (row) {
@@ -1981,16 +2011,27 @@
                     row.style.boxShadow = `0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)`;
                     row.style.borderColor = `rgba(255,255,255,0.4)`;
 
-                    const bust = row.querySelector('.player-bust, .avatar');
-                    if (bust) {
-                        const bustX = ((x - centerX) / centerX) * 8; 
-                        const bustY = ((y - centerY) / centerY) * 8;
-                        
-                        if (bust.classList.contains('player-bust')) {
-                            bust.style.transform = `translateX(calc(-50% + ${bustX}px)) translateY(${bustY}px) scale(1.15)`;
-                        } else {
-                            bust.style.transform = `translateX(${bustX}px) translateY(${bustY}px) scale(1.15)`;
-                        }
+                    // Bust wrapper parallax slide
+                    const wrapper = row.querySelector('.player-bust-wrapper');
+                    if (wrapper) {
+                        const bustX = ((x - centerX) / centerX) * 6;
+                        const bustY = ((y - centerY) / centerY) * 4;
+                        wrapper.style.transform = `translateX(calc(-50% + ${bustX}px)) translateY(${bustY}px) scale(1.1)`;
+                    }
+
+                    // Head layer tilt (look up/down)
+                    const head = row.querySelector('.player-bust-head');
+                    if (head) {
+                        const headTilt = ((y - centerY) / centerY) * 12;
+                        head.style.transform = `translateX(-50%) rotate(${headTilt * 0.3}deg) translateY(${headTilt * 0.5}px)`;
+                    }
+
+                    // Board card avatar
+                    const avatarEl = row.querySelector('.avatar');
+                    if (avatarEl && !wrapper) {
+                        const bustX = ((x - centerX) / centerX) * 5;
+                        const bustY = ((y - centerY) / centerY) * 5;
+                        avatarEl.style.transform = `translateX(${bustX}px) translateY(${bustY}px) scale(1.1)`;
                     }
                     
                     let glare = row.querySelector('.glare');
@@ -2768,7 +2809,10 @@
             row.innerHTML = `
                 <div class="rank-banner ${rankClass}">
                     <div class="rank-number">${rank}.</div>
-                    <img src="${bustUrl}" alt="bust" class="player-bust" onerror="this.src='https://crafatar.com/renders/body/606e2ff0ed7748429d6ce0927ce6486?size=100'">
+                    <div class="player-bust-wrapper">
+                        <img src="${bustUrl}" alt="bust" class="player-bust player-bust-body" onerror="this.src='https://crafatar.com/renders/body/606e2ff0ed7748429d6ce0927ce6486?size=100'">
+                        <img src="${bustUrl}" alt="bust" class="player-bust player-bust-head" onerror="this.src='https://crafatar.com/renders/body/606e2ff0ed7748429d6ce0927ce6486?size=100'">
+                    </div>
                 </div>
                 
                 <div class="player-info">

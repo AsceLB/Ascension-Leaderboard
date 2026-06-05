@@ -178,10 +178,40 @@
             box-shadow: none;
         }
 
+        /* Light Mode Rank Banners */
+        body.light-mode .rank-other {
+            background-color: #f1f5f9;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        body.light-mode .rank-number { 
+            color: #1a1a2e; 
+            text-shadow: none; /* Remove dark mode text shadow */
+        }
+
+        /* Light Mode Hover States (Overrides dark gradients) */
         body.light-mode .player-row:hover {
+            background: rgba(0,0,0,0.02);
             border-color: rgba(100,100,200,0.4);
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-            /* Important: We don't set background here so we don't override the gold/silver/bronze gradients */
+            box-shadow: 0 0 12px rgba(0,0,0,0.08);
+        }
+
+        body.light-mode .player-row.rank-row-1:hover {
+            background: linear-gradient(135deg, rgba(223,166,50,0.1) 0%, rgba(0,0,0,0.02) 100%);
+            border-color: rgba(223,166,50,0.6);
+            box-shadow: 0 0 15px rgba(223,166,50,0.2);
+        }
+
+        body.light-mode .player-row.rank-row-2:hover {
+            background: linear-gradient(135deg, rgba(138,149,153,0.15) 0%, rgba(0,0,0,0.02) 100%);
+            border-color: rgba(138,149,153,0.6);
+            box-shadow: 0 0 15px rgba(138,149,153,0.2);
+        }
+
+        body.light-mode .player-row.rank-row-3:hover {
+            background: linear-gradient(135deg, rgba(194,104,40,0.15) 0%, rgba(0,0,0,0.02) 100%);
+            border-color: rgba(194,104,40,0.6);
+            box-shadow: 0 0 15px rgba(194,104,40,0.2);
         }
 
         body.light-mode .name-wrapper h3 { color: #1a1a2e; }
@@ -252,10 +282,6 @@
         }
 
         body.light-mode .glare { mix-blend-mode: soft-light; }
-
-        body.light-mode .rank-number { 
-            color: #1a1a2e; 
-        }
 
         body.light-mode .position-circle {
             background: rgba(0,0,0,0.08);

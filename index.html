@@ -2749,7 +2749,7 @@
         else if(effectType === 'snow') glowColor = 'rgba(0, 200, 255, 0.2)'; // cyan
         else if(effectType === 'fireflies') glowColor = 'rgba(234, 179, 8, 0.2)'; // yellow
         else if(effectType === 'matrix') glowColor = 'rgba(0, 255, 0, 0.2)'; // green
-        else if(effectType === 'bubbles') glowColor = 'rgba(59, 130, 246, 0.2)'; // blue
+        else if(effectType === 'bubbles') glowColor = `color-mix(in srgb, ${themeColor || '#ffffff'} 25%, transparent)`; // matches theme!
         else if(effectType === 'stars') glowColor = 'rgba(255, 255, 255, 0.15)'; // white
         
         if (glowColor) {

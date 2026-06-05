@@ -1654,24 +1654,18 @@
 
         .splash-text {
             margin-top: 15px; /* Brought closer to logo */
-            display: flex;
-            gap: 15px;
             font-size: 50px;
             font-weight: 900;
+            letter-spacing: 25px;
             color: white;
             text-transform: uppercase;
             text-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }
-
-        .splash-text span {
-            display: inline-block;
             background: linear-gradient(180deg, #ffffff 0%, #555555 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 0;
             transform: translateY(30px);
-            animation: letterEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            animation-delay: calc(0.3s + (var(--i) * 0.1s));
+            animation: textEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
         }
 
         .splash-continue-wrapper {
@@ -1700,8 +1694,8 @@
             animation: none;
         }
 
-        @keyframes letterEntrance {
-            0% { opacity: 0; transform: translateY(30px) scale(0.8); filter: blur(5px); }
+        @keyframes textEntrance {
+            0% { opacity: 0; transform: translateY(50px) scale(0.8); filter: blur(5px); }
             100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0px); }
         }
 
@@ -1731,6 +1725,7 @@
         }
         
         @keyframes popOut {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
             100% { transform: scale(0) translateY(-300px); opacity: 0; }
         }
     </style>
@@ -1739,9 +1734,7 @@
     <!-- Epic Intro Splash Screen -->
     <div id="intro-splash" onclick="dismissSplash()">
         <img src="https://i.postimg.cc/j5B1nLhX/Silver-Arrow-Emblem-with-Wings-removebg-preview.png" id="splashLogo" class="splash-logo">
-        <div class="splash-text">
-            <span style="--i:1">A</span><span style="--i:2">S</span><span style="--i:3">C</span><span style="--i:4">E</span><span style="--i:5">N</span><span style="--i:6">S</span><span style="--i:7">I</span><span style="--i:8">O</span><span style="--i:9">N</span>
-        </div>
+        <div class="splash-text" id="splashText">ASCENSION</div>
         <div class="splash-continue-wrapper" id="splashContinue">
             <span class="splash-continue-text">Click to continue</span>
         </div>
@@ -2078,7 +2071,7 @@
             
             const cont = document.getElementById('splashContinue');
             const logo = document.getElementById('splashLogo');
-            const letters = document.querySelectorAll('.splash-text span');
+            const text = document.getElementById('splashText');
 
             if (cont) {
                 cont.style.animation = 'none';
@@ -2087,14 +2080,14 @@
                 cont.classList.add('pop-out');
             }
 
-            letters.forEach((letter, index) => {
-                letter.style.animation = 'none';
-                setTimeout(() => letter.classList.add('pop-out'), index * 40);
-            });
+            if (text) {
+                text.style.animation = 'none';
+                setTimeout(() => text.classList.add('pop-out'), 100);
+            }
 
             if (logo) {
                 logo.style.animation = 'none';
-                setTimeout(() => logo.classList.add('pop-out'), 300);
+                setTimeout(() => logo.classList.add('pop-out'), 250);
             }
 
             setTimeout(() => {

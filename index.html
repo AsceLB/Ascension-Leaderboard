@@ -3966,6 +3966,9 @@
         window.cursorEnabled = document.getElementById('cursorToggle').checked;
         window.cursorStyle = document.getElementById('cursorStyle').value;
         
+        localStorage.setItem('cursorEnabled', window.cursorEnabled);
+        localStorage.setItem('cursorStyle', window.cursorStyle);
+        
         if (!window.cursorEnabled) {
             document.body.classList.remove('custom-cursor-active');
             document.body.style.cursor = 'auto'; // Fallback
@@ -3993,8 +3996,20 @@
         document.documentElement.style.setProperty('--cursor-b', b);
         document.documentElement.style.setProperty('--cursor-hex', hex);
         
+        localStorage.setItem('cursorColor', JSON.stringify({ r, g, b, hex }));
+        
         document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
-        if(btn) btn.classList.add('active');
+        if(btn) {
+            btn.classList.add('active');
+        } else {
+            // Find and highlight matching button if loaded from storage
+            document.querySelectorAll('.color-btn').forEach(b => {
+                // Convert inline background rgb/hex to hex to compare
+                if(b.style.background.includes(hex) || b.style.background.includes(r+', '+g+', '+b)) {
+                    b.classList.add('active');
+                }
+            });
+        }
     };
 
     // --- Cursor Engine Initialization ---
@@ -4016,9 +4031,28 @@
             canvas.height = cHeight;
         });
 
+        // Load Settings from LocalStorage
+        const savedEnabled = localStorage.getItem('cursorEnabled');
+        if (savedEnabled !== null) {
+            document.getElementById('cursorToggle').checked = savedEnabled === 'true';
+        }
+        
+        const savedStyle = localStorage.getItem('cursorStyle');
+        if (savedStyle) {
+            document.getElementById('cursorStyle').value = savedStyle;
+        }
+
+        const savedColor = localStorage.getItem('cursorColor');
+        if (savedColor) {
+            try {
+                const color = JSON.parse(savedColor);
+                window.setCursorColor(color.r, color.g, color.b, color.hex, null);
+            } catch(e) {}
+        }
+
         // Initialize Defaults
-        window.cursorEnabled = true;
-        window.cursorStyle = 'dots';
+        window.cursorEnabled = document.getElementById('cursorToggle').checked;
+        window.cursorStyle = document.getElementById('cursorStyle').value;
         
         let mouseX = -100, mouseY = -100;
         let ringX = -100, ringY = -100;

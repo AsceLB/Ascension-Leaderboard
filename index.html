@@ -306,26 +306,23 @@
         body.light-mode .rules-btn { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); color: #555; }
         body.light-mode .rules-btn:hover { background: rgba(0,0,0,0.1); color: #1a1a2e; }
 
-        /* Fix burned out icons in light mode */
+        /* Magic trick to remove solid black JPG background in Light Mode ("cắt nền JPG") */
         body.light-mode img[style*="mix-blend-mode: screen"],
         body.light-mode .tier-item img,
-        body.light-mode .title img,
-        body.light-mode #modalTitle svg {
-            mix-blend-mode: normal !important;
-            filter: drop-shadow(0 0 2px rgba(0,0,0,0.2)) !important;
+        body.light-mode .title img {
+            /* Invert black to white, rotate hues back, then multiply against white page to make the JPG background transparent! */
+            filter: invert(1) hue-rotate(180deg) !important;
+            mix-blend-mode: multiply !important;
         }
 
-        /* Remove icon background circles globally as requested */
+        /* Remove icon background circles globally as requested, while keeping padding/border width to maintain perfect alignment ("ngay hàng") */
         .tier-item img {
-            border: none !important;
+            border-color: transparent !important;
             background: transparent !important;
-            padding: 0 !important;
-            width: 28px !important;
-            height: 28px !important;
         }
         
         .empty-icon-ring {
-            border: none !important;
+            border-color: transparent !important;
             background: transparent !important;
         }
 

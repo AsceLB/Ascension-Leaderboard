@@ -2061,7 +2061,7 @@
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
-                <input type="text" id="searchInput" placeholder="Search player..." onkeypress="handleSearch(event)">
+                <input type="text" id="searchInput" placeholder="Search player..." onkeydown="handleSearch(event)">
             </div>
         </div>
     </div>
@@ -2698,9 +2698,14 @@
 
     // --- Search Functionality ---
     function handleSearch(event) {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            event.preventDefault();
             const query = document.getElementById('searchInput').value.trim().toLowerCase();
             if (query) {
+                if (!players || players.length === 0) {
+                    showToast('Connecting to database...', 'error');
+                    return;
+                }
                 const player = players.find(p => p.name.toLowerCase() === query);
                 if (player) {
                     openPlayerProfile(player.name);

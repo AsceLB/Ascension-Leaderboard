@@ -2832,9 +2832,9 @@
                 let bgAlpha = numVal === 1 ? 'linear-gradient(rgba(223, 165, 57, 0.15), rgba(223, 165, 57, 0.15)), var(--card-bg)' : numVal === 2 ? 'linear-gradient(rgba(170, 186, 198, 0.15), rgba(170, 186, 198, 0.15)), var(--card-bg)' : numVal === 3 ? 'linear-gradient(rgba(190, 115, 63, 0.15), rgba(190, 115, 63, 0.15)), var(--card-bg)' : 'linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg)';
                 let borderAlpha = numVal === 1 ? 'rgba(223, 165, 57, 0.3)' : numVal === 2 ? 'rgba(170, 186, 198, 0.3)' : numVal === 3 ? 'rgba(190, 115, 63, 0.3)' : 'rgba(100, 116, 139, 0.3)';
                 
-                let actualBorderColor = isRetired ? '#475569' : color;
-                let actualBgAlpha = isRetired ? 'linear-gradient(rgba(71, 85, 105, 0.15), rgba(71, 85, 105, 0.15)), var(--card-bg)' : bgAlpha;
-                let actualBorderAlpha = isRetired ? 'rgba(71, 85, 105, 0.4)' : borderAlpha;
+                let actualBorderColor = isRetired ? '#64748b' : color;
+                let actualBgAlpha = isRetired ? 'linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg)' : bgAlpha;
+                let actualBorderAlpha = isRetired ? 'rgba(100, 116, 139, 0.3)' : borderAlpha;
 
                 let label = isRetired ? `R#${numVal}` : `#${numVal}`;
                 let fontStyle = isRetired ? 'font-style: italic;' : '';

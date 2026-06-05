@@ -343,13 +343,24 @@
             border: 1px solid transparent;
             box-shadow: none;
             transform: translateY(0) scale(1);
-            transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+            transition: transform 0.1s ease-out,
                         background 0.4s ease,
                         border-color 0.4s ease,
-                        box-shadow 0.45s ease,
+                        box-shadow 0.4s ease,
                         opacity 0.4s ease;
             opacity: 1;
             position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .glare {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            border-radius: inherit;
+            transition: opacity 0.3s ease;
+            z-index: 10;
+            mix-blend-mode: overlay;
         }
 
         /* --- Kích thước to hơn cho Top 1, 2, 3 --- */
@@ -719,10 +730,11 @@
             position: relative;
             overflow: hidden;
             transition: padding-left 0.3s ease,
-                        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                        transform 0.1s ease-out,
                         background-color 0.3s ease,
                         border-color 0.4s ease,
                         box-shadow 0.4s ease;
+            transform-style: preserve-3d;
         }
         
         .board-player-card:hover {
@@ -1916,6 +1928,69 @@
                     window.uiAudio.init();
                 }
             });
+
+            // Live Search Filtering
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase().trim();
+                    document.querySelectorAll('.player-row').forEach(row => {
+                        const nameEl = row.querySelector('.name-wrapper h3');
+                        if (nameEl) {
+                            const name = nameEl.textContent.toLowerCase();
+                            row.style.display = name.includes(query) ? '' : 'none';
+                        }
+                    });
+                    document.querySelectorAll('.board-player-card').forEach(card => {
+                        const nameEl = card.querySelector('.name');
+                        if (nameEl) {
+                            const name = nameEl.textContent.toLowerCase();
+                            card.style.display = name.includes(query) ? '' : 'none';
+                        }
+                    });
+                });
+            }
+
+            // 3D Holographic Trading Card Tilt
+            let lastHoveredRow3D = null;
+            document.addEventListener('mousemove', (e) => {
+                const row = e.target.closest('.player-row, .board-player-card');
+                
+                if (lastHoveredRow3D && lastHoveredRow3D !== row) {
+                    lastHoveredRow3D.style.transform = '';
+                    lastHoveredRow3D.style.boxShadow = '';
+                    lastHoveredRow3D.style.borderColor = '';
+                    const glare = lastHoveredRow3D.querySelector('.glare');
+                    if (glare) glare.style.opacity = '0';
+                }
+
+                if (row) {
+                    const rect = row.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((y - centerY) / centerY) * -4; 
+                    const rotateY = ((x - centerX) / centerX) * 4;
+                    
+                    row.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px) scale(1.02)`;
+                    row.style.boxShadow = `0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)`;
+                    row.style.borderColor = `rgba(255,255,255,0.4)`;
+                    
+                    let glare = row.querySelector('.glare');
+                    if (!glare) {
+                        glare = document.createElement('div');
+                        glare.className = 'glare';
+                        row.appendChild(glare);
+                    }
+                    glare.style.opacity = '1';
+                    glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.15) 0%, transparent 50%)`;
+                    
+                    lastHoveredRow3D = row;
+                }
+            });
         });
     </script>
 </head>
@@ -2487,7 +2562,16 @@
                     size: { value: 1.5, random: true },
                     move: { enable: true, speed: 0.25, direction: "none", random: true, straight: false, out_mode: "out" }
                 },
-                interactivity: { events: { onhover: { enable: false } } },
+                interactivity: { 
+                    detect_on: "window",
+                    events: { 
+                        onhover: { enable: true, mode: "grab" },
+                        resize: true
+                    },
+                    modes: {
+                        grab: { distance: 150, line_linked: { opacity: 0.3 } }
+                    }
+                },
                 retina_detect: true,
                 background: { color: "transparent" }
             });

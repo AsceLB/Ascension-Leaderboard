@@ -1366,8 +1366,8 @@
         .modal-header-profile #avatarContainer {
             display: block;
             width: 120px;
-            height: 160px;
-            border-radius: 15px;
+            height: 120px;
+            border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
             background: #1e293b;
@@ -1988,9 +1988,9 @@
         </button>
         
         <div class="modal-header-profile">
-            <div id="avatarContainer" style="position: relative; display: inline-block; border-radius: 15px; margin-bottom: 12px; overflow: hidden; width: 120px; height: 160px; z-index: 2; cursor: grab;" onmousedown="this.style.cursor='grabbing'" onmouseup="this.style.cursor='grab'" onmouseleave="this.style.cursor='grab'">
+            <div id="avatarContainer" style="position: relative; display: inline-block; border-radius: 50%; margin-bottom: 12px; overflow: hidden; width: 120px; height: 120px; z-index: 2; cursor: grab;" onmousedown="this.style.cursor='grabbing'" onmouseup="this.style.cursor='grab'" onmouseleave="this.style.cursor='grab'">
                 <img id="modalAvatar" src="" alt="avatar" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 1; transition: opacity 0.5s ease; border: none; box-shadow: none; z-index: 1;">
-                <canvas id="skinContainer" width="120" height="160" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; border: none; box-shadow: none; z-index: 10;"></canvas>
+                <canvas id="skinContainer" width="120" height="120" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; border: none; box-shadow: none; z-index: 10;"></canvas>
             </div>
             <h2 id="modalName">Name</h2>
             <div id="modalTitle" class="modal-title-badge">
@@ -2746,9 +2746,10 @@
             window.skinViewer = new skinview3d.SkinViewer({
                 canvas: skinCanvas,
                 width: 120,
-                height: 160,
+                height: 120,
                 skin: skinUrl
             });
+            window.skinViewer.zoom = 0.85;
             window.skinViewer.animation = new skinview3d.WalkingAnimation();
             window.skinViewer.animation.speed = 0.5;
             window.skinViewer.autoRotate = true;

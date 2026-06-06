@@ -4090,8 +4090,7 @@
             mouseY = e.clientY;
 
             // Instantly update dot position for 0ms input lag!
-            dot.style.left = mouseX + 'px';
-            dot.style.top = mouseY + 'px';
+            dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
 
             if (!isVisible) {
                 isVisible = true;
@@ -4169,8 +4168,7 @@
                 // Ring follows with smooth lerp
                 ringX += (mouseX - ringX) * 0.15;
                 ringY += (mouseY - ringY) * 0.15;
-                ring.style.left = ringX + 'px';
-                ring.style.top = ringY + 'px';
+                ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
 
                 // Fluid Trail Physics
                 let currentX = mouseX;
@@ -4189,9 +4187,7 @@
                     const scale = 1 - (i / TRAIL_LENGTH);
 
                     if (window.cursorStyle === 'dots') {
-                        t.el.style.left = t.x + 'px';
-                        t.el.style.top = t.y + 'px';
-                        t.el.style.transform = `translate(-50%, -50%) scale(${scale})`;
+                        t.el.style.transform = `translate3d(${t.x}px, ${t.y}px, 0) translate(-50%, -50%) scale(${scale})`;
                         t.el.style.opacity = scale * 0.7;
                     } else if (window.cursorStyle === 'solid') {
                         ctx.beginPath();

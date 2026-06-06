@@ -4172,8 +4172,8 @@
 
             if (isVisible) {
                 // Ring follows with smooth lerp
-                ringX += (mouseX - ringX) * 0.45;
-                ringY += (mouseY - ringY) * 0.45;
+                ringX += (mouseX - ringX) * 0.65;
+                ringY += (mouseY - ringY) * 0.65;
                 ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
 
                 // Fluid Trail Physics
@@ -4183,31 +4183,47 @@
                 const g = getComputedStyle(document.documentElement).getPropertyValue('--cursor-g').trim() || '139';
                 const b = getComputedStyle(document.documentElement).getPropertyValue('--cursor-b').trim() || '250';
 
+                // Pass 1: Physics calculation
+                let px = mouseX;
+                let py = mouseY;
                 for (let i = 0; i < TRAIL_LENGTH; i++) {
                     const t = trail[i];
-                    
-                    // Spring physics to pull towards the previous point
-                    t.x += (currentX - t.x) * 0.65;
-                    t.y += (currentY - t.y) * 0.65;
-                    
-                    const scale = 1 - (i / TRAIL_LENGTH);
+                    t.x += (px - t.x) * 0.75;
+                    t.y += (py - t.y) * 0.75;
+                    px = t.x;
+                    py = t.y;
+                }
 
-                    if (window.cursorStyle === 'dots') {
+                // Pass 2: Rendering
+                if (window.cursorStyle === 'dots') {
+                    for (let i = 0; i < TRAIL_LENGTH; i++) {
+                        const t = trail[i];
+                        const scale = 1 - (i / TRAIL_LENGTH);
                         t.el.style.transform = `translate3d(${t.x}px, ${t.y}px, 0) translate(-50%, -50%) scale(${scale})`;
                         t.el.style.opacity = scale * 0.7;
-                    } else if (window.cursorStyle === 'solid') {
-                        ctx.beginPath();
-                        ctx.moveTo(currentX, currentY);
-                        ctx.lineTo(t.x, t.y);
-                        ctx.lineWidth = 2 + (6 * scale);
-                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${scale * 0.8})`;
-                        ctx.lineCap = 'round';
-                        ctx.lineJoin = 'round';
-                        ctx.stroke();
                     }
-                    
-                    currentX = t.x;
-                    currentY = t.y;
+                } else if (window.cursorStyle === 'solid') {
+                    ctx.lineCap = 'round';
+                    ctx.lineJoin = 'round';
+                    let cx = mouseX;
+                    let cy = mouseY;
+                    for (let i = 0; i < TRAIL_LENGTH - 1; i++) {
+                        const t = trail[i];
+                        const next = trail[i+1];
+                        const xc = (t.x + next.x) / 2;
+                        const yc = (t.y + next.y) / 2;
+                        const scale = 1 - (i / TRAIL_LENGTH);
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(cx, cy);
+                        ctx.quadraticCurveTo(t.x, t.y, xc, yc);
+                        ctx.lineWidth = 2 + (8 * scale);
+                        ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${scale * 0.9})`;
+                        ctx.stroke();
+                        
+                        cx = xc;
+                        cy = yc;
+                    }
                 }
 
                 // Render extra particles for sparkles / smoke

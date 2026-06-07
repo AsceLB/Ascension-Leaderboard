@@ -529,20 +529,12 @@
             transform: scale(0.95);
         }
 
-        .tab-icon-blender {
+        .tab img {
             width: 18px;
             height: 18px;
+            object-fit: contain;
             opacity: 0.5;
             transition: all 0.3s ease;
-            mix-blend-mode: screen !important;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .tab-icon-blender img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
         }
 
         .tab.active, .tab:hover {
@@ -550,7 +542,7 @@
             color: var(--text-main);
         }
 
-        .tab.active .tab-icon-blender, .tab:hover .tab-icon-blender {
+        .tab.active img, .tab:hover img {
             opacity: 1;
         }
 
@@ -944,11 +936,11 @@
             cursor: pointer;
         }
 
-        .tier-icon-container, .tier-icon-value {
+        .icon-wrapper, .tier-icon-value {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .tier-item:hover .tier-icon-container {
+        .tier-item:hover .icon-wrapper {
             transform: scale(1.15);
         }
         
@@ -1807,10 +1799,10 @@
             gap: 6px;
             cursor: pointer;
         }
-        .modal-tier-container, .modal-tier-icon-value {
+        .modal-icon-wrapper, .modal-tier-icon-value {
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .modal-tier-icon:hover .modal-tier-container, .modal-tier-icon:hover .modal-tier-icon-value {
+        .modal-tier-icon:hover .modal-icon-wrapper, .modal-tier-icon:hover .modal-tier-icon-value {
             transform: scale(1.15);
         }
         
@@ -2151,10 +2143,44 @@
         }
 
         /* --- JPG Background Remover (Screen with high contrast to crush background to pure black) --- */
+        .icon-wrapper {
+            width: 38px;
+            height: 38px;
+            padding: 4px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .icon-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .modal-icon-wrapper {
+            width: 44px;
+            height: 44px;
+            padding: 7px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .modal-icon-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* --- PNG and JPG Background Remover & Enhancer --- */
         img[style*="mix-blend-mode: screen"],
         .title img,
-        .tab-icon-blender img,
+        .tab img,
         .position-circle img,
+        .icon-wrapper img,
+        .modal-icon-wrapper img,
         #modalOverallIcon {
             mix-blend-mode: screen !important;
             filter: contrast(4) brightness(0.7) saturate(1.2) !important;
@@ -2688,9 +2714,7 @@
                     <span id="modalOverallRank" class="modal-rank" style="font-size: 28px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
                 </div>
                 <div style="display: flex; align-items: center; padding-left: 15px;">
-                    <div id="modalOverallBlender" style="width: 28px; height: 28px; margin-right: 10px; mix-blend-mode: screen !important;">
-                        <img id="modalOverallIcon" src="" alt="Overall" style="width: 100%; height: 100%; object-fit: contain;">
-                    </div>
+                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 28px; height: 28px; margin-right: 10px; object-fit: contain;">
                     <span style="font-weight: 800; font-size: 18px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
                     <span id="modalOverallPoints" style="color: #94a3b8; font-size: 15px; margin-left: 6px; font-weight: normal;">(0 points)</span>
                 </div>
@@ -2947,10 +2971,10 @@
 
     // Tạo HTML cho menu Tabs
     const tabsContainer = document.getElementById('categoryTabs');
-    tabsContainer.innerHTML = `<div class="tab active" data-target="overall"><div class="tab-icon-blender"><img src="${IMG.overall}" alt="Overall"></div> Overall</div>`;
+    tabsContainer.innerHTML = `<div class="tab active" data-target="overall"><img src="${IMG.overall}" alt="Overall"> Overall</div>`;
     
     categories.forEach(cat => {
-        tabsContainer.innerHTML += `<div class="tab" data-target="${cat.id}"><div class="tab-icon-blender"><img src="${cat.icon}" alt="${cat.name}"></div> ${cat.name}</div>`;
+        tabsContainer.innerHTML += `<div class="tab" data-target="${cat.id}"><img src="${cat.icon}" alt="${cat.name}"> ${cat.name}</div>`;
     });
 
     let currentActiveTab = 'overall';
@@ -3205,9 +3229,8 @@
 
                     let tierHTML = `
                     <div class="tier-item" onclick="event.stopPropagation(); goToBoard('${cat.id}', '${player.name}')">
-                        <div class="tier-icon-container" style="position: relative; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; z-index: 1;">
-                            <div class="tier-icon-border" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 50%; border: 1.5px solid ${actualBorderColor}; pointer-events: none; z-index: 2;"></div>
-                            <img src="${cat.icon}" alt="${cat.name}" style="width: 30px; height: 30px; object-fit: contain; mix-blend-mode: screen !important; z-index: 3;">
+                        <div class="icon-wrapper" style="border: 1.5px solid ${actualBorderColor};">
+                            <img src="${cat.icon}" alt="${cat.name}">
                         </div>
                         <span class="tier-icon-value" style="color: ${color}; text-shadow: 0 0 5px ${color}; background: ${actualBgAlpha}; border: 1px solid ${actualBorderAlpha}; ${fontStyle}">${label}</span>
                         <div class="tooltip-box">
@@ -3553,9 +3576,8 @@
                 
                 let tierHTML = `
                 <div class="modal-tier-icon" onclick="goToBoard('${cat.id}', '${playerName}')">
-                    <div class="modal-tier-container" style="position: relative; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; z-index: 1;">
-                        <div class="modal-tier-border" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: 50%; border: 1.5px solid ${actualBorderColor}; pointer-events: none; z-index: 2;"></div>
-                        <img src="${cat.icon}" alt="${cat.name}" style="width: 30px; height: 30px; object-fit: contain; mix-blend-mode: screen !important; z-index: 3;">
+                    <div class="modal-icon-wrapper" style="border: 1.5px solid ${actualBorderColor};">
+                        <img src="${cat.icon}" alt="${cat.name}">
                     </div>
                     <span class="modal-tier-icon-value" style="color: ${color}; text-shadow: 0 0 5px ${color}; background: ${actualBgAlpha}; border: 1px solid ${actualBorderAlpha}; ${fontStyle}">${label}</span>
                     <div class="tooltip-box">

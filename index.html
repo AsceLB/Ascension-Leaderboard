@@ -2161,7 +2161,6 @@
         #modalOverallIcon {
             mix-blend-mode: screen !important;
             filter: contrast(1.5) brightness(0.9) !important;
-            border-radius: 0 !important;
             background: transparent !important;
         }
 
@@ -2859,7 +2858,7 @@
             currentParticles.destroy();
             currentParticles = null;
         }
-        if (!effectType || effectType === 'reset') return;
+        const modal = document.getElementById('playerModal'); modal.style.boxShadow = 'none'; if (!effectType || effectType === 'reset') return;
         
         const starSvg = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 20' width='300' height='20'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' stop-color='%23fff' stop-opacity='0'/%3E%3Cstop offset='95%25' stop-color='%23fff' stop-opacity='1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon points='0,10 290,8 295,10 290,12' fill='url(%23g)'/%3E%3Ccircle cx='295' cy='10' r='5' fill='%23fff' filter='drop-shadow(0 0 3px %23fff)'/%3E%3C/svg%3E";
 

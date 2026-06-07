@@ -529,13 +529,20 @@
             transform: scale(0.95);
         }
 
-        .tab img {
+        .tab-icon-blender {
             width: 18px;
             height: 18px;
-            object-fit: contain;
             opacity: 0.5;
             transition: all 0.3s ease;
-            mix-blend-mode: screen;
+            mix-blend-mode: screen !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .tab-icon-blender img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .tab.active, .tab:hover {
@@ -543,7 +550,7 @@
             color: var(--text-main);
         }
 
-        .tab.active img, .tab:hover img {
+        .tab.active .tab-icon-blender, .tab:hover .tab-icon-blender {
             opacity: 1;
         }
 
@@ -2177,7 +2184,7 @@
         }
 
         /* --- JPG Background Remover (Screen with high contrast to crush background to pure black) --- */
-        .tab img,
+        .tab-icon-blender img,
         .position-circle img,
         .icon-blender img,
         #modalOverallIcon {
@@ -2722,7 +2729,9 @@
                     <span id="modalOverallRank" class="modal-rank" style="font-size: 28px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
                 </div>
                 <div style="display: flex; align-items: center; padding-left: 15px;">
-                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 28px; height: 28px; margin-right: 10px; object-fit: contain; mix-blend-mode: screen;">
+                    <div id="modalOverallBlender" style="width: 28px; height: 28px; margin-right: 10px; mix-blend-mode: screen !important;">
+                        <img id="modalOverallIcon" src="" alt="Overall" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
                     <span style="font-weight: 800; font-size: 18px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
                     <span id="modalOverallPoints" style="color: #94a3b8; font-size: 15px; margin-left: 6px; font-weight: normal;">(0 points)</span>
                 </div>
@@ -2979,10 +2988,10 @@
 
     // Tạo HTML cho menu Tabs
     const tabsContainer = document.getElementById('categoryTabs');
-    tabsContainer.innerHTML = `<div class="tab active" data-target="overall"><img src="${IMG.overall}" alt="Overall"> Overall</div>`;
+    tabsContainer.innerHTML = `<div class="tab active" data-target="overall"><div class="tab-icon-blender"><img src="${IMG.overall}" alt="Overall"></div> Overall</div>`;
     
     categories.forEach(cat => {
-        tabsContainer.innerHTML += `<div class="tab" data-target="${cat.id}"><img src="${cat.icon}" alt="${cat.name}"> ${cat.name}</div>`;
+        tabsContainer.innerHTML += `<div class="tab" data-target="${cat.id}"><div class="tab-icon-blender"><img src="${cat.icon}" alt="${cat.name}"></div> ${cat.name}</div>`;
     });
 
     let currentActiveTab = 'overall';

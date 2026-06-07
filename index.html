@@ -958,9 +958,18 @@
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
-            mix-blend-mode: screen !important;
+            position: relative;
         }
-        .icon-wrapper img {
+        
+        .icon-blender {
+            width: 100%;
+            height: 100%;
+            mix-blend-mode: screen !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .icon-blender img {
             width: 100%;
             height: 100%;
             clip-path: circle(50%);
@@ -2170,7 +2179,7 @@
         /* --- JPG Background Remover (Screen with high contrast to crush background to pure black) --- */
         .tab img,
         .position-circle img,
-        .icon-wrapper img,
+        .icon-blender img,
         #modalOverallIcon {
             filter: contrast(4) brightness(0.7) saturate(1.2) !important;
             background: transparent !important;
@@ -3229,7 +3238,9 @@
                     let tierHTML = `
                     <div class="tier-item" onclick="event.stopPropagation(); goToBoard('${cat.id}', '${player.name}')">
                         <div class="icon-wrapper" style="border: 1.5px solid ${actualBorderColor};">
-                            <img src="${cat.icon}" alt="${cat.name}">
+                            <div class="icon-blender">
+                                <img src="${cat.icon}" alt="${cat.name}">
+                            </div>
                         </div>
                         <span class="tier-icon-value" style="color: ${color}; text-shadow: 0 0 5px ${color}; background: ${actualBgAlpha}; border: 1px solid ${actualBorderAlpha}; ${fontStyle}">${label}</span>
                         <div class="tooltip-box">

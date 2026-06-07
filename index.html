@@ -958,6 +958,7 @@
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
+            mix-blend-mode: screen !important;
         }
         .icon-wrapper img {
             width: 100%;
@@ -2171,8 +2172,7 @@
         .position-circle img,
         .icon-wrapper img,
         #modalOverallIcon {
-            mix-blend-mode: screen !important;
-            filter: url('#crush-background') !important;
+            filter: contrast(4) brightness(0.7) saturate(1.2) !important;
             background: transparent !important;
         }
 

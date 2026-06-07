@@ -1837,14 +1837,22 @@
         .modal-tier-icon:hover img, .modal-tier-icon:hover .modal-tier-icon-value {
             transform: scale(1.15);
         }
-        .modal-tier-icon img {
+        .modal-tier-wrapper {
             width: 44px;
             height: 44px;
             padding: 7px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
+        .modal-tier-icon img {
+            width: 100%;
+            height: 100%;
             object-fit: contain;
-            mix-blend-mode: screen;
-            background: transparent;
+            mix-blend-mode: screen !important;
+            background: transparent !important;
         }
         .modal-tier-icon-value {
             font-size: 13px;
@@ -2183,10 +2191,14 @@
         }
 
         /* --- JPG Background Remover (Screen with high contrast to crush background to pure black) --- */
+        img[style*="mix-blend-mode: screen"],
+        .title img,
         .tab-icon-blender img,
         .position-circle img,
         .icon-blender img,
-        #modalOverallIcon {
+        #modalOverallIcon,
+        .modal-tier-icon img {
+            mix-blend-mode: screen !important;
             filter: contrast(4) brightness(0.7) saturate(1.2) !important;
             background: transparent !important;
         }
@@ -3594,7 +3606,9 @@
                 
                 let tierHTML = `
                 <div class="modal-tier-icon" onclick="goToBoard('${cat.id}', '${playerName}')">
-                    <img src="${cat.icon}" alt="${cat.name}" style="border: 1.5px solid ${actualBorderColor};">
+                    <div class="modal-tier-wrapper" style="border: 1.5px solid ${actualBorderColor};">
+                        <img src="${cat.icon}" alt="${cat.name}">
+                    </div>
                     <span class="modal-tier-icon-value" style="color: ${color}; text-shadow: 0 0 5px ${color}; background: ${actualBgAlpha}; border: 1px solid ${actualBorderAlpha}; ${fontStyle}">${label}</span>
                     <div class="tooltip-box">
                         <div class="tooltip-title" style="color: ${tooltipColor}; text-shadow: 0 0 5px ${tooltipColor};">${tooltipTitle}</div>

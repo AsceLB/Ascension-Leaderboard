@@ -538,12 +538,24 @@
             pointer-events: none;
         }
 
-        .site-logo {
+                .site-logo {
             height: 90px;
             width: auto;
             object-fit: contain; 
             filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.2));
-            /* Animation handled by JS requestAnimationFrame */
+            animation: floatingLogo 4s ease-in-out infinite;
+            transition: filter 0.3s ease, transform 0.3s ease;
+        }
+
+        .site-logo:hover {
+            filter: drop-shadow(0px 5px 15px rgba(0, 229, 255, 0.5));
+            transform: scale(1.05) translateY(-5px);
+            animation-play-state: paused;
+        }
+
+        @keyframes floatingLogo {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
         @keyframes titleGlow {
@@ -2489,72 +2501,7 @@
                 });
             }
 
-            // 3D Holographic Trading Card Tilt
-            let lastHoveredRow3D = null;
-            let isTicking3D = false;
-            document.addEventListener('mousemove', (e) => {
-                if (isTicking3D) return;
-                isTicking3D = true;
-                requestAnimationFrame(() => {
-                    isTicking3D = false;
-                    const row = e.target.closest('.player-row, .board-player-card');
-                
-                if (lastHoveredRow3D && lastHoveredRow3D !== row) {
-                    lastHoveredRow3D.style.transform = '';
-                    lastHoveredRow3D.style.boxShadow = '';
-                    lastHoveredRow3D.style.borderColor = '';
-                    const glare = lastHoveredRow3D.querySelector('.glare');
-                    if (glare) glare.style.opacity = '0';
-                    const bust = lastHoveredRow3D.querySelector('.player-bust');
-                    if (bust) bust.style.transform = 'translateX(-50%)';
-                    const avatarEl = lastHoveredRow3D.querySelector('.avatar');
-                    if (avatarEl) avatarEl.style.transform = '';
-                }
-
-                if (row) {
-                    const rect = row.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-                    
-                    const rotateX = ((y - centerY) / centerY) * -1.5; 
-                    const rotateY = ((x - centerX) / centerX) * 1.5;
-                    
-                    row.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
-                    row.style.boxShadow = `0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.1)`;
-                    row.style.borderColor = `rgba(255,255,255,0.4)`;
-
-                    // Bust parallax float
-                    const bust = row.querySelector('.player-bust');
-                    if (bust) {
-                        const bustX = ((x - centerX) / centerX) * 6;
-                        const bustY = ((y - centerY) / centerY) * 4;
-                        bust.style.transform = `translateX(calc(-50% + ${bustX}px)) translateY(${bustY - 3}px) scale(1.12)`;
-                    }
-
-                    // Board card avatar parallax
-                    const avatarEl = row.querySelector('.avatar');
-                    if (avatarEl && !bust) {
-                        const ax = ((x - centerX) / centerX) * 4;
-                        const ay = ((y - centerY) / centerY) * 4;
-                        avatarEl.style.transform = `translate(${ax}px, ${ay}px) scale(1.1)`;
-                    }
-                    
-                    let glare = row.querySelector('.glare');
-                    if (!glare) {
-                        glare = document.createElement('div');
-                        glare.className = 'glare';
-                        row.appendChild(glare);
-                    }
-                    glare.style.opacity = '1';
-                    glare.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(255,255,255,0.15) 0%, transparent 50%)`;
-                    
-                    lastHoveredRow3D = row;
-                }
-                });
-            });
+            
         });
     </script>
 </head>
@@ -3237,7 +3184,7 @@
                 interactivity: { 
                     detect_on: "window",
                     events: { 
-                        onhover: { enable: true, mode: "grab" },
+                        onhover: { enable: false, mode: "grab" },
                         resize: true
                     },
                     modes: {
@@ -3930,75 +3877,7 @@
     }
 
     </script>
-    <script>
-        // --- Magnetic 3D Hover & Idle Effect for Logo & Title ---
-        document.addEventListener("DOMContentLoaded", () => {
-            const siteLogo = document.querySelector('.site-logo');
-            const siteTitle = document.querySelector('.site-title');
-            const logoZone = document.getElementById('logoZone');
-            
-            if (siteLogo && siteTitle && logoZone) {
-                // Ensure title can be transformed
-                siteTitle.style.display = 'inline-block';
-                siteTitle.style.transformOrigin = 'left center';
-                
-                let time = 0;
-                let isHovering = false;
-                let targetRotateX = 0, targetRotateY = 0, targetTranslateX = 0, targetTranslateY = 0;
-                let currentRotateX = 0, currentRotateY = 0, currentTranslateX = 0, currentTranslateY = 0;
-                let idleFloatY = 0;
-                let idleGlow = 0;
-                
-                logoZone.addEventListener('mouseenter', () => { isHovering = true; });
-                logoZone.addEventListener('mouseleave', () => {
-                    isHovering = false;
-                    targetRotateX = 0; targetRotateY = 0; targetTranslateX = 0; targetTranslateY = 0;
-                });
-                
-                logoZone.addEventListener('mousemove', (e) => {
-                    if (!isHovering) return;
-                    const rect = logoZone.getBoundingClientRect();
-                    const centerX = rect.left + rect.width / 2;
-                    const centerY = rect.top + rect.height / 2;
-                    
-                    const distX = e.clientX - centerX;
-                    const distY = e.clientY - centerY;
-                    
-                    targetRotateX = -(distY / 15);
-                    targetRotateY = (distX / 30);
-                    targetTranslateX = distX / 25;
-                    targetTranslateY = distY / 25;
-                });
-                
-                function animateLogo() {
-                    if (!isHovering) {
-                        time += 0.03;
-                        idleFloatY = Math.sin(time) * -4; // float up 4px
-                        idleGlow = (Math.sin(time) + 1) / 2; // 0 to 1
-                    } else {
-                        idleFloatY += (0 - idleFloatY) * 0.1;
-                        idleGlow += (0 - idleGlow) * 0.1;
-                    }
-                    
-                    currentRotateX += (targetRotateX - currentRotateX) * 0.15;
-                    currentRotateY += (targetRotateY - currentRotateY) * 0.15;
-                    currentTranslateX += (targetTranslateX - currentTranslateX) * 0.15;
-                    currentTranslateY += (targetTranslateY - currentTranslateY) * 0.15;
-                    
-                    const finalTranslateY = currentTranslateY + idleFloatY;
-                    
-                    // Apply to Logo
-                    siteLogo.style.transform = `perspective(800px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) translate(${currentTranslateX}px, ${finalTranslateY}px) scale(${isHovering ? 1.05 : 1})`;
-                    
-                    // Apply to Title with Parallax offset (moves slightly differently for 3D depth)
-                    siteTitle.style.transform = `perspective(800px) rotateX(${currentRotateX * 0.7}deg) rotateY(${currentRotateY * 0.7}deg) translate(${currentTranslateX * 0.5}px, ${finalTranslateY * 0.8}px) scale(${isHovering ? 1.02 : 1})`;
-                    
-                    requestAnimationFrame(animateLogo);
-                }
-                animateLogo();
-            }
-        });
-    </script>
+    
 
     <!-- Toolbar Toggle Scripts -->
     <script>

@@ -2151,6 +2151,20 @@
             mix-blend-mode: overlay;
         }
 
+    
+        /* --- Universal Black Background Remover --- */
+        img[style*="mix-blend-mode: screen"],
+        .tab img,
+        .position-circle img,
+        .tier-item img,
+        .title img,
+        #modalOverallIcon {
+            mix-blend-mode: normal !important;
+            filter: url(#unblack) brightness(1.2) drop-shadow(0 2px 4px rgba(0,0,0,0.5)) !important;
+            border-radius: 0 !important;
+            background: transparent !important;
+        }
+
     </style>
     <script src="https://unpkg.com/skinview3d@3.0.0/bundles/skinview3d.bundle.js"></script>
     <script>
@@ -2403,6 +2417,19 @@
     </script>
 </head>
 <body>
+
+    <!-- SVG Filter to cut black backgrounds -->
+    <svg width="0" height="0" style="position: absolute; pointer-events: none;">
+        <filter id="unblack" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                2 2 2 0 0
+            " />
+        </filter>
+    </svg>
+
     
     <!-- Custom Cursor Canvas -->
     <canvas id="cursorCanvas"></canvas>
@@ -3335,7 +3362,7 @@
                     <div class="${cardClass}" onclick="openPlayerProfile('${p.name}')" style="cursor: pointer;" title="Win Rate: ${winRate}%">
                         ${streakBadgeCard}
                         <div class="card-region-tag ${p.region}">${p.region}</div>
-                        <img src="${avatarUrl}" class="avatar" alt="${p.name}" onerror="this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=50'">
+                        <img src="${avatarUrl}" loading="lazy" class="avatar" alt="${p.name}" onerror="this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=50'">
                         <span class="name">${namePrefix}${p.name}</span>
                     </div>
                 `;

@@ -2976,201 +2976,6 @@
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                 </svg>
                 <input type="text" id="searchInput" placeholder="Search player..." onkeydown="handleSearch(event)">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rank 3 -->
-                <div>
-                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                        <img src="https://i.postimg.cc/d1hX08Gq/tier-3.jpg" style="width: 20px; height: 20px; filter: url(#remove-img-bg); margin-right: 8px;">
-                        <span style="color: #d97706; font-weight: bold; font-size: 16px;">#3</span>
-                    </div>
-                    <div style="border-left: 2px solid #d97706; padding-left: 15px; margin-left: 9px;">
-                        <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
-                                <span style="color: #d97706; font-size: 12px; font-weight: bold;">5 Points</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rank 4 -->
-                <div>
-                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                        <div style="width: 20px; height: 20px; margin-right: 8px; display: flex; align-items: center; justify-content: center; opacity: 0;"></div>
-                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">#4</span>
-                    </div>
-                    <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
-                        <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">3 Points</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Rank 5 -->
-                <div>
-                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                        <div style="width: 20px; height: 20px; margin-right: 8px; display: flex; align-items: center; justify-content: center; opacity: 0;"></div>
-                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">#5</span>
-                    </div>
-                    <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
-                        <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">1 Point</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Player Profile Modal -->
-<div id="playerModal" class="modal-overlay" onclick="if(event.target===this) closePlayerProfile()">
-    <div id="profileParticles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; opacity: 0; transition: opacity 0.8s ease;"></div>
-    <div class="modal-content" style="max-width: 480px; padding: 25px;">
-        <video id="modalBgVideo" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.35; border-radius: 20px; display: none; pointer-events: none;"></video>
-        <button class="modal-close" onclick="closePlayerProfile()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-        
-        <div class="modal-header-profile">
-            <div id="avatarContainer" style="position: relative; display: inline-block; border-radius: 50%; margin-bottom: 12px; overflow: hidden; width: 120px; height: 120px; z-index: 2; cursor: grab;" onmousedown="this.style.cursor='grabbing'" onmouseup="this.style.cursor='grab'" onmouseleave="this.style.cursor='grab'">
-                <img id="modalAvatar" src="" alt="avatar" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 1; transition: opacity 0.5s ease; border: none; box-shadow: none; z-index: 1;">
-                <canvas id="skinContainer" width="120" height="120" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; border: none; box-shadow: none; z-index: 10;"></canvas>
-            </div>
-            <h2 id="modalName">Name</h2>
-            <div id="modalTitle" class="modal-title-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M12 2L22 12L12 22L2 12L12 2Z"/></svg> Combat Master
-            </div>
-            <div id="modalRegion" class="modal-region">North America</div>
-            <a id="modalNamemc" href="#" target="_blank" class="modal-namemc-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M8 12l4-4 4 4"></path><path d="M12 16V8"></path></svg> NameMC
-            </a>
-        </div>
-
-        <div class="modal-section" style="margin-bottom: 25px;">
-            <div class="modal-section-title">COMBAT STATS</div>
-            <div style="display: flex; gap: 15px;">
-                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN RATE</div>
-                    <div id="modalWinRate" style="font-size: 20px; color: #4ade80; font-weight: 800;">100%</div>
-                </div>
-                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">MATCHES</div>
-                    <div id="modalMatches" style="font-size: 20px; color: #fff; font-weight: 800;">0</div>
-                </div>
-                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN STREAK</div>
-                    <div id="modalStreak" style="font-size: 20px; color: #e2e8f0; font-weight: 800; text-shadow: 0 0 10px rgba(255,255,255,0.3); display: flex; justify-content: center; align-items: center;">
-                        <span style="margin-right: 6px; font-size: 22px;">🔥</span>
-                        <span id="modalStreakValue">0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-section">
-            <div class="modal-section-title">TIER</div>
-            <div class="modal-overall-box">
-                <div id="modalOverallBanner" style="display: flex; align-items: center; justify-content: center; padding: 0 20px; border-right: 1px solid rgba(255,255,255,0.05);">
-                    <span id="modalOverallRank" class="modal-rank" style="font-size: 28px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
-                </div>
-                <div style="display: flex; align-items: center; padding-left: 15px;">
-                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 28px; height: 28px; margin-right: 10px; object-fit: contain;">
-                    <span style="font-weight: 800; font-size: 18px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
-                    <span id="modalOverallPoints" style="color: #94a3b8; font-size: 15px; margin-left: 6px; font-weight: normal;">(0 points)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-section" style="margin-top: 25px;">
-            <div class="modal-section-title">TIERS</div>
-            <div class="modal-positions-box">
-                <div id="modalTiers" class="modal-tiers-grid">
-                    <!-- tier icons will be injected here -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Rules Modal -->
-<div id="rulesModal" class="modal-overlay" onclick="if(event.target===this) closeRulesModal()">
-    <div class="modal-content" style="max-width: 550px;">
-        <button class="modal-close" onclick="closeRulesModal()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-        
-        <div class="modal-header-profile" style="margin-bottom: 20px;">
-            <div style="width: 60px; height: 60px; border-radius: 15px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.1); box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
-                <img src="https://i.postimg.cc/2SrLBgdb/Book-JE2-BE2.png" style="width: 40px; height: 40px; image-rendering: pixelated; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));" alt="Rules Book">
-            </div>
-            <h2 style="font-size: 24px; margin: 0; color: #fff; letter-spacing: 0.5px;">Leaderboard Rules</h2>
-            <div style="color: #94a3b8; font-size: 14px; margin-top: 5px;">Must read before participating</div>
-        </div>
-
-        <div style="background: rgba(0,0,0,0.3); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.05);">
-            <ul class="rules-list">
-                <li>The fights are <strong>BO4</strong></li>
-                <li>If the players are from different region then <strong>2-2 matches</strong> would be divided</li>
-                <li>You should <strong>not argue over your ping</strong> in different region cause it's equal for both</li>
-                <li><strong>No toxicity</strong> events should be conducted inside a leaderboard fight</li>
-                <li>No one in the server is allowed to <strong>ban players</strong> over a personal leaderboard fight</li>
-                <li>There is a <strong>2 days cooldown</strong> if you <strong>FAILED</strong> a fight</li>
-                <li>There is <strong>no cooldown</strong> if you <strong>WIN</strong> a fight</li>
-                <li>Kits are either <strong>MCTiers</strong> or <strong>PVPTiers</strong> format</li>
-                <li>You should be <strong>active</strong> in the leaderboard</li>
-                <li><strong>Dodging</strong> a leaderboard fight is considered <strong>forfeit</strong></li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<!-- Match History Panel -->
-<div id="historyPanel" class="history-panel">
-    <div class="history-header">
-        <h2 style="margin: 0; font-size: 20px; color: #fff; display: flex; align-items: center; gap: 8px;">⚔️ Match History</h2>
-        <button class="modal-close" style="position: static; padding: 5px; width: 30px; height: 30px;" onclick="closeHistoryPanel()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-    </div>
-    <div class="history-list" id="historyList">
-        <div style="text-align: center; color: #888; padding: 20px;">Loading matches...</div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="header">
-        <div id="logoZone" onclick="location.reload()" style="cursor: pointer; display: flex; align-items: center; padding: 10px;">
-            <img src="https://i.postimg.cc/j5B1nLhX/Silver-Arrow-Emblem-with-Wings-removebg-preview.png" alt="Logo" class="site-logo">
-            <div class="site-title">ASCENSION LEADERBOARD</div>
-        </div>
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <div class="rules-btn" onclick="openHistoryPanel()" title="View Match History" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(124, 58, 237, 0.1)); border-color: rgba(124, 58, 237, 0.2);">
-                <img src="https://i.postimg.cc/qv1d0ZpW/Book-and-Quill-JE2-BE2.png" style="width: 22px; height: 22px; image-rendering: pixelated; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));" alt="Match History"> 
-                <span style="color: #a78bfa;">Match History</span>
-            </div>
-            <div class="rules-btn" onclick="openRulesModal()" title="View Leaderboard Rules">
-                <img src="https://i.postimg.cc/2SrLBgdb/Book-JE2-BE2.png" style="width: 22px; height: 22px; image-rendering: pixelated; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.5));" alt="Rules"> 
-                <span>Rules</span>
-            </div>
-            <div class="search-container">
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-                <input type="text" id="searchInput" placeholder="Search player..." onkeydown="handleSearch(event)">
             </div>
         </div>
     </div>
@@ -3184,7 +2989,7 @@
             <div>PLAYER</div>
             <div style="text-align: center;">REGION</div>
             <div style="display: flex; align-items: center; justify-content: flex-end; gap: 15px;">
-                <span>TIERS</span>
+                <span>POSITIONS</span>
                 <div class="info-btn" onclick="openRankInfo()" title="View Rank Info">! Information</div>
             </div>
         </div>
@@ -3619,6 +3424,101 @@
                 let peakRank = (player.peaks && player.peaks[cat.id]) ? player.peaks[cat.id] : null;
                 let tooltipTitle = peakRank ? `Peak: ${peakRank}` : `Tier: ${label}`;
                 let tooltipPoints = peakRank ? (POSITION_POINTS[peakRank] || 0) : (POSITION_POINTS[tierStr] || 0);
+                let tooltipColor = color;
+
+                    let tierHTML = `
+                    <div class="tier-item" onclick="event.stopPropagation(); goToBoard('${cat.id}', '${player.name}')">
+                        <div class="icon-wrapper" style="border: 1.5px solid ${actualBorderColor};">
+                            <img src="${cat.icon}" alt="${cat.name}">
+                        </div>
+                        <span class="tier-icon-value" style="color: ${color}; text-shadow: 0 0 5px ${color}; background: ${actualBgAlpha}; border: 1px solid ${actualBorderAlpha}; ${fontStyle}">${label}</span>
+                        <div class="tooltip-box">
+                            <div class="tooltip-title" style="color: ${tooltipColor}; text-shadow: 0 0 5px ${tooltipColor};">${tooltipTitle}</div>
+                            <div class="tooltip-desc">${tooltipPoints} points</div>
+                        </div>
+                    </div>`;
+
+                    if (isRetired) {
+                        retiredTiersHTML += tierHTML;
+                    } else {
+                        activeTiersHTML += tierHTML;
+                    }
+                } else {
+                    emptyTiersHTML += `
+                    <div class="tier-item empty-tier" style="cursor: default;">
+                        <div class="empty-icon-ring" style="width: 38px; height: 38px; padding: 6px; border-radius: 50%; border: 1.5px dashed rgba(255,255,255,0.15);"></div>
+                        <span class="tier-icon-value empty-badge" style="color: #64748b; background: linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg); border: 1px solid rgba(100, 116, 139, 0.3);">-</span>
+                    </div>`;
+                }
+            });
+            let tiersHTML = activeTiersHTML + retiredTiersHTML + emptyTiersHTML;
+
+            let rowClassExtra = '';
+            if (rank === 1) rowClassExtra = 'rank-row-1';
+            else if (rank === 2) rowClassExtra = 'rank-row-2';
+            else if (rank === 3) rowClassExtra = 'rank-row-3';
+
+            let wins = player.wins || 0;
+            let losses = player.losses || 0;
+            let streak = player.streak || 0;
+            let totalMatches = wins + losses;
+            let winRate = totalMatches > 0 ? Math.round((wins / totalMatches) * 100) : 100;
+            
+            if (streak >= 10) rowClassExtra += ' white-fire-aura';
+
+            const bustUrl = `https://mc-heads.net/body/${player.name}/100`;
+
+            const streakBadge = streak >= 3 ? `<span class="streak-badge" title="${streak} Win Streak!"><span class="white-fire-emoji">🔥</span> ${streak}</span>` : '';
+
+            const row = document.createElement('div');
+            row.className = `player-row ${rowClassExtra}`;
+            row.style.animationDelay = `${index * 0.08}s`;
+            row.onclick = () => openPlayerProfile(player.name);
+            row.style.cursor = 'pointer';
+            
+            row.innerHTML = `
+                <div class="rank-banner ${rankClass}">
+                    <div class="rank-number">${rank}.</div>
+                    <img src="${bustUrl}" alt="bust" class="player-bust" onerror="this.src='https://crafatar.com/renders/body/606e2ff0ed7748429d6ce0927ce6486?size=100'">
+                </div>
+                
+                <div class="player-info">
+                    <div class="name-wrapper">
+                        <h3 title="Win Rate: ${winRate}%">${player.name} ${streakBadge}</h3>
+                        <div class="title" style="display: flex; align-items: center;"><img src="${getRankIcon(calcPoints(player.stats, player.peaks))}" style="width: 22px; height: 22px; object-fit: contain; margin-right: 6px; ${getRankIcon(calcPoints(player.stats, player.peaks)).endsWith('.jpg') ? 'filter: url(#remove-img-bg);' : ''}"> ${getTitle(calcPoints(player.stats, player.peaks))} <span style="margin-left:4px;">(${calcPoints(player.stats, player.peaks)} pts)</span></div>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="region ${player.region}">${player.region}</span>
+                </div>
+
+                <div class="tiers">
+                    ${tiersHTML}
+                </div>
+            `;
+
+            list.appendChild(row);
+        });
+    }
+
+    // Hàm Render Giao Diện Cột Tiers (Board View)
+    function renderBoardView(category) {
+        const board = document.getElementById('boardView');
+        board.innerHTML = '';
+        
+        sortPlayers();
+
+        const columnsData = [
+            { num: 1, title: "#1", iconSrc: IMG.tier1, class: "col-header-1" },
+            { num: 2, title: "#2", iconSrc: IMG.tier2, class: "col-header-2" },
+            { num: 3, title: "#3", iconSrc: IMG.tier3, class: "col-header-3" },
+            { num: 4, title: "#4", iconSrc: null, class: "col-header-4" },
+            { num: 5, title: "#5", iconSrc: null, class: "col-header-5" }
+        ];
+
+        columnsData.forEach((colInfo, colIndex) => {
+            const colDiv = document.createElement('div');
             colDiv.className = 'board-col';
             colDiv.style.animationDelay = `${colIndex * 0.1}s`;
 

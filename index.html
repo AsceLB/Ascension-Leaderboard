@@ -1522,14 +1522,35 @@
         }
         .match-row {
             display: flex;
-            justify-content: space-between;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            width: 100%;
         }
         .match-player {
             font-weight: 700;
             font-size: 15px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            flex: 1;
+            min-width: 0; /* allows truncation */
+        }
+        .match-player.winner {
+            justify-content: flex-end;
+        }
+        .match-player.loser {
+            justify-content: flex-start;
+        }
+        .player-name-truncate {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 120px;
+        }
+        .match-score {
+            font-size: 18px;
+            font-weight: 900;
         }
         .winner { color: #4ade80; }
         .loser { color: #f87171; }
@@ -1538,6 +1559,7 @@
             font-size: 12px;
             font-weight: bold;
             font-style: italic;
+            flex-shrink: 0;
         }
         .match-meta {
             display: flex;
@@ -4067,14 +4089,14 @@
                 <div class="match-row">
                     <div class="match-player winner">
                         <img src="https://mc-heads.net/avatar/${match.winner}/50" class="match-avatar" alt="${match.winner}">
-                        <div>👑 ${match.winner}</div>
+                        <div class="player-name-truncate">👑 ${match.winner}</div>
                         ${winnerScoreText}
                     </div>
                     <div class="match-vs">VS</div>
                     <div class="match-player loser">
-                        <img src="https://mc-heads.net/avatar/${match.loser}/50" class="match-avatar" alt="${match.loser}">
-                        <div>☠️ ${match.loser}</div>
                         ${loserScoreText}
+                        <div class="player-name-truncate">☠️ ${match.loser}</div>
+                        <img src="https://mc-heads.net/avatar/${match.loser}/50" class="match-avatar" alt="${match.loser}">
                     </div>
                 </div>
                 <div class="match-meta">

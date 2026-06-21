@@ -1085,21 +1085,38 @@
         }
 
         .ht-card {
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 0 8px rgba(16, 185, 129, 0.15) inset;
+            background: #1d2836;
+            border-color: #273648;
         }
         .ht-card:hover {
-            border-color: rgba(16, 185, 129, 0.8);
-            box-shadow: 0 0 12px rgba(16, 185, 129, 0.25) inset;
+            background: #253344;
+            border-color: #334459;
         }
         
         .lt-card {
-            border-color: rgba(225, 29, 72, 0.4);
-            box-shadow: 0 0 8px rgba(225, 29, 72, 0.15) inset;
+            background: #0e141d;
+            border-color: #1a2536;
         }
         .lt-card:hover {
-            border-color: rgba(225, 29, 72, 0.8);
-            box-shadow: 0 0 12px rgba(225, 29, 72, 0.25) inset;
+            background: #151e2c;
+            border-color: #233147;
+        }
+
+        .tier-chevron {
+            position: absolute;
+            right: 12px;
+            width: 20px;
+            height: 20px;
+            transition: color 0.3s ease;
+        }
+        .ht-chevron {
+            color: #4b5e75;
+        }
+        .lt-chevron {
+            color: #2f3c4e;
+        }
+        .ht-card:hover .ht-chevron, .lt-card:hover .lt-chevron {
+            color: #637a96;
         }
 
         .card-region-tag {
@@ -3583,12 +3600,15 @@
                 let cardClass = isRetired ? 'board-player-card retired-card' : 'board-player-card';
                 let namePrefix = isRetired ? '[R] ' : '';
                 
+                let chevronHTML = '';
                 if (pk === 'HT' + colInfo.num || pk === colInfo.num || pk === 'LT' + colInfo.num) {
                     cardClass += ' peak-card'; 
                 } else if (!isRetired && (v === 'HT' + colInfo.num || v === colInfo.num)) {
                     cardClass += ' ht-card';
+                    chevronHTML = `<svg class="tier-chevron ht-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>`;
                 } else if (!isRetired && v === 'LT' + colInfo.num) {
                     cardClass += ' lt-card';
+                    chevronHTML = `<svg class="tier-chevron lt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 15l-5-5-5 5"></path></svg>`;
                 }
 
                 let wins = p.wins || 0;
@@ -3607,6 +3627,7 @@
                         <div class="card-region-tag ${p.region}">${p.region}</div>
                         <img src="${avatarUrl}" loading="lazy" class="avatar" alt="${p.name}" onerror="this.src='https://crafatar.com/avatars/606e2ff0ed7748429d6ce0927ce6486?size=50'">
                         <span class="name">${namePrefix}${p.name}</span>
+                        ${chevronHTML}
                     </div>
                 `;
             });

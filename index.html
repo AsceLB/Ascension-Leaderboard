@@ -1084,6 +1084,20 @@
             animation: neonPulseLight 2s ease-in-out infinite;
         }
 
+        .ht-card {
+            background: #0d0d0d;
+        }
+        .ht-card:hover {
+            background: #1a1a1a;
+        }
+        
+        .lt-card {
+            background: #252525;
+        }
+        .lt-card:hover {
+            background: #333333;
+        }
+
         .card-region-tag {
             position: absolute;
             left: 0;
@@ -3567,6 +3581,10 @@
                 
                 if (pk === 'HT' + colInfo.num || pk === colInfo.num || pk === 'LT' + colInfo.num) {
                     cardClass += ' peak-card'; 
+                } else if (!isRetired && (v === 'HT' + colInfo.num || v === colInfo.num)) {
+                    cardClass += ' ht-card';
+                } else if (!isRetired && v === 'LT' + colInfo.num) {
+                    cardClass += ' lt-card';
                 }
 
                 let wins = p.wins || 0;

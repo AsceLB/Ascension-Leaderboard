@@ -1085,21 +1085,21 @@
         }
 
         .ht-card {
-            background: #1a1a1a;
-            border-color: #2a2a2a;
-        }
-        .ht-card:hover {
-            background: #222222;
-            border-color: #333333;
-        }
-        
-        .lt-card {
             background: #252525;
             border-color: #383838;
         }
-        .lt-card:hover {
+        .ht-card:hover {
             background: #2d2d2d;
             border-color: #444444;
+        }
+        
+        .lt-card {
+            background: #1a1a1a;
+            border-color: #2a2a2a;
+        }
+        .lt-card:hover {
+            background: #222222;
+            border-color: #333333;
         }
 
         .tier-chevron {
@@ -1109,11 +1109,17 @@
             height: 20px;
             transition: color 0.3s ease;
         }
+        .peak-chevron {
+            color: #d97706;
+        }
         .ht-chevron {
             color: #666666;
         }
         .lt-chevron {
             color: #444444;
+        }
+        .peak-card:hover .peak-chevron {
+            color: #fbbf24;
         }
         .ht-card:hover .ht-chevron, .lt-card:hover .lt-chevron {
             color: #888888;
@@ -3603,6 +3609,7 @@
                 let chevronHTML = '';
                 if (pk === 'HT' + colInfo.num || pk === colInfo.num || pk === 'LT' + colInfo.num) {
                     cardClass += ' peak-card'; 
+                    chevronHTML = `<svg class="tier-chevron peak-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6l-5-5-5 5"></path><path d="M17 13l-5-5-5 5"></path><path d="M17 20l-5-5-5 5"></path></svg>`;
                 } else if (!isRetired && (v === 'HT' + colInfo.num || v === colInfo.num)) {
                     cardClass += ' ht-card';
                     chevronHTML = `<svg class="tier-chevron ht-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>`;

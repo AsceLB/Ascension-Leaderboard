@@ -1503,7 +1503,6 @@
             margin-bottom: 15px;
             transition: transform 0.2s, box-shadow 0.2s;
             position: relative;
-            overflow: hidden;
         }
         .history-card::before {
             content: '';
@@ -1513,12 +1512,13 @@
             width: 4px;
             height: 100%;
             background: linear-gradient(180deg, #dfa539, transparent);
-            border-radius: 4px 0 0 4px;
+            border-radius: 16px 0 0 16px;
         }
         .history-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.4);
             border-color: rgba(255,255,255,0.1);
+            z-index: 10;
         }
         .match-row {
             display: flex;

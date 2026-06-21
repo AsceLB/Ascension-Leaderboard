@@ -1924,7 +1924,8 @@
         }
         .modal-tier-icon:hover .tooltip-box,
         .tier-item:hover .tooltip-box,
-        .point-box:hover .tooltip-box {
+        .point-box:hover .tooltip-box,
+        .name-tooltip-wrapper:hover .tooltip-box {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0) scale(1);
@@ -4089,13 +4090,23 @@
                 <div class="match-row">
                     <div class="match-player winner">
                         <img src="https://mc-heads.net/avatar/${match.winner}/50" class="match-avatar" alt="${match.winner}">
-                        <div class="player-name-truncate" title="${match.winner}">👑 ${match.winner}</div>
+                        <div class="name-tooltip-wrapper" style="position: relative; cursor: help;">
+                            <div class="player-name-truncate">👑 ${match.winner}</div>
+                            <div class="tooltip-box" style="white-space: nowrap; padding: 6px 12px; z-index: 1000;">
+                                <div class="tooltip-title" style="color: #fff; font-size: 14px; font-weight: bold; margin-bottom: 0; font-family: 'Inter', sans-serif;">${match.winner}</div>
+                            </div>
+                        </div>
                         ${winnerScoreText}
                     </div>
                     <div class="match-vs">VS</div>
                     <div class="match-player loser">
                         ${loserScoreText}
-                        <div class="player-name-truncate" title="${match.loser}">☠️ ${match.loser}</div>
+                        <div class="name-tooltip-wrapper" style="position: relative; cursor: help;">
+                            <div class="player-name-truncate">☠️ ${match.loser}</div>
+                            <div class="tooltip-box" style="white-space: nowrap; padding: 6px 12px; z-index: 1000;">
+                                <div class="tooltip-title" style="color: #fff; font-size: 14px; font-weight: bold; margin-bottom: 0; font-family: 'Inter', sans-serif;">${match.loser}</div>
+                            </div>
+                        </div>
                         <img src="https://mc-heads.net/avatar/${match.loser}/50" class="match-avatar" alt="${match.loser}">
                     </div>
                 </div>

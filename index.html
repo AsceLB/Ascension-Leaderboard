@@ -3534,27 +3534,48 @@
             // Lọc data theo category
             let matchingPlayers = players.filter(p => {
                 let v = p.stats[category];
+                let pk = p.peaks ? p.peaks[category] : null;
+                if (v === colInfo.num || v === 'HT' + colInfo.num || v === 'LT' + colInfo.num) return true;
+                if (pk === colInfo.num || pk === 'HT' + colInfo.num || pk === 'LT' + colInfo.num) return true;
                 if (typeof v === 'string' && v.startsWith('r')) {
-                    return parseInt(v.substring(1)) === colInfo.num;
+                    if (v === 'r' + colInfo.num || v === 'rHT' + colInfo.num || v === 'rLT' + colInfo.num) return true;
                 }
-                return v === colInfo.num;
+                return false;
             });
 
-            // Sắp xếp: Active trước, Retired sau
+            // Sắp xếp: Peak -> HT -> LT -> Retired
             matchingPlayers.sort((a, b) => {
-                let aVal = a.stats[category];
-                let bVal = b.stats[category];
-                let aSort = (typeof aVal === 'string' && aVal.startsWith('r')) ? 1 : 0;
-                let bSort = (typeof bVal === 'string' && bVal.startsWith('r')) ? 1 : 0;
-                return aSort - bSort;
+                const getScore = (p) => {
+                    let v = p.stats[category];
+                    let pk = p.peaks ? p.peaks[category] : null;
+                    if (pk === 'HT' + colInfo.num || pk === colInfo.num || pk === 'LT' + colInfo.num) return 3; // Peak
+                    if (v === 'HT' + colInfo.num || v === colInfo.num) return 2; // HT
+                    if (v === 'LT' + colInfo.num) return 1; // LT
+                    return 0; // Retired
+                };
+                return getScore(b) - getScore(a);
             });
 
             matchingPlayers.forEach(p => {
                 const avatarUrl = `https://mc-heads.net/avatar/${p.name}/50`;
                 let v = p.stats[category];
-                let isRetired = (typeof v === 'string' && v.startsWith('r'));
-                let cardClass = isRetired ? 'board-player-card retired-card' : 'board-player-card';
-                let namePrefix = isRetired ? '[R] ' : '';
+                let pk = p.peaks ? p.peaks[category] : null;
+                
+                let tag = '';
+                let cardClass = 'board-player-card';
+                
+                if (pk === 'HT' + colInfo.num || pk === colInfo.num || pk === 'LT' + colInfo.num) {
+                    tag = '<span style="color:#facc15; font-size: 10px; font-weight:bold; border: 1px solid rgba(250,204,21,0.5); padding: 1px 4px; border-radius: 4px; margin-right: 4px;">PEAK</span> ';
+                } else if (v === 'HT' + colInfo.num || v === colInfo.num) {
+                    tag = '<span style="color:#4ade80; font-size: 10px; font-weight:bold; border: 1px solid rgba(74,222,128,0.5); padding: 1px 4px; border-radius: 4px; margin-right: 4px;">HT</span> ';
+                } else if (v === 'LT' + colInfo.num) {
+                    tag = '<span style="color:#f87171; font-size: 10px; font-weight:bold; border: 1px solid rgba(248,113,113,0.5); padding: 1px 4px; border-radius: 4px; margin-right: 4px;">LT</span> ';
+                } else {
+                    tag = '<span style="color:#94a3b8; font-size: 10px; font-weight:bold; border: 1px solid rgba(148,163,184,0.5); padding: 1px 4px; border-radius: 4px; margin-right: 4px;">RET</span> ';
+                    cardClass += ' retired-card';
+                }
+                
+                let namePrefix = tag;
 
                 let wins = p.wins || 0;
                 let losses = p.losses || 0;

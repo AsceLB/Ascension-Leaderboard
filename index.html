@@ -3422,7 +3422,7 @@
                 let fontStyle = isRetired ? 'font-style: italic;' : '';
                 
                 let peakRank = (player.peaks && player.peaks[cat.id]) ? player.peaks[cat.id] : null;
-                let tooltipTitle = peakRank ? `Peak: ${peakRank}` : `Tier: ${label}`;
+                let tooltipTitle = peakRank ? `Peak #${peakRank}` : label;
                 let tooltipPoints = peakRank ? (POSITION_POINTS[peakRank] || 0) : (POSITION_POINTS[tierStr] || 0);
                 let tooltipColor = color;
 

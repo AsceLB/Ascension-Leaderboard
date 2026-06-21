@@ -1110,7 +1110,7 @@
             transition: color 0.3s ease;
         }
         .peak-chevron {
-            color: #d97706;
+            color: #dfa539;
         }
         .ht-chevron {
             color: #666666;
@@ -1119,7 +1119,7 @@
             color: #444444;
         }
         .peak-card:hover .peak-chevron {
-            color: #fbbf24;
+            color: #ffc85a;
         }
         .ht-card:hover .ht-chevron, .lt-card:hover .lt-chevron {
             color: #888888;
@@ -3609,7 +3609,7 @@
                 let chevronHTML = '';
                 if (pk === 'HT' + colInfo.num || pk === colInfo.num || pk === 'LT' + colInfo.num) {
                     cardClass += ' peak-card'; 
-                    chevronHTML = `<svg class="tier-chevron peak-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 6l-5-5-5 5"></path><path d="M17 13l-5-5-5 5"></path><path d="M17 20l-5-5-5 5"></path></svg>`;
+                    chevronHTML = `<svg class="tier-chevron peak-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>`;
                 } else if (!isRetired && (v === 'HT' + colInfo.num || v === colInfo.num)) {
                     cardClass += ' ht-card';
                     chevronHTML = `<svg class="tier-chevron ht-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>`;

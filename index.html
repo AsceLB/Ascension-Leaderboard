@@ -2886,7 +2886,7 @@
         </div>
 
         <div class="modal-section">
-            <div class="modal-section-title">POSITION</div>
+            <div class="modal-section-title">TIER</div>
             <div class="modal-overall-box">
                 <div id="modalOverallBanner" style="display: flex; align-items: center; justify-content: center; padding: 0 20px; border-right: 1px solid rgba(255,255,255,0.05);">
                     <span id="modalOverallRank" class="modal-rank" style="font-size: 28px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
@@ -2900,7 +2900,7 @@
         </div>
 
         <div class="modal-section" style="margin-top: 25px;">
-            <div class="modal-section-title">POSITIONS</div>
+            <div class="modal-section-title">TIERS</div>
             <div class="modal-positions-box">
                 <div id="modalTiers" class="modal-tiers-grid">
                     <!-- tier icons will be injected here -->
@@ -3158,7 +3158,7 @@
     let currentActiveTab = 'overall';
 
     // Bảng điểm theo position
-    const POSITION_POINTS = { 1: 10, 2: 7, 3: 5, 4: 3, 5: 1 };
+    const POSITION_POINTS = { 1: 10, 2: 7, 3: 5, 4: 3, 5: 1, 'HT1': 15, 'LT1': 12, 'HT2': 10, 'LT2': 8, 'HT3': 6, 'LT3': 4, 'HT4': 3, 'LT4': 2, 'HT5': 1, 'LT5': 0 };
 
     // Tính tổng điểm từ stats và peaks
     function calcPoints(stats, peaks = {}) {
@@ -3384,26 +3384,47 @@
                 if(val) {
                     let isRetired = false;
                     let numVal = val;
-                    if (typeof val === 'string' && val.toLowerCase().startsWith('r')) {
-                        isRetired = true;
-                        numVal = parseInt(val.substring(1));
-                    }
-                    
-                    let color = numVal === 1 ? '#dfa539' : numVal === 2 ? '#aabac6' : numVal === 3 ? '#be733f' : '#64748b';
-                    let bgAlpha = numVal === 1 ? 'linear-gradient(rgba(223, 165, 57, 0.15), rgba(223, 165, 57, 0.15)), var(--card-bg)' : numVal === 2 ? 'linear-gradient(rgba(170, 186, 198, 0.15), rgba(170, 186, 198, 0.15)), var(--card-bg)' : numVal === 3 ? 'linear-gradient(rgba(190, 115, 63, 0.15), rgba(190, 115, 63, 0.15)), var(--card-bg)' : 'linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg)';
-                    let borderAlpha = numVal === 1 ? 'rgba(223, 165, 57, 0.3)' : numVal === 2 ? 'rgba(170, 186, 198, 0.3)' : numVal === 3 ? 'rgba(190, 115, 63, 0.3)' : 'rgba(100, 116, 139, 0.3)';
-                    
-                    let actualBorderColor = isRetired ? '#64748b' : color;
-                    let actualBgAlpha = isRetired ? 'linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg)' : bgAlpha;
-                    let actualBorderAlpha = isRetired ? 'rgba(100, 116, 139, 0.3)' : borderAlpha;
+                    let tierStr = String(val).toUpperCase();
+                
+                if (tierStr.startsWith('R') && tierStr.length > 2) {
+                    isRetired = true;
+                    tierStr = tierStr.substring(1);
+                }
 
-                    let label = isRetired ? `R#${numVal}` : `#${numVal}`;
-                    let fontStyle = isRetired ? 'font-style: italic;' : '';
+                let color = '#64748b'; 
+                if (tierStr.includes('HT1') || tierStr === '1') color = '#dfa539';
+                else if (tierStr.includes('LT1')) color = '#a79759';
+                else if (tierStr.includes('HT2') || tierStr === '2') color = '#aabac6';
+                else if (tierStr.includes('LT2')) color = '#6a8ca7';
+                else if (tierStr.includes('HT3') || tierStr === '3') color = '#be733f';
+                else if (tierStr.includes('LT3')) color = '#9f5f3a';
+                else if (tierStr.includes('HT4')) color = '#a855f7';
+                else if (tierStr.includes('LT4')) color = '#7e22ce';
+                else if (tierStr.includes('HT5')) color = '#ef4444';
+                else if (tierStr.includes('LT5')) color = '#b91c1c';
 
-                    let peakRank = (player.peaks && player.peaks[cat.id]) ? player.peaks[cat.id] : null;
-                    let tooltipTitle = peakRank ? `Peak #${peakRank}` : label;
-                    let tooltipPoints = peakRank ? (POSITION_POINTS[peakRank] || 0) : (POSITION_POINTS[numVal] || 0);
-                    let tooltipColor = peakRank === 1 ? '#dfa539' : peakRank === 2 ? '#aabac6' : peakRank === 3 ? '#be733f' : peakRank ? '#64748b' : color;
+                const hexToRgb = hex => {
+                    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '100, 116, 139';
+                };
+                const rgbColor = hexToRgb(color);
+                
+                let bgAlpha = `linear-gradient(rgba(${rgbColor}, 0.15), rgba(${rgbColor}, 0.15)), var(--card-bg)`;
+                let borderAlpha = `rgba(${rgbColor}, 0.3)`;
+                
+                let actualBorderColor = isRetired ? '#64748b' : color;
+                let actualBgAlpha = isRetired ? 'linear-gradient(rgba(100, 116, 139, 0.15), rgba(100, 116, 139, 0.15)), var(--card-bg)' : bgAlpha;
+                let actualBorderAlpha = isRetired ? 'rgba(100, 116, 139, 0.3)' : borderAlpha;
+
+                let label = isRetired ? `R-${tierStr}` : tierStr;
+                if (!isNaN(parseInt(tierStr)) && !tierStr.includes('T')) label = isRetired ? `R#${tierStr}` : `#${tierStr}`;
+
+                let fontStyle = isRetired ? 'font-style: italic;' : '';
+                
+                let peakRank = (player.peaks && player.peaks[cat.id]) ? player.peaks[cat.id] : null;
+                let tooltipTitle = peakRank ? `Peak: ${peakRank}` : `Tier: ${label}`;
+                let tooltipPoints = peakRank ? (POSITION_POINTS[peakRank] || 0) : (POSITION_POINTS[tierStr] || 0);
+                let tooltipColor = color;
 
                     let tierHTML = `
                     <div class="tier-item" onclick="event.stopPropagation(); goToBoard('${cat.id}', '${player.name}')">

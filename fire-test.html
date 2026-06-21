@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { background: black; padding: 100px; color: white; font-family: sans-serif; }
+.card {
+    width: 400px; height: 100px; background: #222; position: relative; border-radius: 10px;
+}
+.fire-aura {
+    position: absolute;
+    top: -15px; left: -15px; right: -15px; bottom: -15px;
+    z-index: -1;
+    background: white;
+    filter: url(#manga-fire);
+    opacity: 0.8;
+}
+</style>
+</head>
+<body>
+<div class="card">
+    <div class="fire-aura"></div>
+    Test Card
+</div>
+
+<svg width="0" height="0">
+  <filter id="manga-fire">
+    <!-- Generate noise -->
+    <feTurbulence type="fractalNoise" baseFrequency="0.02 0.15" numOctaves="3" result="noise">
+      <animate attributeName="baseFrequency" values="0.02 0.15; 0.02 0.3; 0.02 0.15" dur="1s" repeatCount="indefinite" />
+    </feTurbulence>
+    <!-- Map the noise to displacement -->
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="30" xChannelSelector="R" yChannelSelector="G" />
+    <feGaussianBlur stdDeviation="3" result="blur" />
+    <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" />
+  </filter>
+</svg>
+</body>
+</html>

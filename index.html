@@ -2772,27 +2772,27 @@
             <div id="infoTabTitles" style="display: flex; flex-direction: column; gap: 15px; animation: fadeOpacityOnly 0.3s ease;">
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/Y2RdcHbH/combat-grandmaster.webp" style="width: 24px; height: 24px; object-fit: contain;">
-                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Grandmaster</div><div style="color: #888; font-size: 13px;">Obtained 80+ total points.</div></div>
+                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Grandmaster</div><div style="color: #888; font-size: 13px;">Obtained 200+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/TPbtB5HD/combat-master.webp" style="width: 24px; height: 24px; object-fit: contain;">
-                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Master</div><div style="color: #888; font-size: 13px;">Obtained 50+ total points.</div></div>
+                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Master</div><div style="color: #888; font-size: 13px;">Obtained 150+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/qBx5knBz/combat-ace.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #f43f5e; font-weight: bold; font-size: 15px;">Combat Ace</div><div style="color: #888; font-size: 13px;">Obtained 30+ total points.</div></div>
+                    <div><div style="color: #f43f5e; font-weight: bold; font-size: 15px;">Combat Ace</div><div style="color: #888; font-size: 13px;">Obtained 100+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/pL6SwHWk/combat-specialist.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #d946ef; font-weight: bold; font-size: 15px;">Combat Specialist</div><div style="color: #888; font-size: 13px;">Obtained 15+ total points.</div></div>
+                    <div><div style="color: #d946ef; font-weight: bold; font-size: 15px;">Combat Specialist</div><div style="color: #888; font-size: 13px;">Obtained 50+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/59BZ6TgY/combat-cadet.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #3b82f6; font-weight: bold; font-size: 15px;">Combat Cadet</div><div style="color: #888; font-size: 13px;">Obtained 10+ total points.</div></div>
+                    <div><div style="color: #3b82f6; font-weight: bold; font-size: 15px;">Combat Cadet</div><div style="color: #888; font-size: 13px;">Obtained 20+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/FHCthSpm/combat-novice.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #10b981; font-weight: bold; font-size: 15px;">Combat Novice</div><div style="color: #888; font-size: 13px;">Obtained 5+ total points.</div></div>
+                    <div><div style="color: #10b981; font-weight: bold; font-size: 15px;">Combat Novice</div><div style="color: #888; font-size: 13px;">Obtained 10+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/X78SDmyS/rookie.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
@@ -3235,22 +3235,22 @@
 
     // Xác định title dựa trên điểm
     function getTitle(points) {
-        if (points >= 80) return 'Combat Grandmaster';
-        if (points >= 50) return 'Combat Master';
-        if (points >= 30) return 'Combat Ace';
-        if (points >= 15) return 'Combat Specialist';
-        if (points >= 10) return 'Combat Cadet';
-        if (points >= 5)  return 'Combat Novice';
+        if (points >= 200) return 'Combat Grandmaster';
+        if (points >= 150) return 'Combat Master';
+        if (points >= 100) return 'Combat Ace';
+        if (points >= 50) return 'Combat Specialist';
+        if (points >= 20) return 'Combat Cadet';
+        if (points >= 10)  return 'Combat Novice';
         return 'Rookie';
     }
 
     function getThemeColor(points) {
-        if (points >= 80) return { main: '#ff2a2a', glow: 'rgba(255, 42, 42, 0.4)', bgAlpha: 'rgba(255, 42, 42, 0.05)' }; // Grandmaster (Red)
-        if (points >= 50) return { main: '#ffd700', glow: 'rgba(255, 215, 0, 0.4)', bgAlpha: 'rgba(255, 215, 0, 0.05)' }; // Master (Gold)
-        if (points >= 30) return { main: '#00e676', glow: 'rgba(0, 230, 118, 0.4)', bgAlpha: 'rgba(0, 230, 118, 0.05)' }; // Ace (Emerald)
-        if (points >= 15) return { main: '#00e5ff', glow: 'rgba(0, 229, 255, 0.4)', bgAlpha: 'rgba(0, 229, 255, 0.05)' }; // Specialist (Cyan)
-        if (points >= 10) return { main: '#4287f5', glow: 'rgba(66, 135, 245, 0.4)', bgAlpha: 'rgba(66, 135, 245, 0.05)' }; // Cadet (Blue)
-        if (points >= 5)  return { main: '#b0bec5', glow: 'rgba(176, 190, 197, 0.4)', bgAlpha: 'rgba(176, 190, 197, 0.05)' }; // Novice (Silver)
+        if (points >= 200) return { main: '#ff2a2a', glow: 'rgba(255, 42, 42, 0.4)', bgAlpha: 'rgba(255, 42, 42, 0.05)' }; // Grandmaster (Red)
+        if (points >= 150) return { main: '#ffd700', glow: 'rgba(255, 215, 0, 0.4)', bgAlpha: 'rgba(255, 215, 0, 0.05)' }; // Master (Gold)
+        if (points >= 100) return { main: '#00e676', glow: 'rgba(0, 230, 118, 0.4)', bgAlpha: 'rgba(0, 230, 118, 0.05)' }; // Ace (Emerald)
+        if (points >= 50) return { main: '#00e5ff', glow: 'rgba(0, 229, 255, 0.4)', bgAlpha: 'rgba(0, 229, 255, 0.05)' }; // Specialist (Cyan)
+        if (points >= 20) return { main: '#4287f5', glow: 'rgba(66, 135, 245, 0.4)', bgAlpha: 'rgba(66, 135, 245, 0.05)' }; // Cadet (Blue)
+        if (points >= 10)  return { main: '#b0bec5', glow: 'rgba(176, 190, 197, 0.4)', bgAlpha: 'rgba(176, 190, 197, 0.05)' }; // Novice (Silver)
         return { main: '#cd7f32', glow: 'rgba(205, 127, 50, 0.4)', bgAlpha: 'rgba(205, 127, 50, 0.05)' }; // Rookie (Bronze)
     }
 
@@ -3262,12 +3262,12 @@
     }
 
     function getRankIcon(points) {
-        if (points >= 80) return 'https://i.postimg.cc/Y2RdcHbH/combat-grandmaster.webp';
-        if (points >= 50) return 'https://i.postimg.cc/TPbtB5HD/combat-master.webp';
-        if (points >= 30) return 'https://i.postimg.cc/qBx5knBz/combat-ace.jpg';
-        if (points >= 15) return 'https://i.postimg.cc/pL6SwHWk/combat-specialist.jpg';
-        if (points >= 10) return 'https://i.postimg.cc/59BZ6TgY/combat-cadet.jpg';
-        if (points >= 5)  return 'https://i.postimg.cc/FHCthSpm/combat-novice.jpg';
+        if (points >= 200) return 'https://i.postimg.cc/Y2RdcHbH/combat-grandmaster.webp';
+        if (points >= 150) return 'https://i.postimg.cc/TPbtB5HD/combat-master.webp';
+        if (points >= 100) return 'https://i.postimg.cc/qBx5knBz/combat-ace.jpg';
+        if (points >= 50) return 'https://i.postimg.cc/pL6SwHWk/combat-specialist.jpg';
+        if (points >= 20) return 'https://i.postimg.cc/59BZ6TgY/combat-cadet.jpg';
+        if (points >= 10)  return 'https://i.postimg.cc/FHCthSpm/combat-novice.jpg';
         return 'https://i.postimg.cc/X78SDmyS/rookie.jpg';
     }
 

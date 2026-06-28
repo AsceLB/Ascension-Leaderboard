@@ -3292,7 +3292,7 @@
     let currentActiveTab = 'overall';
 
     // Bảng điểm theo position
-    const POSITION_POINTS = { 1: 10, 2: 7, 3: 5, 4: 3, 5: 1, 'HT1': 60, 'LT1': 45, 'HT2': 30, 'LT2': 20, 'HT3': 10, 'LT3': 6, 'HT4': 4, 'LT4': 3, 'HT5': 2, 'LT5': 1 };
+    const POSITION_POINTS = { 1: 10, 2: 7, 3: 5, 4: 3, 5: 1 };
 
     // Tính tổng điểm từ stats và peaks
     function calcPoints(stats, peaks = {}) {
@@ -3640,11 +3640,11 @@
         sortPlayers();
 
         const columnsData = [
-            { num: 1, title: "Tier 1", iconSrc: IMG.tier1, class: "col-header-1" },
-            { num: 2, title: "Tier 2", iconSrc: IMG.tier2, class: "col-header-2" },
-            { num: 3, title: "Tier 3", iconSrc: IMG.tier3, class: "col-header-3" },
-            { num: 4, title: "Tier 4", iconSrc: null, class: "col-header-4" },
-            { num: 5, title: "Tier 5", iconSrc: null, class: "col-header-5" }
+            { num: 1, title: "#1", iconSrc: IMG.tier1, class: "col-header-1" },
+            { num: 2, title: "#2", iconSrc: IMG.tier2, class: "col-header-2" },
+            { num: 3, title: "#3", iconSrc: IMG.tier3, class: "col-header-3" },
+            { num: 4, title: "#4", iconSrc: null, class: "col-header-4" },
+            { num: 5, title: "#5", iconSrc: null, class: "col-header-5" }
         ];
 
         columnsData.forEach((colInfo, colIndex) => {
@@ -3928,9 +3928,9 @@
                 let tooltipTitle = peakRank ? `Peak #${peakRank}` : label;
                 let tooltipPoints = peakRank ? (POSITION_POINTS[peakRank] || 0) : (POSITION_POINTS[tierStr] || 0);
                 
-                let isPeakTier1 = peakRank && (peakRank === '1' || peakRank.includes('1'));
-                let isPeakTier2 = peakRank && (peakRank === '2' || peakRank.includes('2'));
-                let isPeakTier3 = peakRank && (peakRank === '3' || peakRank.includes('3'));
+                let isPeakTier1 = peakRank && peakRank === '1';
+                let isPeakTier2 = peakRank && peakRank === '2';
+                let isPeakTier3 = peakRank && peakRank === '3';
                 let tooltipColor = isPeakTier1 ? '#dfa539' : isPeakTier2 ? '#aabac6' : isPeakTier3 ? '#be733f' : peakRank ? '#64748b' : color;
                 
                 let tierHTML = `

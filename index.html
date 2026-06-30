@@ -2790,7 +2790,7 @@
         <div class="modal-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
             <div style="display: flex; flex-direction: column; width: 100%;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h2 class="modal-title" style="margin:0; font-size: 18px; color: #fff;">Rank Information</h2>
+                    <h2 class="modal-title" style="margin:0; font-size: 18px; color: #fff;">Position Information</h2>
                     <button class="modal-close" onclick="closeRankInfo()" style="background: none; border: none; color: #888; font-size: 24px; cursor: pointer; padding: 0;">&times;</button>
                 </div>
                 <div class="info-tabs-container" style="display: flex; background: rgba(255,255,255,0.05); border-radius: 8px; padding: 4px; position: relative;">
@@ -2806,238 +2806,116 @@
             <div id="infoTabTitles" style="display: flex; flex-direction: column; gap: 15px; animation: fadeOpacityOnly 0.3s ease;">
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/Y2RdcHbH/combat-grandmaster.webp" style="width: 24px; height: 24px; object-fit: contain;">
-                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Grandmaster</div><div style="color: #888; font-size: 13px;">Obtained 400+ total points.</div></div>
+                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Grandmaster</div><div style="color: #888; font-size: 13px;">Obtained 80+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/TPbtB5HD/combat-master.webp" style="width: 24px; height: 24px; object-fit: contain;">
-                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Master</div><div style="color: #888; font-size: 13px;">Obtained 250+ total points.</div></div>
+                    <div><div style="color: #facc15; font-weight: bold; font-size: 15px;">Combat Master</div><div style="color: #888; font-size: 13px;">Obtained 15+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/qBx5knBz/combat-ace.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #f43f5e; font-weight: bold; font-size: 15px;">Combat Ace</div><div style="color: #888; font-size: 13px;">Obtained 100+ total points.</div></div>
+                    <div><div style="color: #f43f5e; font-weight: bold; font-size: 15px;">Combat Ace</div><div style="color: #888; font-size: 13px;">Obtained 30+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/pL6SwHWk/combat-specialist.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #d946ef; font-weight: bold; font-size: 15px;">Combat Specialist</div><div style="color: #888; font-size: 13px;">Obtained 50+ total points.</div></div>
+                    <div><div style="color: #d946ef; font-weight: bold; font-size: 15px;">Combat Specialist</div><div style="color: #888; font-size: 13px;">Obtained 15+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/59BZ6TgY/combat-cadet.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #3b82f6; font-weight: bold; font-size: 15px;">Combat Cadet</div><div style="color: #888; font-size: 13px;">Obtained 20+ total points.</div></div>
+                    <div><div style="color: #3b82f6; font-weight: bold; font-size: 15px;">Combat Cadet</div><div style="color: #888; font-size: 13px;">Obtained 5+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/FHCthSpm/combat-novice.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #10b981; font-weight: bold; font-size: 15px;">Combat Novice</div><div style="color: #888; font-size: 13px;">Obtained 10+ total points.</div></div>
+                    <div><div style="color: #10b981; font-weight: bold; font-size: 15px;">Combat Novice</div><div style="color: #888; font-size: 13px;">Obtained 5+ total points.</div></div>
                 </div>
                 <div style="display: flex; gap: 15px; align-items: center;">
                     <img src="https://i.postimg.cc/X78SDmyS/rookie.jpg" style="width: 24px; height: 24px; object-fit: contain; filter: url(#remove-img-bg);">
-                    <div><div style="color: #9ca3af; font-weight: bold; font-size: 15px;">Rookie</div><div style="color: #888; font-size: 13px;">Starting rank for players with less than 10 points.</div></div>
+                    <div><div style="color: #9ca3af; font-weight: bold; font-size: 15px;">Rookie</div><div style="color: #888; font-size: 13px;">Starting rank for players with less than 5 points.</div></div>
                 </div>
             </div>
 
             <!-- Points Tab -->
-            <div id="infoTabPoints" style="display: none; flex-direction: column; gap: 15px; animation: fadeOpacityOnly 0.3s ease;">
+                        <div id="infoTabPoints" style="display: none; flex-direction: column; gap: 15px; animation: fadeOpacityOnly 0.3s ease;">
                 <div style="margin-bottom: 5px; color: #e2e8f0; font-size: 14px;">How <span style="text-decoration: underline; text-decoration-color: #888; text-underline-offset: 3px;">ranking points</span> are calculated</div>
                 
-                <!-- Tier 1 -->
+                <!-- Rank 1 -->
                 <div>
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
                         <img src="https://i.postimg.cc/Qxw2KYfG/overall.jpg" style="width: 20px; height: 20px; filter: url(#remove-img-bg); margin-right: 8px;">
-                        <span style="color: #facc15; font-weight: bold; font-size: 16px;">Tier 1</span>
+                        <span style="color: #facc15; font-weight: bold; font-size: 16px;">#1</span>
                     </div>
                     <div style="border-left: 2px solid #facc15; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="position: relative; background: rgba(250, 204, 21, 0.15); border: 1px solid rgba(250, 204, 21, 0.3); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>
-                                <span style="color: #facc15; font-size: 12px; font-weight: bold;">60 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #facc15; font-size: 14px; margin-bottom: 0;">High Tier</div>
-                                </div>
-                            </div>
-                            <div class="point-box" style="position: relative; background: rgba(250, 204, 21, 0.05); border: 1px solid rgba(250, 204, 21, 0.15); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 15l-5-5-5 5"></path></svg>
-                                <span style="color: #facc15; font-size: 12px; font-weight: bold; opacity: 0.8;">45 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #facc15; font-size: 14px; margin-bottom: 0; opacity: 0.8;">Low Tier</div>
-                                </div>
+                            <div class="point-box" style="background: rgba(250, 204, 21, 0.1); border: 1px solid rgba(250, 204, 21, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
+                                <span style="color: #facc15; font-size: 12px; font-weight: bold;">10 Points</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tier 2 -->
+                <!-- Rank 2 -->
                 <div>
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
                         <img src="https://i.postimg.cc/7PFvfQBj/tier-2.jpg" style="width: 20px; height: 20px; filter: url(#remove-img-bg); margin-right: 8px;">
-                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">Tier 2</span>
+                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">#2</span>
                     </div>
                     <div style="border-left: 2px solid #94a3b8; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="position: relative; background: rgba(148, 163, 184, 0.15); border: 1px solid rgba(148, 163, 184, 0.3); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">30 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #94a3b8; font-size: 14px; margin-bottom: 0;">High Tier</div>
-                                </div>
-                            </div>
-                            <div class="point-box" style="position: relative; background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 15l-5-5-5 5"></path></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold; opacity: 0.8;">20 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #94a3b8; font-size: 14px; margin-bottom: 0; opacity: 0.8;">Low Tier</div>
-                                </div>
+                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
+                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">7 Points</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tier 3 -->
+                <!-- Rank 3 -->
                 <div>
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
                         <img src="https://i.postimg.cc/d1hX08Gq/tier-3.jpg" style="width: 20px; height: 20px; filter: url(#remove-img-bg); margin-right: 8px;">
-                        <span style="color: #d97706; font-weight: bold; font-size: 16px;">Tier 3</span>
+                        <span style="color: #d97706; font-weight: bold; font-size: 16px;">#3</span>
                     </div>
                     <div style="border-left: 2px solid #d97706; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="position: relative; background: rgba(217, 119, 6, 0.15); border: 1px solid rgba(217, 119, 6, 0.3); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>
-                                <span style="color: #d97706; font-size: 12px; font-weight: bold;">10 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #d97706; font-size: 14px; margin-bottom: 0;">High Tier</div>
-                                </div>
-                            </div>
-                            <div class="point-box" style="position: relative; background: rgba(217, 119, 6, 0.05); border: 1px solid rgba(217, 119, 6, 0.15); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 15l-5-5-5 5"></path></svg>
-                                <span style="color: #d97706; font-size: 12px; font-weight: bold; opacity: 0.8;">6 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #d97706; font-size: 14px; margin-bottom: 0; opacity: 0.8;">Low Tier</div>
-                                </div>
+                            <div class="point-box" style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
+                                <span style="color: #d97706; font-size: 12px; font-weight: bold;">5 Points</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tier 4 -->
+                <!-- Rank 4 -->
                 <div>
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                        <div style="min-width: 20px; min-height: 20px; margin-right: 8px;"></div>
-                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">Tier 4</span>
+                        <div style="width: 20px; height: 20px; margin-right: 8px; display: flex; align-items: center; justify-content: center; opacity: 0;"></div>
+                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">#4</span>
                     </div>
                     <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="position: relative; background: rgba(148, 163, 184, 0.15); border: 1px solid rgba(148, 163, 184, 0.3); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">4 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #94a3b8; font-size: 14px; margin-bottom: 0;">High Tier</div>
-                                </div>
-                            </div>
-                            <div class="point-box" style="position: relative; background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 15l-5-5-5 5"></path></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold; opacity: 0.8;">3 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #94a3b8; font-size: 14px; margin-bottom: 0; opacity: 0.8;">Low Tier</div>
-                                </div>
+                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
+                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">3 Points</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Tier 5 -->
+                <!-- Rank 5 -->
                 <div>
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                        <div style="min-width: 20px; min-height: 20px; margin-right: 8px;"></div>
-                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">Tier 5</span>
+                        <div style="width: 20px; height: 20px; margin-right: 8px; display: flex; align-items: center; justify-content: center; opacity: 0;"></div>
+                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">#5</span>
                     </div>
                     <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
-                            <div class="point-box" style="position: relative; background: rgba(148, 163, 184, 0.15); border: 1px solid rgba(148, 163, 184, 0.3); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 11l-5-5-5 5"></path><path d="M17 18l-5-5-5 5"></path></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">2 Points</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #94a3b8; font-size: 14px; margin-bottom: 0;">High Tier</div>
-                                </div>
-                            </div>
-                            <div class="point-box" style="position: relative; background: rgba(148, 163, 184, 0.05); border: 1px solid rgba(148, 163, 184, 0.15); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px; cursor: pointer;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M17 15l-5-5-5 5"></path></svg>
-                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold; opacity: 0.8;">1 Point</span>
-                                <div class="tooltip-box">
-                                    <div class="tooltip-title" style="color: #94a3b8; font-size: 14px; margin-bottom: 0; opacity: 0.8;">Low Tier</div>
-                                </div>
+                            <div class="point-box" style="background: rgba(148, 163, 184, 0.1); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 20px; padding: 4px 12px; display: flex; align-items: center; gap: 6px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline><polyline points="18 9 12 3 6 9"></polyline></svg>
+                                <span style="color: #94a3b8; font-size: 12px; font-weight: bold;">1 Point</span>
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Player Profile Modal -->
-<div id="playerModal" class="modal-overlay" onclick="if(event.target===this) closePlayerProfile()">
-    <div id="profileParticles" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; opacity: 0; transition: opacity 0.8s ease;"></div>
-    <div class="modal-content" style="max-width: 480px; padding: 25px;">
-        <video id="modalBgVideo" autoplay loop muted playsinline style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1; opacity: 0.35; border-radius: 20px; display: none; pointer-events: none;"></video>
-        <button class="modal-close" onclick="closePlayerProfile()">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-        
-        <div class="modal-header-profile">
-            <div id="avatarContainer" style="position: relative; display: inline-block; border-radius: 50%; margin-bottom: 12px; overflow: hidden; width: 120px; height: 120px; z-index: 2; cursor: grab;" onmousedown="this.style.cursor='grabbing'" onmouseup="this.style.cursor='grab'" onmouseleave="this.style.cursor='grab'">
-                <img id="modalAvatar" src="" alt="avatar" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; opacity: 1; transition: opacity 0.5s ease; border: none; box-shadow: none; z-index: 1;">
-                <canvas id="skinContainer" width="120" height="120" style="position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s ease; border: none; box-shadow: none; z-index: 10;"></canvas>
-            </div>
-            <h2 id="modalName">Name</h2>
-            <div id="modalTitle" class="modal-title-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px;"><path d="M12 2L22 12L12 22L2 12L12 2Z"/></svg> Combat Master
-            </div>
-            <div id="modalRegion" class="modal-region">North America</div>
-            <a id="modalNamemc" href="#" target="_blank" class="modal-namemc-btn">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><path d="M8 12l4-4 4 4"></path><path d="M12 16V8"></path></svg> NameMC
-            </a>
-        </div>
-
-        <div class="modal-section" style="margin-bottom: 25px;">
-            <div class="modal-section-title">COMBAT STATS</div>
-            <div style="display: flex; gap: 15px;">
-                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN RATE</div>
-                    <div id="modalWinRate" style="font-size: 20px; color: #4ade80; font-weight: 800;">100%</div>
-                </div>
-                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">MATCHES</div>
-                    <div id="modalMatches" style="font-size: 20px; color: #fff; font-weight: 800;">0</div>
-                </div>
-                <div style="flex: 1; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 15px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8; font-weight: 700; margin-bottom: 4px;">WIN STREAK</div>
-                    <div id="modalStreak" style="font-size: 20px; color: #e2e8f0; font-weight: 800; text-shadow: 0 0 10px rgba(255,255,255,0.3); display: flex; justify-content: center; align-items: center;">
-                        <span style="margin-right: 6px; font-size: 22px;">🔥</span>
-                        <span id="modalStreakValue">0</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-section">
-            <div class="modal-section-title">TIER</div>
-            <div class="modal-overall-box">
-                <div id="modalOverallBanner" style="display: flex; align-items: center; justify-content: center; padding: 0 20px; border-right: 1px solid rgba(255,255,255,0.05);">
-                    <span id="modalOverallRank" class="modal-rank" style="font-size: 28px; font-weight: 900; font-style: italic; color: #fff;">#1</span>
-                </div>
-                <div style="display: flex; align-items: center; padding-left: 15px;">
-                    <img id="modalOverallIcon" src="" alt="Overall" style="width: 28px; height: 28px; margin-right: 10px; object-fit: contain;">
-                    <span style="font-weight: 800; font-size: 18px; color: #fff; letter-spacing: 0.5px;">OVERALL</span>
-                    <span id="modalOverallPoints" style="color: #94a3b8; font-size: 15px; margin-left: 6px; font-weight: normal;">(0 points)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-section" style="margin-top: 25px;">
-            <div class="modal-section-title">TIERS</div>
-            <div class="modal-positions-box">
-                <div id="modalTiers" class="modal-tiers-grid">
-                    <!-- tier icons will be injected here -->
                 </div>
             </div>
         </div>
@@ -3123,8 +3001,8 @@
             <div>PLAYER</div>
             <div style="text-align: center;">REGION</div>
             <div style="display: flex; align-items: center; justify-content: flex-end; gap: 15px;">
-                <span>TIERS</span>
-                <div class="info-btn" onclick="openRankInfo()" title="View Rank Info">! Information</div>
+                <span>POSITIONS</span>
+                <div class="info-btn" onclick="openRankInfo()" title="View Position Info">! Information</div>
             </div>
         </div>
         <div class="player-list" id="playerList">

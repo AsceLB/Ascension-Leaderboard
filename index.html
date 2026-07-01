@@ -2920,7 +2920,7 @@
                 <div>
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
                         <div style="min-width: 20px; min-height: 20px; margin-right: 8px;"></div>
-                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">Tier 4</span>
+                        <span style="color: #848c96; font-weight: bold; font-size: 16px;">Tier 4 (HT4/LT4)</span>
                     </div>
                     <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
@@ -2946,7 +2946,7 @@
                 <div>
                     <div style="display: flex; align-items: center; margin-bottom: 8px;">
                         <div style="min-width: 20px; min-height: 20px; margin-right: 8px;"></div>
-                        <span style="color: #94a3b8; font-weight: bold; font-size: 16px;">Tier 5</span>
+                        <span style="color: #6b7280; font-weight: bold; font-size: 16px;">Tier 5 (HT5/LT5)</span>
                     </div>
                     <div style="border-left: 2px solid #475569; padding-left: 15px; margin-left: 9px;">
                         <div style="display: flex; gap: 10px;">
@@ -3532,6 +3532,10 @@
                 else if (tierStr.includes('LT2')) color = '#6a8ca7';
                 else if (tierStr.includes('HT3') || tierStr === '3') color = '#be733f';
                 else if (tierStr.includes('LT3')) color = '#9f5f3a';
+                else if (tierStr.includes('HT4')) color = '#848c96';
+                else if (tierStr.includes('LT4')) color = '#555d66';
+                else if (tierStr.includes('HT5')) color = '#6b7280';
+                else if (tierStr.includes('LT5')) color = '#4b5563';
 
                 const hexToRgb = hex => {
                     let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
